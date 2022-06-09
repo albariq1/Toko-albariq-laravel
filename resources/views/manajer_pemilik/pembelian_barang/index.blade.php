@@ -1,4 +1,5 @@
 @extends('template.layouts')
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -6,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"><i class="fas fa-layer-group mr-2"></i>Tabel Barang</h1>
+                        <h1 class="m-0"><i class="fas fa-shopping-cart mr-2"></i>Tabel Pembelian Barang</h1>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -19,7 +20,7 @@
                 <!-- button tambah barang -->
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-folder-plus mr-2"></i>Tambah Barang
+                    <i class="fas fa-folder-plus mr-2"></i> Tambah Pembelian Barang
                 </button>
 
                 <!-- Modal -->
@@ -28,59 +29,42 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Barang</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Pembelian Barang</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <!-- form pengisian data barang -->
-                                <form action="{{ route('store_tabel_barang') }}" method="POST">
+                                <form action="{{ route('store_tabel_pembelian_barang') }}" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Pemasok</label>
-                                            <select class="form-control" name="pemasok_id" id="" required>
+                                            <label for="exampleInputEmail1" class="form-label">Barang</label>
+                                            <select class="form-control" name="barang_id" id="" required>
                                                 <option value="">--Pilih--</option>
-                                                @foreach ($pemasok as $pm)
-                                                    <option value="{{ $pm->id }}">{{ $pm->nama_pemasok }}</option>
+                                                @foreach ($barang as $br)
+                                                    <option value="{{ $br->id }}">{{ $br->barcode }} -
+                                                        {{ $br->nama_barang }} - {{ $br->nama_pemasok }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Kategori</label>
-                                            <select class="form-control" name="kategori_id" id="" required>
-                                                <option value="">--Pilih--</option>
-                                                @foreach ($kategori as $kt)
-                                                    <option value="{{ $kt->id }}">{{ $kt->nama_katagori }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                                            <input type="text" name="nama_barang" class="form-control"
-                                                id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Barcode</label>
-                                            <input type="text" name="barcode" class="form-control"
-                                                id="exampleInputPassword1" required>
+                                            <label for="" class="form-label">Tgl. Pembelian</label>
+                                            <input type="date" name="tanggal_pembelian" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Satuan</label>
-                                        <select class="form-control" name="satuan" id="">
-                                            <option value="">--Pilih--</option>
-                                            <option value="Pcs">Pcs</option>
-                                            <option value="Kg">Kg</option>
-                                        </select>
+                                        <label for="" class="form-label">Jumlah</label>
+                                        <input type="number" min="1" name="jumlah_beli" class="form-control" id="">
                                     </div>
-
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                            Benar?</label>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Harga Beli</label>
+                                        <input type="text" name="harga_beli" class="form-control" id="">
                                     </div>
-
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">harga Jual</label>
+                                        <input type="text" name="harga_jual" class="form-control" id="">
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -114,10 +98,13 @@
                     <tr>
                         <th>No</th>
                         <th>Barcode</th>
-                        <th>Nama barang</th>
-                        <th>Kategori</th>
-                        <th>Pemasok</th>
-                        <th>Aksi</th>
+                        <th>Nama Barang</th>
+                        <th>Nama Pemasok</th>
+                        <th>Stock/jumlah</th>
+                        <th>Satuan</th>
+                        <th>Harga beli</th>
+                        <th>Harga jual</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,8 +113,11 @@
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $dt->barcode }}</td>
                             <td>{{ $dt->nama_barang }}</td>
-                            <td>{{ $dt->nama_katagori }}</td>
                             <td>{{ $dt->nama_pemasok }}</td>
+                            <td>{{ $dt->stok }}</td>
+                            <td>{{ $dt->satuan }}</td>
+                            <td>{{ $dt->harga_beli }}</td>
+                            <td>{{ $dt->harga_jual }}</td>
                             <td>
                                 <!-- Action -->
                                 <div class="btn-group">
@@ -178,7 +168,7 @@
 
         {{-- modal detail --}}
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -229,11 +219,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- modal edit --}}
         <!-- Modal -->
-        @foreach ($data as $dtedit)
+        {{-- @foreach ($data as $dtedit)
             <div class="modal fade" id="exampleModalEdit{{ $dtedit->id }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -273,9 +263,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                                        <input type="text" name="nama_barang" class="form-control"
-                                            id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            value="{{ $dtedit->nama_barang }}" required>
+                                        <input type="text" name="nama_barang" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" value="{{ $dtedit->nama_barang }}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Barcode</label>
@@ -307,7 +296,7 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
 
     </div>
 @endsection

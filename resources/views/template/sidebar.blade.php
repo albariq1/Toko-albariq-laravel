@@ -54,7 +54,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             Data Barang
                             <i class="right fas fa-angle-left"></i>
@@ -79,11 +79,17 @@
                                 <p>Tabel Return</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_kategori') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Kategori</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <i class="nav-icon fas fa-file-invoice"></i>
                         <p>
                             Data Transaksi
                             <i class="right fas fa-angle-left"></i>
@@ -97,7 +103,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tabel_pembelian') }}" class="nav-link">
+                            <a href="{{ route('tabel_pembelian_barang') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Pembelian</p>
                             </a>
@@ -119,6 +125,26 @@
                             User
                         </p>
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('seting') }}" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Setting Profile
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </nav>

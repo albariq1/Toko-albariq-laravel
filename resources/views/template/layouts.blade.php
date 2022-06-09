@@ -35,6 +35,11 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    {{-- seting profile --}}
+    <a href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></a>
+    <a href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></a>
+    <a href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></a>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

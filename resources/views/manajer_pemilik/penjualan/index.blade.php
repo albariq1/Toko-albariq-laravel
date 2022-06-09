@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"><i class="fas fa-file-invoice mr-2"></i>Tabel Penjualan</h1>
+                        <h1 class="m-0"><i class="fas fa-clipboard-list mr-2"></i>Tabel Penjualan</h1>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -262,8 +262,8 @@
                                 </ul>
                             </div>
                             <!-- <a href="" class="btn btn-primary">Detail</a>
-                                    <a href="" class="btn btn-warning">Ubah</a>
-                                    <a href="" class="btn btn-danger">Hapus</a> -->
+                                                            <a href="" class="btn btn-warning">Ubah</a>
+                                                            <a href="" class="btn btn-danger">Hapus</a> -->
                         </td>
                     </tr>
                 </tbody>

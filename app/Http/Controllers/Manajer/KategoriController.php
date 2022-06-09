@@ -3,80 +3,67 @@
 namespace App\Http\Controllers\Manajer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pemasok;
+use App\Models\Kategori;
 use Exception;
 use Illuminate\Http\Request;
 
-class PemasokController extends Controller
+class KategoriController extends Controller
 {
     public function index()
     {
-        $data = Pemasok::all();
-        return view('manajer_pemilik.pemasok.index', compact('data'));
+        $data = Kategori::all();
+        return view('manajer_pemilik.kategori.index', compact('data'));
     }
 
+    // menyimpan data ke tabel kategoris /menambahkan
     public function store(Request $request)
     {
-        // validasi
-        // $request->validate(
-        //     [
-        //         'email' => 'required|email|unique:users',
-        //         'name' => 'required|min:3',
-        //         'no_hp' => 'required|min:11|max:15',
-        //         'password' => 'required',
-        //         'alamat' => 'required',
-        //         'role' => 'required',
-
-
-        //     ]
-        // );
+        // // validasi
+        // $request->validate([
+        //     'nama_kategori' => 'required|unique:kategoris'
+        // ]);
 
         try {
             //proses input data ke tabel
             // eloquent
-            $store = Pemasok::create(
+            $store = Kategori::create(
                 [
-                    'nama_pemasok' => $request->nama_pemasok,
-                    'alamat' => $request->alamat,
-                    'no_hp' => $request->no_hp
+                    'nama_katagori' => $request->nama_katagori
                 ]
             );
 
-            return redirect('tabel_pemasok')->with([
+            return redirect('tabel_kategori')->with([
                 'success' => 'Data Berhasil Ditambah!'
             ]);
         } catch (Exception $error) {
-            return redirect('tabel_pemasok')->with([
+            return redirect('tabel_kategori')->with([
                 'failed' => 'Data Gagal Ditambah! Karena' . $error->getMessage()
             ]);
         }
     }
 
+
     public function update(Request $request)
     {
         $request->validate([
-            'nama_pemasok' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required'
+            'nama_kategori' => 'required'
         ]);
 
         try {
             //proses update data ke tabel
             // eloquent
             // ambil data user berdasarkan id yang dikirim dari form
-            $pemasok = Pemasok::find($request->id);
+            $kategori = Kategori::find($request->id);
 
-            $pemasok->update([
-                'nama_pemasok' => $request->nama_pemasok,
-                'alamat' => $request->alamat,
-                'no_hp' => $request->no_hp
+            $kategori->update([
+                'nama_kategori' => $request->nama_kategori
             ]);
 
-            return redirect('tabel_pemasok')->with([
+            return redirect('tabel_kategori')->with([
                 'success' => 'Data Berhasil DiEdit!'
             ]);
         } catch (Exception $error) {
-            return redirect('tabel_pemasok')->with([
+            return redirect('tabel_kategori')->with([
                 'failed' => 'Data Gagal DiEdit! Karena' . $error->getMessage()
             ]);
         }
@@ -89,13 +76,13 @@ class PemasokController extends Controller
             //proses update data ke tabel
             // eloquent
             // ambil data user berdasarkan id yang dikirim dari form
-            Pemasok::destroy($request->id);
+            Kategori::destroy($request->id);
 
-            return redirect('tabel_pemasok')->with([
+            return redirect('tabel_kategori')->with([
                 'success' => 'Data Berhasil DiHapus!'
             ]);
         } catch (Exception $error) {
-            return redirect('tabel_pemasok')->with([
+            return redirect('tabel_kategori')->with([
                 'failed' => 'Data Gagal DiHapus!,Karena' . $error->getMessage()
             ]);
         }

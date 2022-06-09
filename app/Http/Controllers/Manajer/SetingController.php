@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Manajer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PembelianController extends Controller
+class SetingController extends Controller
 {
     public function index()
     {
-        return view('manajer_pemilik.pembelian.index');
+        return view('manajer_pemilik.seting.index');
     }
 }
