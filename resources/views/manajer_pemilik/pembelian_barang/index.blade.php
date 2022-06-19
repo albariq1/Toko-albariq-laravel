@@ -102,22 +102,38 @@
                         <th>Nama Pemasok</th>
                         <th>Stock/jumlah</th>
                         <th>Satuan</th>
-                        <th>Harga beli</th>
-                        <th>Harga jual</th>
+                        {{-- <th>Harga beli</th>
+                        <th>Harga jual</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($data as $dt)
+                        @php
+                            // ambil jumlah_beli dari tabel pembelian_barangs berdasarkan id barang yang diforeach
+                            $getJumlah = DB::table('pembelian_barangs')
+                                ->select(DB::raw('SUM(jumlah_beli) as stok'))
+                                ->where('barang_id', $dt->barang_id)
+                                ->first();
+                            
+                            // ambil jumlah dari tabel penjualan_barangs berdasarkan id barang yang diforeach
+                            $getJumlahTerjual = DB::table('detail_penjualans')
+                                ->select(DB::raw('SUM(jumlah) as jumlah_terjual'))
+                                ->where('barang_id', $dt->barang_id)
+                                ->first();
+                            
+                            // hitung sisa stok
+                            $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual;
+                        @endphp
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $dt->barcode }}</td>
                             <td>{{ $dt->nama_barang }}</td>
                             <td>{{ $dt->nama_pemasok }}</td>
-                            <td>{{ $dt->stok }}</td>
+                            <td>{{ $sisaStok }}</td>
                             <td>{{ $dt->satuan }}</td>
-                            <td>{{ $dt->harga_beli }}</td>
-                            <td>{{ $dt->harga_jual }}</td>
+                            {{-- <td>{{ $dt->harga_beli }}</td>
+                            <td>{{ $dt->harga_jual }}</td> --}}
                             <td>
                                 <!-- Action -->
                                 <div class="btn-group">
@@ -130,10 +146,10 @@
                                             <div class="col mb-3">
                                                 <!-- button tambah barang -->
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal">
+                                                <a href="{{ route('detail_tabel_pembelian_barang', $dt->barang_id) }}"
+                                                    class="btn btn-primary">
                                                     Detail
-                                                </button>
+                                                </a>
 
 
                                             </div>

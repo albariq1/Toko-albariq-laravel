@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Carbon\Carbon;
+use Exception;
+use App\Models\RiwayatLogin;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -36,5 +41,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        try {
+            // update field last_login_at & last_login_ip pd tabel users
+            // berdasarkan user yg login
+            $user->forceFill([
+                'last_login_at' => Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp()
+            ])->save();
+
+            // insert data user yg login ke tabel history login
+            $userId = $user->id;
+            RiwayatLogin::create([
+                'user_id' => $userId,
+                'last_login_at' => Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp()
+            ]);
+        } catch (Exception $err) {
+            dd($err->getMessage());
+        }
     }
 }

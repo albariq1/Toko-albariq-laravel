@@ -119,6 +119,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('laba_rugi') }}" class="nav-link">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p>
+                            Laporan Laba Rugi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('tabel_user') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>

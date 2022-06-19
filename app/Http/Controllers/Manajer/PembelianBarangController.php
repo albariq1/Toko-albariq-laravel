@@ -15,11 +15,11 @@ class PembelianBarangController extends Controller
     public function index()
     {
         $data = DB::table('pembelian_barangs')
-            ->select(DB::raw('pembelian_barangs.*, SUM(jumlah_beli) as stok, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
+            ->select(DB::raw('pembelian_barangs.*, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
             ->join('barangs', 'barangs.id', 'pembelian_barangs.barang_id')
             ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
             ->groupBy('pembelian_barangs.barang_id')
-            ->orderBy('pembelian_barangs.id', 'DESC')
+            // ->orderBy('pembelian_barangs.id', 'DESC')
             ->orderBy('barangs.id', 'ASC')
             ->get();
 
@@ -73,5 +73,35 @@ class PembelianBarangController extends Controller
                 'failed' => 'Data Gagal Ditambah! Karena' . $error->getMessage()
             ]);
         }
+    }
+
+    public function detail($id)
+    {
+        $data = DB::table('pembelian_barangs')
+            ->select(DB::raw('pembelian_barangs.*, barangs.id as id_barang, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
+            ->join('barangs', 'barangs.id', 'pembelian_barangs.barang_id')
+            ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
+            ->where('barangs.id', $id)
+            ->get();
+
+        // ambil jumlal_beli(SUM) dari tabel pembelian_barangs
+        // berdasarkan id barangs yg dipilih
+        $getJumlah = DB::table('pembelian_barangs')
+            ->select(DB::raw('SUM(jumlah_beli) as stok'))
+            ->where('barang_id', $id)
+            ->first();
+
+        // ambil jumlah (SUM) dari tabel detail_penjualans
+        // berdasarkan id barangs yg dipilih
+        $getJumlahTerjual = DB::table('detail_penjualans')
+            ->select(DB::raw('SUM(jumlah) as jumlah_terjual'))
+            ->where('barang_id', $id)
+            ->first();
+
+        $getLast = PembelianBarang::where('barang_id', $id)->orderBy('id', 'DESC')->first(); //untuk mengambil data barang yang terakhir untuk ambil harga tersebut
+
+        $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual; //pengurangan total barang yang dibeli dengen total barang yang terjual
+
+        return  view('manajer_pemilik.pembelian_barang.detail', compact('data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast'));
     }
 }

@@ -38,6 +38,7 @@ Route::get('/tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController
 Route::get('/transaksi', [App\Http\Controllers\Manajer\TransaksiController::class, 'index'])->name('transaksi');
 Route::get('/seting', [App\Http\Controllers\Manajer\SetingController::class, 'index'])->name('seting');
 Route::get('/tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'index'])->name('tabel_kategori');
+Route::get('/laba_rugi', [App\Http\Controllers\Manajer\LabaRugiController::class, 'index'])->name('laba_rugi');
 
 
 // mengirim data untuk User
@@ -65,7 +66,13 @@ Route::post('/store_tabel_barang', [App\Http\Controllers\Manajer\BarangControlle
 Route::post('/update_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'update'])->name('update_tabel_barang');
 Route::post('/destroy_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'destroy'])->name('destroy_tabel_barang');
 
-// mengirim data barang
+// mengirim data pembelian 
+Route::get('/detail_tabel_pembelian_barang/{id}', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'detail'])->name('detail_tabel_pembelian_barang');
 Route::post('/store_tabel_pembelian_barang', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'store'])->name('store_tabel_pembelian_barang');
 // Route::post('/update_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'update'])->name('update_tabel_barang');
 // Route::post('/destroy_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'destroy'])->name('destroy_tabel_barang');
+
+// mengirim data kasir
+Route::get('/kasir/transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'index'])->name('kasir.transaksi');
+Route::post('/kasir/store-transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'store'])->name('kasir.store-transaksi');
+Route::post('/kasir/store-penjualan', [App\Http\Controllers\Kasir\TransaksiController::class, 'store_penjualan'])->name('kasir.store-penjualan');

@@ -56,7 +56,11 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('template.sidebar')
+        @if (Auth::user()->role == 'Manajer')
+            @include('template.sidebar')
+        @elseif (Auth::user()->role == 'Kasir')
+            @include('template.sidebar_kasir')
+        @endif
 
         {{-- ISi Content --}}
         @yield('content')
