@@ -19,7 +19,7 @@
                 <!-- button tambah barang -->
                 <!-- Button trigger modal -->
                 <a href="{{ route('tabel_pembelian_barang') }}" class="btn btn-primary">
-                    <i class="fas fa-folder-plus mr-2"></i>Kembali
+                    <i class="fas fa-angle-left mr-2"></i>Kembali
                 </a>
 
                 <!-- Modal -->
@@ -145,16 +145,16 @@
                                     </ul>
                                 </div>
                                 <!-- <a href="" class="btn btn-primary">Detail</a>
-                                        <a href="" class="btn btn-warning">Ubah</a>
-                                        <a href="" class="btn btn-danger">Hapus</a> -->
+                                                                    <a href="" class="btn btn-warning">Ubah</a>
+                                                                    <a href="" class="btn btn-danger">Hapus</a> -->
                             </td>
                             <td>{{ $dt->barcode }}</td>
                             <td>{{ $dt->nama_barang }}</td>
                             <td>{{ $dt->nama_pemasok }}</td>
                             <td>{{ $dt->satuan }}</td>
                             <td>{{ $dt->tanggal_pembelian }}</td>
-                            <td>{{ $dt->harga_beli }}</td>
-                            <td>{{ $dt->harga_jual }}</td>
+                            <td>Rp.{{ number_format($dt->harga_beli) }}</td>
+                            <td>Rp.{{ number_format($dt->harga_jual) }}</td>
                             <td>{{ $dt->jumlah_beli }}</td>
                         </tr>
                     @endforeach
@@ -171,8 +171,12 @@
                         <th>{{ $sisaStok }}</th>
                     </tr>
                     <tr>
-                        <th colspan="9">Harga Beli Akhir / Harga Jual Akhir</th>
-                        <th>{{ $getLast->harga_beli }} / {{ $getLast->harga_jual }}</th>
+                        <th colspan="9">Harga Beli Akhir</th>
+                        <th>Rp.{{ number_format($getLast->harga_beli) }}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="9">Harga Jual Akhir</th>
+                        <th>Rp.{{ number_format($getLast->harga_jual) }}</th>
                     </tr>
                 </tbody>
             </table>
