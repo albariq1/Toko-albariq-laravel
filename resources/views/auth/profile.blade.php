@@ -12,13 +12,22 @@
                     <div class="card mb-4 mb-xl-0">
                         <div class="card-header">Profile Picture</div>
                         <div class="card-body text-center">
-                            <!-- Profile picture image-->
-                            <img class="img-account-profile rounded-circle mb-2"
-                                src="http://bootdey.com/img/Content/avatar/avatar1.png" style="width: 80%" alt="">
-                            <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                            <!-- Profile picture upload button-->
-                            <button class="btn btn-primary" type="button">Upload new image</button>
+                            <form action="{{ route('update-foto') }}" enctype="multipart/form-data" method="POST">
+                                @csrf
+                                <!-- Profile picture image-->
+                                @if ($data->foto == '' || $data->foto == null)
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" style="width: 80%" alt="">
+                                @else
+                                    <img src="{{ asset('storage/' . $data->foto) }}" alt="" style="width: 80%">
+                                @endif
+                                <!-- Profile picture help block-->
+                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                <!-- Profile picture upload button-->
+                                {{-- <button class="btn btn-primary" type="submit">Upload new image</button> --}}
+                                <input type="file" name="foto">
+                                <button class="btn btn-primary" type="submit">upload new image</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -27,43 +36,48 @@
                     <div class="card mb-4">
                         <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            <form>
+                            <form action="{{ route('update-profile') }}" method="POST">
+                                @csrf
                                 <!-- Form Group (username)-->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputUsername">Nama Lengkap</label>
                                     <input class="form-control" id="inputUsername" type="text"
-                                        placeholder="Enter your username" value="username">
+                                        placeholder="Enter your username" name="name" value="{{ $data->name }}" required>
                                 </div>
                                 <!-- Form Group (email address)-->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputEmailAddress">Email</label>
                                     <input class="form-control" id="inputEmailAddress" type="email"
-                                        placeholder="Enter your email address" value="name@example.com">
+                                        placeholder="Enter your email address" name="email" value="{{ $data->email }}"
+                                        readonly>
                                 </div>
                                 <!-- Form Row  -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (organization name)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputOrgName">No Hp</label>
-                                        <input class="form-control" id="inputOrgName" type="Email"
-                                            placeholder="Enter your organization name" value="Start Bootstrap">
+                                        <input class="form-control" id="inputOrgName" type="text"
+                                            placeholder="Enter your organization name" name="No_hp"
+                                            value="{{ $data->No_hp }}" required>
                                     </div>
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLocation">Jabatan</label>
                                         <input class="form-control" id="inputLocation" type="text"
-                                            placeholder="Enter your location" value="San Francisco, CA">
+                                            placeholder="Enter your location" name="role" value="{{ $data->role }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-12">
                                         <label class="small mb-1" for="inputPhone">alamat</label>
-                                        <textarea class="form-control" name="" id="inputPhone" cols="50" rows="2"></textarea>
+                                        <textarea class="form-control" id="inputPhone" cols="50" rows="2" name="alamat"
+                                            required>{{ $data->alamat }}</textarea>
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="button">Save changes</button>
+                                <button type="submit" class="btn btn-primary" type="button">Save changes</button>
                             </form>
                         </div>
                     </div>

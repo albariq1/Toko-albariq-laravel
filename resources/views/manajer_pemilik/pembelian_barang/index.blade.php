@@ -135,45 +135,12 @@
                             {{-- <td>{{ $dt->harga_beli }}</td>
                             <td>{{ $dt->harga_jual }}</td> --}}
                             <td>
-                                <!-- Action -->
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <div class="col mb-3">
-                                                <!-- button tambah barang -->
-                                                <!-- Button trigger modal -->
-                                                <a href="{{ route('detail_tabel_pembelian_barang', $dt->barang_id) }}"
-                                                    class="btn btn-primary">
-                                                    Detail
-                                                </a>
+                                <a href="{{ route('detail_tabel_pembelian_barang', $dt->barang_id) }}"
+                                    class="btn btn-primary">
+                                    Detail
+                                </a>
 
 
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col mb-3">
-                                                <!-- button tambah barang -->
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalEdit{{ $dt->id }}">
-                                                    Edit
-                                                </button>
-
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col mb-3">
-                                                <button type="button" class="btn btn-danger">
-                                                    Hapus
-                                                </button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -182,137 +149,6 @@
         </section>
         <!-- /.content -->
 
-        {{-- modal detail --}}
-        <!-- Modal -->
-        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Barang
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- form pengisian data barang -->
-                        <form>
-                            <div class="row">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="bimoli" disabled>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Barcode</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Pemasok</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Satuan</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Harga Beli</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Harga Jual</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                    Benar?</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Tambah</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        {{-- modal edit --}}
-        <!-- Modal -->
-        {{-- @foreach ($data as $dtedit)
-            <div class="modal fade" id="exampleModalEdit{{ $dtedit->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Data Barang</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- form pengisian data barang -->
-                            <form action="{{ route('update_tabel_barang') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <input type="hidden" name="id" value="{{ $dtedit->id }}">
-                                        <label for="exampleInputPassword1" class="form-label">Pemasok</label>
-                                        <select class="form-control" name="pemasok_id" id="" required>
-                                            <option value="">--Pilih--</option>
-                                            @foreach ($pemasok as $pm)
-                                                <option value="{{ $pm->id }}"
-                                                    {{ $pm->id == $dtedit->pemasok_id ? 'selected' : '' }}>
-                                                    {{ $pm->nama_pemasok }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Kategori</label>
-                                        <select class="form-control" name="kategori_id" id="" required>
-                                            <option value="">--Pilih--</option>
-                                            @foreach ($kategori as $kt)
-                                                <option value="{{ $kt->id }}"
-                                                    {{ $kt->id == $dtedit->kategori_id ? 'selected' : '' }}>
-                                                    {{ $kt->nama_katagori }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                                        <input type="text" name="nama_barang" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp" value="{{ $dtedit->nama_barang }}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Barcode</label>
-                                        <input type="text" name="barcode" class="form-control" id="exampleInputPassword1"
-                                            value="{{ $dtedit->barcode }}" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Satuan</label>
-                                    <select class="form-control" name="satuan" id="">
-                                        <option value="">--Pilih--</option>
-                                        <option value="{{ $dtedit->satuan == 'Pcs' ? 'selected' : '' }}">Pcs</option>
-                                        <option value="{{ $dtedit->satuan == 'Kg' ? 'selected' : '' }}">Kg</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                        Benar?</label>
-                                </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Edit</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach --}}
 
     </div>
 @endsection

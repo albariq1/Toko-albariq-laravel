@@ -59,11 +59,6 @@ class UserController extends Controller
 
 
 
-    // menampilkan form edit
-    public function edit()
-    {
-    }
-
     public function update(Request $request)
     {
         // dd($request->all());

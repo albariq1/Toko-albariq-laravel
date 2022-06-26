@@ -11,11 +11,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="img-circle elevation-2"
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Nama Karyawan</a>
+                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -68,6 +68,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('tabel_kategori') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Kategori</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('tabel_barang') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Barang</p>
@@ -80,9 +86,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tabel_kategori') }}" class="nav-link">
+                            <a href="{{ route('tabel_kehilangan') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel Kategori</p>
+                                <p>Tabel Kehilangan</p>
                             </a>
                         </li>
                     </ul>
@@ -135,7 +141,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('seting') }}" class="nav-link">
+                    <a href="{{ route('setting') }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Setting Profile

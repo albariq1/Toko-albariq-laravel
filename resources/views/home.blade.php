@@ -48,7 +48,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>Rp.10.000.000</h3>
+                                <h3>Rp.{{ number_format($labakotor->labakotor) }}</h3>
 
                                 <p>Laba Kotor</p>
                             </div>
@@ -77,7 +77,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>150</h3>
+                                <h3>{{ $data->barangterjual }}</h3>
 
                                 <p>Barang Yang Terjual</p>
                             </div>

@@ -36,9 +36,10 @@ Route::get('/tabel_penjualan', [App\Http\Controllers\Manajer\PenjualanController
 Route::get('/tabel_pembelian_barang', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'index'])->name('tabel_pembelian_barang');
 Route::get('/tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController::class, 'index'])->name('tabel_pelanggan');
 Route::get('/transaksi', [App\Http\Controllers\Manajer\TransaksiController::class, 'index'])->name('transaksi');
-Route::get('/seting', [App\Http\Controllers\Manajer\SetingController::class, 'index'])->name('seting');
+Route::get('/setting', [App\Http\Controllers\SetingController::class, 'profile'])->name('setting');
 Route::get('/tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'index'])->name('tabel_kategori');
 Route::get('/laba_rugi', [App\Http\Controllers\Manajer\LabaRugiController::class, 'index'])->name('laba_rugi');
+Route::get('/tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganController::class, 'index'])->name('tabel_kehilangan');
 
 
 // mengirim data untuk User
@@ -76,3 +77,7 @@ Route::post('/store_tabel_pembelian_barang', [App\Http\Controllers\Manajer\Pembe
 Route::get('/kasir/transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'index'])->name('kasir.transaksi');
 Route::post('/kasir/store-transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'store'])->name('kasir.store-transaksi');
 Route::post('/kasir/store-penjualan', [App\Http\Controllers\Kasir\TransaksiController::class, 'store_penjualan'])->name('kasir.store-penjualan');
+
+// seting profile
+Route::post('/update-setting', [App\Http\Controllers\SetingController::class, 'updateprofile'])->name('update-profile');
+Route::post('/update-foto', [App\Http\Controllers\SetingController::class, 'updatefoto'])->name('update-foto');

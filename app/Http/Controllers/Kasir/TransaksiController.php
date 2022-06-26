@@ -14,8 +14,35 @@ use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
+    public function penjualanToday()
+    {
+        $today = date('Y-m-d');
+        $detail = DB::table('penjualan_barangs')
+            ->join('detail_penjualans', 'detail_penjualans.penjualan_id', 'penjualan_barangs.id')
+            ->where('detail_penjualans.status', '1')
+            ->where('penjualan_barangs.tanggal_transaksi', $today)
+            ->where('detail_penjualans.user_id', Auth::user()->id) // user_id dimaksudkan pada kasir yg menginput
+            ->get();
+
+
+        $grandTotal = DB::table('penjualan_barangs')
+            ->select(DB::raw('penjualan_barangs.*, SUM(grand_total) as totalBelanjaan '))
+            ->join('detail_penjualans', 'detail_penjualans.penjualan_id', 'penjualan_barangs.id')
+            ->where('detail_penjualans.status', '1')
+            ->where('detail_penjualans.user_id', Auth::user()->id) // user_id dimaksudkan pada kasir yg menginput
+            ->where('penjualan_barangs.tanggal_transaksi', $today)
+            ->first();
+
+        $data = [
+            'detail' =>  $detail,
+            'grandTotal' => $grandTotal
+        ];
+
+        return $data;
+    }
     public function index()
     {
+
         // menampilkan data pelanggan utk diform transaksi
         $pelanggan = Pelanggan::orderBy('nama_pelanggan')->get();
         // menampilkan data barang utk diform transaksi
@@ -40,7 +67,9 @@ class TransaksiController extends Controller
             ->first();
         $totBelanja = $total->totalbelanja;
 
-        return view('kasir.transaksi.index', compact('pelanggan', 'barang', 'detail', 'totBelanja'));
+        $penjualanToday = $this->penjualanToday();
+
+        return view('kasir.transaksi.index', compact('pelanggan', 'barang', 'detail', 'totBelanja', 'penjualanToday'));
     }
 
     public function store(Request $request)
@@ -66,6 +95,7 @@ class TransaksiController extends Controller
                     'totalharga' => $request->jumlah * $harga,
                     'status' => '0',
                     'pelanggan_id' => $request->pelanggan_id,
+                    'tanggal_transaksi' => date('Y-m-d'),
                     'user_id' => Auth::user()->id
                 ]);
             }
@@ -81,7 +111,7 @@ class TransaksiController extends Controller
         }
     }
 
-    public function store_penjualan()
+    public function store_penjualan(Request $request)
     {
         $user_id = Auth::user()->id;
         // opening db transaction
@@ -103,7 +133,11 @@ class TransaksiController extends Controller
 
             $storePenjualan = PenjualanBarang::create([
                 'kode_penjualan' => "BRQ-" . $kode,
-                'grand_total' => $getDetail[0]->total
+                'pelanggan_id' => $request->pelanggan_id,
+                'grand_total' => $getDetail[0]->total,
+                'jumlah_bayar' => $request->jumlah_bayar,
+                'kembalian' => $request->kembalian,
+                'tanggal_transaksi' => date('Y-m-d'),
             ]);
 
             $updateDetail = DetailPenjualan::where('status', '0')->where('user_id', Auth::user()->id)->update([

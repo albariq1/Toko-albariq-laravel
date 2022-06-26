@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('seting') }}" class="nav-link">
+                    <a href="{{ route('setting') }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Setting Profile
