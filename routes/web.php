@@ -40,6 +40,7 @@ Route::get('/setting', [App\Http\Controllers\SetingController::class, 'profile']
 Route::get('/tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'index'])->name('tabel_kategori');
 Route::get('/laba_rugi', [App\Http\Controllers\Manajer\LabaRugiController::class, 'index'])->name('laba_rugi');
 Route::get('/tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganController::class, 'index'])->name('tabel_kehilangan');
+Route::get('/tabel_history', [App\Http\Controllers\Manajer\HistoryController::class, 'index'])->name('tabel_history');
 
 
 // mengirim data untuk User

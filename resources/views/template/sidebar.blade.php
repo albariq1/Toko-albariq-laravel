@@ -133,12 +133,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('tabel_user') }}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             User
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_user') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_history') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel History</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('setting') }}" class="nav-link">

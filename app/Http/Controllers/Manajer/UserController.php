@@ -3,17 +3,27 @@
 namespace App\Http\Controllers\Manajer;
 
 use App\Http\Controllers\Controller;
+use App\Models\RiwayatLogin;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index()
     {
+        $today = date('Y-m-d H:i:s');
+
         $data = User::all();
-        return view('manajer_pemilik.user.index', compact('data'));
+
+        $history = DB::table('riwayat_logins')
+            ->select('riwayat_logins.*', 'users.name')
+            ->join('users', 'users.id', 'riwayat_logins.user_id')
+            ->orderBy('last_login_at', 'DESC')
+            ->get();
+        return view('manajer_pemilik.user.index', compact('data', 'history'));
     }
 
     // menyimpan data ke tabel users /menambahkan
