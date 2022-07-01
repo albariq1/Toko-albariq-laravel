@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class TransaksiController extends Controller
 {
@@ -18,10 +19,12 @@ class TransaksiController extends Controller
     {
         $today = date('Y-m-d');
         $detail = DB::table('penjualan_barangs')
-            ->join('detail_penjualans', 'detail_penjualans.penjualan_id', 'penjualan_barangs.id')
-            ->where('detail_penjualans.status', '1')
+            ->select(DB::raw('penjualan_barangs.*, users.name, pelanggans.nama_pelanggan '))
+            ->join('users', 'users.id', 'penjualan_barangs.user_id')
+            ->leftJoin('pelanggans', 'pelanggans.id', 'penjualan_barangs.pelanggan_id')
             ->where('penjualan_barangs.tanggal_transaksi', $today)
-            ->where('detail_penjualans.user_id', Auth::user()->id) // user_id dimaksudkan pada kasir yg menginput
+            ->where('penjualan_barangs.user_id', Auth::user()->id) // user_id yang dimasudkan pada kasih yang menginput
+            ->orderBy('id', 'DESC')
             ->get();
 
 
@@ -39,6 +42,12 @@ class TransaksiController extends Controller
         ];
 
         return $data;
+    }
+    public function history_transaksi()
+    {
+        $history = $this->penjualanToday();
+
+        return view('kasir.transaksi.history', compact('history'));
     }
     public function index()
     {
@@ -137,6 +146,7 @@ class TransaksiController extends Controller
                 'grand_total' => $getDetail[0]->total,
                 'jumlah_bayar' => $request->jumlah_bayar,
                 'kembalian' => $request->kembalian,
+                'user_id' => Auth::user()->id,
                 'tanggal_transaksi' => date('Y-m-d'),
             ]);
 
@@ -148,9 +158,12 @@ class TransaksiController extends Controller
             // success transaction
             DB::commit();
 
-            return redirect()->back()->with([
-                'success' => 'Data berhasil diproses!'
-            ]);
+            //penggail function download pdf invoice menggunakan redirect
+            return redirect()->route('kasir.cetak-invoice', ['id' => $storePenjualan->id]);
+
+            // return redirect()->back()->with([
+            //     'success' => 'Data berhasil diproses!'
+            // ]);
         } catch (Exception $error) {
             // saat gagal, maka cancel smua transaction data
             DB::rollBack();
@@ -159,5 +172,25 @@ class TransaksiController extends Controller
                 'failed' => 'Data gagal ditambah, karena ' . $error->getMessage()
             ]);
         }
+    }
+
+    public function cetak_invoice($id)
+    {
+
+        //ambbil data detail penjualans berdasarkan id penjualan yg dipilih
+        $data = DB::table('detail_penjualans')
+            ->join('barangs', 'barangs.id', 'detail_penjualans.barang_id')
+            ->where('detail_penjualans.penjualan_id', $id)
+            ->get();
+        // tampilkan data tabel penjualan_barangs berdasarkan id penjualan yg dipilih
+        $penjualan = PenjualanBarang::find($id);
+        // setting view untuk dijadikan file pdf
+        $pdf = PDF::loadView('kasir.transaksi.invoice', compact('data', 'penjualan'));
+        //setting size paprer printer kasir, layout kertas (potrair / landscape)
+        $pdf->setPaper([0, 0, 204, 650], 'potrait');
+        //setting dpi file pdf
+        $pdf->setOptions(['dpi', 72]);
+        //fungsi untuk menjalankan perintah print pdf / download pdf
+        return $pdf->stream('struk-penjualan.pdf');
     }
 }

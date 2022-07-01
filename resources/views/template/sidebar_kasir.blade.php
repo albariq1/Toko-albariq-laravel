@@ -53,6 +53,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('kasir.history-transaksi') }}" class="nav-link">
+                        <i class="nav-icon fas fa-cash-register"></i>
+                        <p>
+                            Riwayat Transaksi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('setting') }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>

@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class PembelianBarangController extends Controller
 {
@@ -103,5 +104,20 @@ class PembelianBarangController extends Controller
         $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual; //pengurangan total barang yang dibeli dengen total barang yang terjual
 
         return  view('manajer_pemilik.pembelian_barang.detail', compact('data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast'));
+    }
+
+    public function cetakBarcode(Request $request)
+    {
+        $dataproduk = DB::table('pembelian_barangs')
+            ->select(DB::raw('pembelian_barangs.*, barangs.id as id_barang, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
+            ->join('barangs', 'barangs.id', 'pembelian_barangs.barang_id')
+            ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
+            ->groupBy('pembelian_barangs.barang_id')
+            ->orderBy('barangs.barcode', 'ASC')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('manajer_pemilik.pembelian_barang.barcode', compact('dataproduk', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('barcode-produk.pdf');
     }
 }

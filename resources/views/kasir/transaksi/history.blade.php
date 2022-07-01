@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"><i class="fas fa-clipboard-list mr-2"></i>Tabel Penjualan</h1>
+                        <h1 class="m-0"><i class="fas fa-clipboard-list mr-2"></i>Tabel Penjualan Harian</h1>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -29,21 +29,23 @@
                         <th>Nama Pelanggan</th>
                         <th>Nama Admin</th>
                         <th>Tanggal</th>
-                        <th>Jumlah Item yang Dibeli</th>
                         <th>Jumlah Transaksi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($penjualanToday['detail'] as $dt)
+                    @foreach ($history['detail'] as $dt)
                         <tr>
-                            <th scope="row">{{ $loop->index + 1 }}</th>
+                            <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $dt->kode_penjualan }}</td>
+                            <td>{{ $dt->nama_pelanggan ?? '-' }}</td>
+                            <td>{{ $dt->name }}</td>
                             <td>{{ $dt->tanggal_transaksi }}</td>
-                            <td>Rp.{{ number_format($dt->grand_total) }}</td>
+                            <td>Rp.{{ number_format($dt->grand_total, 0, ',', '.') }}</td>
                             <td>
-                                <a href="" class="btn btn-warning"><i class="fa fa-print"></i></a>
-                                <a href="" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                {{-- infoice pelanggan --}}
+                                <a href="{{ route('kasir.cetak-invoice', $dt->id) }}" class="btn btn-warning"><i
+                                        class="fa fa-print"></i></a>
                             </td>
                         </tr>
                     @endforeach

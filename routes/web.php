@@ -71,6 +71,7 @@ Route::post('/destroy_tabel_barang', [App\Http\Controllers\Manajer\BarangControl
 // mengirim data pembelian 
 Route::get('/detail_tabel_pembelian_barang/{id}', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'detail'])->name('detail_tabel_pembelian_barang');
 Route::post('/store_tabel_pembelian_barang', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'store'])->name('store_tabel_pembelian_barang');
+Route::get('/barcode_barang', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'cetakBarcode'])->name('barcode_barang');
 // Route::post('/update_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'update'])->name('update_tabel_barang');
 // Route::post('/destroy_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'destroy'])->name('destroy_tabel_barang');
 
@@ -78,6 +79,8 @@ Route::post('/store_tabel_pembelian_barang', [App\Http\Controllers\Manajer\Pembe
 Route::get('/kasir/transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'index'])->name('kasir.transaksi');
 Route::post('/kasir/store-transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'store'])->name('kasir.store-transaksi');
 Route::post('/kasir/store-penjualan', [App\Http\Controllers\Kasir\TransaksiController::class, 'store_penjualan'])->name('kasir.store-penjualan');
+Route::get('/kasir/history-transaksi', [App\Http\Controllers\Kasir\TransaksiController::class, 'history_transaksi'])->name('kasir.history-transaksi');
+Route::get('/kasir/cetak-invoice/{id}', [App\Http\Controllers\Kasir\TransaksiController::class, 'cetak_invoice'])->name('kasir.cetak-invoice');
 
 // seting profile
 Route::post('/update-setting', [App\Http\Controllers\SetingController::class, 'updateprofile'])->name('update-profile');

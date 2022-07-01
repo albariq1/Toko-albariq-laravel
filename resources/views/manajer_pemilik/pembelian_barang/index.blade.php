@@ -77,6 +77,8 @@
                 <button type="button" class="btn btn-info">
                     Print
                 </button>
+                <a href="{{ route('barcode_barang') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-barcode mr-2"></i> Print Barcode</a>
             </div>
             @if (Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
