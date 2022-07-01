@@ -54,11 +54,11 @@ class PemasokController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'nama_pemasok' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required'
-        ]);
+        // $request->validate([
+        //     'nama_pemasok' => 'required',
+        //     'alamat' => 'required',
+        //     'no_hp' => 'required'
+        // ]);
 
         try {
             //proses update data ke tabel

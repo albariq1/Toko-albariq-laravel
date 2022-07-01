@@ -158,7 +158,7 @@
 
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="card" style="width: 100%;">
                         <h3 class="card-header">Penjualan Hari ini</h3>
                         <div class="card-body">
@@ -194,7 +194,7 @@
                             <h4>Rp.{{ number_format($penjualanToday['grandTotal']->totalBelanjaan) }}</h4>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 

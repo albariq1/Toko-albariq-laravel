@@ -65,6 +65,12 @@
                                         <label for="" class="form-label">harga Jual</label>
                                         <input type="text" name="harga_jual" class="form-control" id="">
                                     </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1" required>Apakah Yang Anda Input
+                                            Sudah
+                                            Benar?</label>
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
