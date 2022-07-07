@@ -35,7 +35,11 @@ class HomeController extends Controller
             ->where('tanggal_transaksi', $today)
             ->where('status', '1')->first();
         // dd($data);
+        $totaltransaksi = DB::table('penjualan_barangs')
+            ->select(DB::raw('COUNT(kode_penjualan) as totaltransaksi'))
+            ->where('tanggal_transaksi', $today)
+            ->first();
 
-        return view('home', compact('data', 'labakotor'));
+        return view('home', compact('data', 'labakotor', 'totaltransaksi'));
     }
 }

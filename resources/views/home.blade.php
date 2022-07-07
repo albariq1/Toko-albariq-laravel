@@ -50,10 +50,10 @@
                             <div class="inner">
                                 <h3>Rp.{{ number_format($labakotor->labakotor) }}</h3>
 
-                                <p>Laba Kotor</p>
+                                <p>Total Penjualan</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-arrow-graph-up-right"></i>
                             </div>
 
                         </div>
@@ -63,12 +63,12 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>Rp.10.000.000</h3>
+                                <h3>{{ $totaltransaksi->totaltransaksi ?? '-' }} </h3>
 
-                                <p>Laba Bersih</p>
+                                <p>Total Transaksi</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="ion ion-navicon"></i>
                             </div>
                         </div>
                     </div>
@@ -77,12 +77,12 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{ $data->barangterjual }}</h3>
+                                <h3>{{ $data->barangterjual ?? '-' }}</h3>
 
                                 <p>Barang Yang Terjual</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-filling"></i>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                                 <p>Barang Return</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-arrow-return-right"></i>
                             </div>
                         </div>
                     </div>
