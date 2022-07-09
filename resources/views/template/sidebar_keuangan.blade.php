@@ -44,7 +44,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{ route('home') }}" class="nav-link {{ set_active('home') }}">
+                    <a href="{{ route('home') }}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -52,16 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('transaksi') }}" class="nav-link {{ set_active('transaksi') }}">
-                        <i class="nav-icon fas fa-cash-register"></i>
-                        <p>
-                            Transaksi
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#"
-                        class="nav-link {{ set_active(['tabel_pemasok', 'tabel_kategori', 'tabel_barang', 'tabel_return', 'tabel_kehilangan']) }}">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             Data Barang
@@ -70,36 +61,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('tabel_pemasok') }}"
-                                class="nav-link {{ set_active('tabel_pemasok') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel Pemasok</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('tabel_kategori') }}"
-                                class="nav-link {{ set_active('tabel_kategori') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel Kategori</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('tabel_barang') }}"
-                                class="nav-link {{ set_active('tabel_barang') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel Barang</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('tabel_return') }}"
-                                class="nav-link {{ set_active('tabel_return') }}">
+                            <a href="{{ route('tabel_return') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Return</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tabel_kehilangan') }}"
-                                class="nav-link {{ set_active('tabel_kehillangan') }}">
+                            <a href="{{ route('tabel_kehilangan') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Kehilangan</p>
                             </a>
@@ -107,8 +75,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#"
-                        class="nav-link  {{ set_active(['tabel_penjualan', 'tabel_pembelian_barang']) }}">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file-invoice"></i>
                         <p>
                             Data Transaksi
@@ -117,15 +84,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('tabel_penjualan') }}"
-                                class="nav-link {{ set_active('tabel_penjualan') }}">
+                            <a href="{{ route('tabel_penjualan') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Penjualan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tabel_pembelian_barang') }}"
-                                class="nav-link {{ set_active('tabel_pembelian_barang') }}">
+                            <a href="{{ route('tabel_pembelian_barang') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Pembelian</p>
                             </a>
@@ -133,15 +98,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('tabel_pelanggan') }}" class="nav-link {{ set_active('tabel_pelanggan') }}">
-                        <i class="nav-icon far fa-user"></i>
-                        <p>
-                            Pelanggan
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('laba_rugi') }}" class="nav-link {{ set_active('laba_rugi') }}">
+                    <a href="{{ route('laba_rugi') }}" class="nav-link">
                         <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
                             Laporan Laba Rugi
@@ -149,32 +106,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ set_active(['tabel_user', 'tabel_history']) }}">
-                        <i class="nav-icon fas fa-boxes"></i>
-                        <p>
-                            User
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-
-                        <li class="nav-item">
-                            <a href="{{ route('tabel_user') }}" class="nav-link {{ set_active('tabel_user') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('tabel_history') }}"
-                                class="nav-link {{ set_active('tabel_history') }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tabel History</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('setting') }}" class="nav-link {{ set_active('setting') }}">
+                    <a href="{{ route('setting') }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Setting Profile

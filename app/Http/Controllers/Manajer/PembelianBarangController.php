@@ -99,11 +99,18 @@ class PembelianBarangController extends Controller
             ->where('barang_id', $id)
             ->first();
 
+        $getJumlahReturn = DB::table('return_barangs')
+            ->select(DB::raw('SUM(jumlah_return) as jumlah_return'))
+            ->where('barang_id', $id)
+            ->where('status', '0')
+            ->first();
+
+
         $getLast = PembelianBarang::where('barang_id', $id)->orderBy('id', 'DESC')->first(); //untuk mengambil data barang yang terakhir untuk ambil harga tersebut
 
-        $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual; //pengurangan total barang yang dibeli dengen total barang yang terjual
+        $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual - $getJumlahReturn->jumlah_return; //pengurangan total barang yang dibeli dengen total barang yang terjual
 
-        return  view('manajer_pemilik.pembelian_barang.detail', compact('data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast'));
+        return  view('manajer_pemilik.pembelian_barang.detail', compact('data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast', 'getJumlahReturn'));
     }
 
     public function cetakBarcode(Request $request)

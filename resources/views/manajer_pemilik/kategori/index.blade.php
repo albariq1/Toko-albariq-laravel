@@ -28,7 +28,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Pembelian</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -38,7 +38,8 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Nama Katagori</label>
-                                        <input type="text" class="form-control @error('nama_katagori') is-invalid @enderror"
+                                        <input type="text"
+                                            class="form-control @error('nama_katagori') is-invalid @enderror"
                                             id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_katagori"
                                             value="{{ old('nama_katagori') }}" required>
                                         @error('nama_katagori')
@@ -141,14 +142,13 @@
 
         @foreach ($data as $dtedit)
             <!-- Modal Edit -->
-            <div class="modal fade" id="exampleModal{{ $dtedit->id }}" tabindex="-1"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal{{ $dtedit->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- form pengisian data barang -->
@@ -157,7 +157,8 @@
                                 <input type="hidden" name="id" value="{{ $dtedit->id }}">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Nama Katagori</label>
-                                    <input type="text" class="form-control @error('nama_katagori') is-invalid @enderror"
+                                    <input type="text"
+                                        class="form-control @error('nama_katagori') is-invalid @enderror"
                                         id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
                                         value="{{ $dtedit->nama_katagori }}">
                                 </div>

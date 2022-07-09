@@ -50,17 +50,19 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Jumlah</label>
-                                            <input type="number" min="1" name="jumlah_beli" class="form-control" id=""
-                                                aria-describedby="emailHelp" required>
+                                            <input type="number" min="1" name="jumlah_beli" class="form-control"
+                                                id="" aria-describedby="emailHelp" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Harga Beli</label>
-                                            <input type="text" name="harga_beli" class="form-control" id="" required>
+                                            <input type="text" name="harga_beli" class="form-control" id=""
+                                                required>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Harga Jual</label>
-                                        <input type="text" name="harga_jual" class="form-control" id="" required>
+                                        <input type="text" name="harga_jual" class="form-control" id=""
+                                            required>
                                     </div>
 
                                     <div class="mb-3 form-check">
@@ -145,8 +147,8 @@
                                     </ul>
                                 </div>
                                 <!-- <a href="" class="btn btn-primary">Detail</a>
-                                                                    <a href="" class="btn btn-warning">Ubah</a>
-                                                                    <a href="" class="btn btn-danger">Hapus</a> -->
+                                                                        <a href="" class="btn btn-warning">Ubah</a>
+                                                                        <a href="" class="btn btn-danger">Hapus</a> -->
                             </td>
                             <td>{{ $dt->barcode }}</td>
                             <td>{{ $dt->nama_barang }}</td>
@@ -165,6 +167,10 @@
                     <tr>
                         <th colspan="9">Jumlah Terjual</th>
                         <th>{{ $getJumlahTerjual->jumlah_terjual ?? 0 }}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="9">Jumlah Return</th>
+                        <th>{{ $getJumlahReturn->jumlah_return ?? 0 }}</th>
                     </tr>
                     <tr>
                         <th colspan="9">Sisa Stok</th>

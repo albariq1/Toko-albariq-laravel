@@ -55,7 +55,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Jumlah</label>
-                                        <input type="number" min="1" name="jumlah_beli" class="form-control" id="">
+                                        <input type="number" min="1" name="jumlah_beli" class="form-control"
+                                            id="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Harga Beli</label>
@@ -129,9 +130,13 @@
                                 ->select(DB::raw('SUM(jumlah) as jumlah_terjual'))
                                 ->where('barang_id', $dt->barang_id)
                                 ->first();
-                            
+                            $getJumlahReturn = DB::table('return_barangs')
+                                ->select(DB::raw('SUM(jumlah_return) as jumlah_return'))
+                                ->where('barang_id', $dt->barang_id)
+                                ->where('status', '0')
+                                ->first();
                             // hitung sisa stok
-                            $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual;
+                            $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual - $getJumlahReturn->jumlah_return;
                         @endphp
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>

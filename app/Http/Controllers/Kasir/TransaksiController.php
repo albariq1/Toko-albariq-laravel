@@ -83,10 +83,38 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
+        //cek Ketersediaan stok
+        $getJumlah = DB::table('pembelian_barangs')
+            ->select(DB::raw('SUM(jumlah_beli) as stok'))
+            ->where('barang_id', $request->barang_id)
+            ->first();
+
+        // ambil jumlah (SUM) dari tabel detail_penjualans
+        // berdasarka $request->barang_id barangs yg dipilih
+        $getJumlahTerjual = DB::table('detail_penjualans')
+            ->select(DB::raw('SUM(jumlah) as jumlah_terjual'))
+            ->where('barang_id', $request->barang_id)
+            ->first();
+
+        $getJumlahReturn = DB::table('return_barangs')
+            ->select(DB::raw('SUM(jumlah_return) as jumlah_return'))
+            ->where('barang_id', $request->barang_id)
+            ->first();
+
+        $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual - $getJumlahReturn->jumlah_return;
+
+        if ($request->jumlah > $sisaStok) {
+            return redirect()->back()->with([
+                'failed' => 'Jumlah pembelian Melebihi Stok Barang!'
+            ]);
+            die;
+        }
+
         try {
             $getLastBarang = PembelianBarang::where('barang_id', $request->barang_id)->orderBy('id', 'DESC')->first();
 
             $harga = $getLastBarang->harga_jual;
+            $harga_beli = $getLastBarang->harga_beli;
 
             $cekKeranjang = DetailPenjualan::where('barang_id', $request->barang_id)->where('status', '0')->where('user_id', Auth::user()->id);
 
@@ -101,6 +129,9 @@ class TransaksiController extends Controller
                 DetailPenjualan::create([
                     'barang_id' => $request->barang_id,
                     'jumlah' => $request->jumlah,
+                    'harga_jual' => $harga,
+                    'harga_pokok' => $harga_beli,
+                    'jual_diskon' => 0,
                     'totalharga' => $request->jumlah * $harga,
                     'status' => '0',
                     'pelanggan_id' => $request->pelanggan_id,

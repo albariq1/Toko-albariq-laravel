@@ -46,7 +46,8 @@
                                          </div>
                                          <div class=" mb-3">
                                              <label for="exampleInputPassword1" class="form-label">Alamat</label>
-                                             <input type="text" class="form-control @error('alamat') is-invalid @enderror"
+                                             <input type="text"
+                                                 class="form-control @error('alamat') is-invalid @enderror"
                                                  id="exampleInputPassword1" name="alamat" value="{{ old('alamat') }}"
                                                  required>
                                          </div>
@@ -54,7 +55,8 @@
                                      <div class="mb-3">
                                          <label for="exampleInputPassword1" class="form-label">No Hp</label>
                                          <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp" required>
+                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp"
+                                             required>
                                      </div>
                                      <div class="mb-3 form-check">
                                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -110,8 +112,8 @@
                              <td>
                                  <!-- Action -->
                                  <div class="btn-group">
-                                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                         aria-expanded="false">
+                                     <button type="button" class="btn btn-primary dropdown-toggle"
+                                         data-bs-toggle="dropdown" aria-expanded="false">
                                          Action
                                      </button>
                                      <ul class="dropdown-menu">
@@ -165,7 +167,7 @@
                      <div class="modal-content">
                          <div class="modal-header">
                              <h5 class="modal-title" id="exampleModalLabel">Edit
-                                 Pelanggan</h5>
+                                 Pemasok</h5>
                              <button type="button" class="btn-close" data-bs-dismiss="modal"
                                  aria-label="Close"></button>
                          </div>
@@ -177,7 +179,8 @@
                                      <div class="mb-3">
                                          <input type="hidden" name="id" value="{{ $dtedit->id }}">
                                          <label for="exampleInputEmail1" class="form-label">Nama Pemasok</label>
-                                         <input type="text" class="form-control @error('nama_pemasok') is-invalid @enderror"
+                                         <input type="text"
+                                             class="form-control @error('nama_pemasok') is-invalid @enderror"
                                              id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="bimoli"
                                              name="nama_pelanggan" value="{{ $dtedit->nama_pemasok }}">
                                      </div>
@@ -189,11 +192,12 @@
                                  </div>
                                  <div class="mb-3">
                                      <label for="exampleInputPassword1" class="form-label">No Hp</label>
-                                     <input type="text" class="form-control" id="exampleInputPassword1" name="no_hp"
-                                         value="{{ $dtedit->no_hp }}">
+                                     <input type="text" class="form-control" id="exampleInputPassword1"
+                                         name="no_hp" value="{{ $dtedit->no_hp }}">
                                  </div>
                                  <div class="modal-footer">
-                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                     <button type="button" class="btn btn-secondary"
+                                         data-bs-dismiss="modal">Close</button>
                                      <button type="submit" class="btn btn-primary">Tambah</button>
                                  </div>
                              </form>
@@ -213,7 +217,7 @@
                                  aria-label="Close"></button>
                          </div>
                          <div class="modal-body">
-                             Apakah Anda Yakin Hapus Data Kategori {{ $dtedit->nama_katagori }}?
+                             Apakah Anda Yakin Hapus Data Pemasok {{ $dtedit->nama_katagori }}?
                          </div>
                          <div class="modal-footer">
                              <form action="{{ route('destroy_tabel_pemasok') }}" method="POST">

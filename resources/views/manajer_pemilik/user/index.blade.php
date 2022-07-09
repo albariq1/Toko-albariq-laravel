@@ -19,7 +19,7 @@
                 <!-- button tambah barang -->
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-folder-plus mr-2"></i> Tambah Admin
+                    <i class="fas fa-folder-plus mr-2"></i> Tambah User
                 </button>
 
                 <!-- Modal -->
@@ -28,7 +28,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Pembelian</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -78,13 +78,15 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Jabatan</label>
-                                        <select class="form-control @error('role') is-invalid @enderror" id="" name="role"
-                                            required>
+                                        <select class="form-control @error('role') is-invalid @enderror" id=""
+                                            name="role" required>
                                             <option value="">--Pilih--</option>
-                                            <option value="Kasir">Kasir</option>
-                                            <option value="Manajer">Manajer</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Direktur">Direktur</option>
+                                            <option value="Sekretaris">Sekretaris</option>
+                                            <option value="Keuangan">Keuangan</option>
                                             <option value="Staff Gudang">Staff Gudang</option>
-                                            <option value="Pemilik">Pemilik</option>
+                                            <option value="Kasir">Kasir</option>
                                         </select>
                                         @error('role')
                                             <span class="invalid-feedback" role="alert">
@@ -94,8 +96,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Alamat</label>
-                                        <textarea class="form-control @error('alamat') is-invalid @enderror" id="" name="alamat" cols="30" rows="10"
-                                            required></textarea>
+                                        <textarea class="form-control @error('alamat') is-invalid @enderror" id="" name="alamat" cols="30"
+                                            rows="10" required></textarea>
                                         @error('alamat')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -159,8 +161,8 @@
                             <td>
                                 <!-- Action -->
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         Action
                                     </button>
                                     <ul class="dropdown-menu">
@@ -233,14 +235,14 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Nama Lengkap</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $dtedit->name }}"
-                                        name="name" required>
+                                        id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        value="{{ $dtedit->name }}" name="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">No Hp</label>
                                     <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $dtedit->No_hp }}"
-                                        name="no_hp" required>
+                                        id="exampleInputEmail1" aria-describedby="emailHelp"
+                                        value="{{ $dtedit->No_hp }}" name="no_hp" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -249,24 +251,28 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Jabatan</label>
-                                    <select class="form-control @error('role') is-invalid @enderror" id="" name="role"
-                                        required>
+                                    <select class="form-control @error('role') is-invalid @enderror" id=""
+                                        name="role" required>
                                         <option value="">--Pilih--</option>
+                                        <option value="Admin "{{ $dtedit->role == 'Admin' ? 'selected' : '' }}>Admin
+                                        </option>
+                                        <option value="Direktur"{{ $dtedit->role == 'Direktur' ? 'selected' : '' }}>
+                                            Direktur</option>
+                                        <option value="Sekretaris"{{ $dtedit->role == 'Sekretaris' ? 'selected' : '' }}>
+                                            Sekretaris</option>
+                                        <option value="Keuangan"{{ $dtedit->role == 'Keuangan' ? 'selected' : '' }}>
+                                            Keuangan</option>
+                                        <option
+                                            value="Staff Gudang"{{ $dtedit->role == 'Staff Gudang' ? 'selected' : '' }}>
+                                            Staff Gudang</option>
                                         <option value="Kasir" {{ $dtedit->role == 'Kasir' ? 'selected' : '' }}>Kasir
                                         </option>
-                                        <option value="Manajer" {{ $dtedit->role == 'Manajer' ? 'selected' : '' }}>
-                                            Manajer</option>
-                                        <option
-                                            value="Staff Gudang {{ $dtedit->role == 'Staff Gudang' ? 'selected' : '' }}">
-                                            Staff Gudang</option>
-                                        <option value="Pemilik" {{ $dtedit->role == 'Pemilik' ? 'selected' : '' }}>
-                                            Pemilik</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label">Alamat</label>
-                                    <textarea class="form-control @error('alamat') is-invalid @enderror" id="" name="alamat" cols="30" rows="10"
-                                        required>{{ $dtedit->alamat }}</textarea>
+                                    <textarea class="form-control @error('alamat') is-invalid @enderror" id="" name="alamat" cols="30"
+                                        rows="10" required>{{ $dtedit->alamat }}</textarea>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">

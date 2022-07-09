@@ -31,14 +31,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'index'])->name('tabel_barang');
 Route::get('/tabel_pemasok', [App\Http\Controllers\Manajer\PemasokController::class, 'index'])->name('tabel_pemasok');
 Route::get('/tabel_user', [App\Http\Controllers\Manajer\UserController::class, 'index'])->name('tabel_user');
-Route::get('/tabel_return', [App\Http\Controllers\Manajer\ReturnController::class, 'index'])->name('tabel_return');
-Route::get('/tabel_penjualan', [App\Http\Controllers\Manajer\PenjualanController::class, 'index'])->name('tabel_penjualan');
+Route::get('/tabel_return', [App\Http\Controllers\Manajer\ReturnBarangController::class, 'index'])->name('tabel_return');
 Route::get('/tabel_pembelian_barang', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'index'])->name('tabel_pembelian_barang');
 Route::get('/tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController::class, 'index'])->name('tabel_pelanggan');
 Route::get('/transaksi', [App\Http\Controllers\Manajer\TransaksiController::class, 'index'])->name('transaksi');
 Route::get('/setting', [App\Http\Controllers\SetingController::class, 'profile'])->name('setting');
 Route::get('/tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'index'])->name('tabel_kategori');
-Route::get('/laba_rugi', [App\Http\Controllers\Manajer\LabaRugiController::class, 'index'])->name('laba_rugi');
 Route::get('/tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganController::class, 'index'])->name('tabel_kehilangan');
 Route::get('/tabel_history', [App\Http\Controllers\Manajer\HistoryController::class, 'index'])->name('tabel_history');
 
@@ -85,3 +83,10 @@ Route::get('/kasir/cetak-invoice/{id}', [App\Http\Controllers\Kasir\TransaksiCon
 // seting profile
 Route::post('/update-setting', [App\Http\Controllers\SetingController::class, 'updateprofile'])->name('update-profile');
 Route::post('/update-foto', [App\Http\Controllers\SetingController::class, 'updatefoto'])->name('update-foto');
+
+// return 
+Route::post('/store-tabel_return', [App\Http\Controllers\Manajer\ReturnBarangController::class, 'store'])->name('store_tabel_return');
+
+// penjualan barang
+Route::get('/tabel_penjualan', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'index'])->name('tabel_penjualan');
+Route::get('/laba_rugi', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'lap_laba_rugi'])->name('laba_rugi');

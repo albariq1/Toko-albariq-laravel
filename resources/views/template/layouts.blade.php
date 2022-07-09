@@ -58,8 +58,10 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @if (Auth::user()->role == 'Manajer')
+        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Direktur')
             @include('template.sidebar')
+        @elseif(Auth::user()->role == 'Keuangan')
+            @include('template.sidebar_keuangan')
         @elseif (Auth::user()->role == 'Kasir')
             @include('template.sidebar_kasir')
         @endif
