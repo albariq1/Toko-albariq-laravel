@@ -101,6 +101,7 @@
                          {{-- <th>Nama Pemasok</th> --}}
                          <th>Pemasok</th>
                          <th>Jumlah Return</th>
+                         <th>Alasan</th>
                          <th>Action</th>
                      </tr>
                  </thead>
@@ -112,7 +113,7 @@
                              <td>{{ $dt->nama_barang }}</td>
                              <td>{{ $dt->nama_pemasok }}</td>
                              <td>{{ $dt->jumlah_return }}</td>
-                             <td>Barang Expired</td>
+                             <td>{{ $dt->alasan }}</td>
                              <td>
                                  <div class="btn-group">
                                      <button type="button" class="btn btn-primary dropdown-toggle"

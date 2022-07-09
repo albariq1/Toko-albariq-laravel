@@ -11,8 +11,13 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                    alt="User Image">
+                @if (Auth::user()->foto == '' || Auth::user()->foto == null)
+                    <img class="img-circle elevation-2" src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                        alt="User Image">
+                @else
+                    <img src="{{ asset('storage/' . Auth::user()->foto) }}" class="img-circle elevation-2"
+                        alt="User Image">
+                @endif
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -47,20 +52,57 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('kasir.transaksi') }}" class="nav-link {{ set_active('kasir.transaksi') }}">
-                        <i class="nav-icon fas fa-cash-register"></i>
+                    <a href="#"
+                        class="nav-link {{ set_active(['tabel_pemasok', 'tabel_kategori', 'tabel_barang', 'tabel_return', 'tabel_kehilangan']) }}">
+                        <i class="nav-icon fas fa-boxes"></i>
                         <p>
-                            Transaksi
+                            Data Barang
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_pemasok') }}"
+                                class="nav-link {{ set_active('tabel_pemasok') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Pemasok</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_kategori') }}"
+                                class="nav-link {{ set_active('tabel_kategori') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Kategori</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_barang') }}"
+                                class="nav-link {{ set_active('tabel_barang') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Barang</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_return') }}"
+                                class="nav-link {{ set_active('tabel_return') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Return</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tabel_kehilangan') }}"
+                                class="nav-link {{ set_active('tabel_kehillangan') }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tabel Kehilangan</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('kasir.history-transaksi') }}"
-                        class="nav-link {{ set_active('kasir.history-transaksi') }}">
-                        <i class="nav-icon fas fa-cash-register"></i>
-                        <p>
-                            Riwayat Transaksi
-                        </p>
+                    <a href="{{ route('tabel_pembelian_barang') }}"
+                        class="nav-link {{ set_active('tabel_pembelian_barang') }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tabel Pembelian</p>
                     </a>
                 </li>
                 <li class="nav-item">

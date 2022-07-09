@@ -58,10 +58,16 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Direktur')
+        @if (Auth::user()->role == 'Admin')
             @include('template.sidebar')
+        @elseif (Auth::user()->role == 'Direktur')
+            @include('template.sidebar_direktur')
+        @elseif (Auth::user()->role == 'Sekretaris')
+            @include('template.sidebar_sekretaris')
         @elseif(Auth::user()->role == 'Keuangan')
             @include('template.sidebar_keuangan')
+        @elseif (Auth::user()->role == 'Staff Gudang')
+
         @elseif (Auth::user()->role == 'Kasir')
             @include('template.sidebar_kasir')
         @endif

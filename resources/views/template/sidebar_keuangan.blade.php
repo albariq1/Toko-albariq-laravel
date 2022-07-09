@@ -44,7 +44,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{ route('home') }}" class="nav-link active">
+                    <a href="{{ route('home') }}" class="nav-link {{ set_active('home') }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -60,14 +60,15 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('tabel_return') }}" class="nav-link">
+                        <li class="nav-item {{ set_active(['tabel_return', 'tabel_kehilangan']) }}">
+                            <a href="{{ route('tabel_return') }}" class="nav-link {{ set_active('tabel_return') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Return</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tabel_kehilangan') }}" class="nav-link">
+                            <a href="{{ route('tabel_kehilangan') }}"
+                                class="nav-link {{ set_active('tabel_kehilangan') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Kehilangan</p>
                             </a>
@@ -75,7 +76,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#"
+                        class="nav-link {{ set_active(['tabel_penjualan', 'tabel_pembelian_barang']) }}">
                         <i class="nav-icon fas fa-file-invoice"></i>
                         <p>
                             Data Transaksi
@@ -84,13 +86,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('tabel_penjualan') }}" class="nav-link">
+                            <a href="{{ route('tabel_penjualan') }}"
+                                class="nav-link {{ set_active('tabel_penjualan') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Penjualan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tabel_pembelian_barang') }}" class="nav-link">
+                            <a href="{{ route('tabel_pembelian_barang') }}"
+                                class="nav-link {{ set_active('tabel_pembelian_barang') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Pembelian</p>
                             </a>
@@ -98,7 +102,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('laba_rugi') }}" class="nav-link">
+                    <a href="{{ route('laba_rugi') }}" class="nav-link {{ set_active('laba_rugi') }}">
                         <i class="nav-icon fas fa-dollar-sign"></i>
                         <p>
                             Laporan Laba Rugi
@@ -106,7 +110,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('setting') }}" class="nav-link">
+                    <a href="{{ route('setting') }}" class="nav-link {{ set_active('setting') }}">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Setting Profile
