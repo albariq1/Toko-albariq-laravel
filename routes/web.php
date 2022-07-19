@@ -37,7 +37,7 @@ Route::get('/tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController
 Route::get('/transaksi', [App\Http\Controllers\Manajer\TransaksiController::class, 'index'])->name('transaksi');
 Route::get('/setting', [App\Http\Controllers\SetingController::class, 'profile'])->name('setting');
 Route::get('/tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'index'])->name('tabel_kategori');
-Route::get('/tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganController::class, 'index'])->name('tabel_kehilangan');
+Route::get('/tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganBarangController::class, 'index'])->name('tabel_kehilangan');
 Route::get('/tabel_history', [App\Http\Controllers\Manajer\HistoryController::class, 'index'])->name('tabel_history');
 
 
@@ -45,26 +45,31 @@ Route::get('/tabel_history', [App\Http\Controllers\Manajer\HistoryController::cl
 Route::post('/store_tabel_user', [App\Http\Controllers\Manajer\UserController::class, 'store'])->name('store_tabel_user');
 Route::post('/update_tabel_user', [App\Http\Controllers\Manajer\UserController::class, 'update'])->name('update_tabel_user');
 Route::post('/destroy_tabel_user', [App\Http\Controllers\Manajer\UserController::class, 'destroy'])->name('destroy_tabel_user');
+Route::get('/download_user', [App\Http\Controllers\Manajer\UserController::class, 'printUser'])->name('download_user');
 
 // mengirim data untuk Kategori
 Route::post('/store_tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'store'])->name('store_tabel_kategori');
 Route::post('/update_tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'update'])->name('update_tabel_kategori');
 Route::post('/destroy_tabel_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'destroy'])->name('destroy_tabel_kategori');
+Route::get('/download_kategori', [App\Http\Controllers\Manajer\KategoriController::class, 'printKategori'])->name('download_kategori');
 
 // mengirim data Pemasok
 Route::post('/store_tabel_pemasok', [App\Http\Controllers\Manajer\PemasokController::class, 'store'])->name('store_tabel_pemasok');
 Route::post('/update_tabel_pemasok', [App\Http\Controllers\Manajer\PemasokController::class, 'update'])->name('update_tabel_pemasok');
 Route::post('/destroy_tabel_pemasok', [App\Http\Controllers\Manajer\PemasokController::class, 'destroy'])->name('destroy_tabel_pemasok');
+Route::get('/download_pemasok', [App\Http\Controllers\Manajer\PemasokController::class, 'printPemasok'])->name('download_pemasok');
 
 // mengirim data pelanggan
 Route::post('/store_tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController::class, 'store'])->name('store_tabel_pelanggan');
 Route::post('/update_tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController::class, 'update'])->name('update_tabel_pelanggan');
 Route::post('/destroy_tabel_pelanggan', [App\Http\Controllers\Manajer\PelangganController::class, 'destroy'])->name('destroy_tabel_pelanggan');
+Route::get('/download_pelanggan', [App\Http\Controllers\Manajer\pelangganController::class, 'printPelanggan'])->name('download_pelanggan');
 
 // mengirim data barang
 Route::post('/store_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'store'])->name('store_tabel_barang');
 Route::post('/update_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'update'])->name('update_tabel_barang');
 Route::post('/destroy_tabel_barang', [App\Http\Controllers\Manajer\BarangController::class, 'destroy'])->name('destroy_tabel_barang');
+Route::get('/download_barang', [App\Http\Controllers\Manajer\BarangController::class, 'printBarang'])->name('download_barang');
 
 // mengirim data pembelian 
 Route::get('/detail_tabel_pembelian_barang/{id}', [App\Http\Controllers\Manajer\PembelianBarangController::class, 'detail'])->name('detail_tabel_pembelian_barang');
@@ -86,7 +91,20 @@ Route::post('/update-foto', [App\Http\Controllers\SetingController::class, 'upda
 
 // return 
 Route::post('/store-tabel_return', [App\Http\Controllers\Manajer\ReturnBarangController::class, 'store'])->name('store_tabel_return');
+Route::get('/update-status_return/{id}', [App\Http\Controllers\Manajer\ReturnBarangController::class, 'updateStatus'])->name('update_status_return');
+Route::post('/destroy_tabel_return', [App\Http\Controllers\Manajer\ReturnBarangController::class, 'destroy'])->name('destroy_tabel_return');
+Route::get('/download_return', [App\Http\Controllers\Manajer\ReturnBarangController::class, 'printReturn'])->name('download_return');
 
 // penjualan barang
 Route::get('/tabel_penjualan', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'index'])->name('tabel_penjualan');
 Route::get('/laba_rugi', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'lap_laba_rugi'])->name('laba_rugi');
+Route::get('/download_labarugi', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'printlabarugi'])->name('download_labarugi');
+
+// Kehilangan barang
+Route::post('/destroy_tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganBarangController::class, 'destroy'])->name('destroy_tabel_kehilangan');
+Route::post('/store-tabel_kehilangan', [App\Http\Controllers\Manajer\KehilanganBarangController::class, 'store'])->name('store_tabel_kehilangan');
+Route::get('/update-status_kehilangan/{id}', [App\Http\Controllers\Manajer\KehilanganBarangController::class, 'updateStatus'])->name('update_status_hilang');
+Route::get('/download_kehilangan', [App\Http\Controllers\Manajer\KehilanganBarangController::class, 'printKehilangan'])->name('download_kehilangan');
+
+// history
+Route::get('/download_history', [App\Http\Controllers\Manajer\HistoryController::class, 'printHistory'])->name('download_history');

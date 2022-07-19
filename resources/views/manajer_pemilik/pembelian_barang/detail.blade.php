@@ -89,7 +89,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Aksi</th>
+                        {{-- <th>Aksi</th> --}}
                         <th>Barcode</th>
                         <th>Nama barang</th>
                         <th>Pemasok</th>
@@ -105,7 +105,7 @@
                     @foreach ($data as $dt)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>
+                            {{-- <td>
                                 <!-- Action -->
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-primary btn-sm dropdown-toggle"
@@ -147,9 +147,9 @@
                                     </ul>
                                 </div>
                                 <!-- <a href="" class="btn btn-primary">Detail</a>
-                                                                        <a href="" class="btn btn-warning">Ubah</a>
-                                                                        <a href="" class="btn btn-danger">Hapus</a> -->
-                            </td>
+                                                                            <a href="" class="btn btn-warning">Ubah</a>
+                                                                            <a href="" class="btn btn-danger">Hapus</a> -->
+                            </td> --}}
                             <td>{{ $dt->barcode }}</td>
                             <td>{{ $dt->nama_barang }}</td>
                             <td>{{ $dt->nama_pemasok }}</td>
@@ -161,27 +161,31 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <th colspan="9">Jumlah Pembelian</th>
+                        <th colspan="8">Jumlah Pembelian</th>
                         <th>{{ $getJumlah->stok }}</th>
                     </tr>
                     <tr>
-                        <th colspan="9">Jumlah Terjual</th>
+                        <th colspan="8">Jumlah Terjual</th>
                         <th>{{ $getJumlahTerjual->jumlah_terjual ?? 0 }}</th>
                     </tr>
                     <tr>
-                        <th colspan="9">Jumlah Return</th>
+                        <th colspan="8">Jumlah Return</th>
                         <th>{{ $getJumlahReturn->jumlah_return ?? 0 }}</th>
                     </tr>
                     <tr>
-                        <th colspan="9">Sisa Stok</th>
+                        <th colspan="8">Jumlah Hilang</th>
+                        <th>{{ $getJumlahHilang->jumlah_hilang ?? 0 }}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="8">Sisa Stok</th>
                         <th>{{ $sisaStok }}</th>
                     </tr>
                     <tr>
-                        <th colspan="9">Harga Beli Akhir</th>
+                        <th colspan="8">Harga Beli Akhir</th>
                         <th>Rp.{{ number_format($getLast->harga_beli) }}</th>
                     </tr>
                     <tr>
-                        <th colspan="9">Harga Jual Akhir</th>
+                        <th colspan="8">Harga Jual Akhir</th>
                         <th>Rp.{{ number_format($getLast->harga_jual) }}</th>
                     </tr>
                 </tbody>

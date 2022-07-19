@@ -52,14 +52,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('kasir.transaksi') }}" class="nav-link {{ set_active('kasir.transaksi') }}">
-                        <i class="nav-icon fas fa-cash-register"></i>
-                        <p>
-                            Transaksi
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="#"
                         class="nav-link {{ set_active(['tabel_pemasok', 'tabel_kategori', 'tabel_barang', 'tabel_return', 'tabel_kehilangan']) }}">
                         <i class="nav-icon fas fa-boxes"></i>

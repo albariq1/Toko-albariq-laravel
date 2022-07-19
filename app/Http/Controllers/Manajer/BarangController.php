@@ -8,7 +8,9 @@ use App\Models\Kategori;
 use App\Models\Pemasok;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class BarangController extends Controller
 {
@@ -23,7 +25,18 @@ class BarangController extends Controller
         $pemasok = Pemasok::orderBy('nama_pemasok', 'ASC')->get();   //ambil data pemasok
         $kategori = Kategori::orderBy('nama_katagori', 'ASC')->get();  //ambil data kategori
 
-        return view('manajer_pemilik.barang.index', compact('data', 'pemasok', 'kategori'));
+        // $data = Kategori::all();
+        if (Auth::user()->role == 'Direktur') {
+            return view('direktur.barang.index', compact('data', 'pemasok', 'kategori'));
+        } else if (Auth::user()->role == 'Sekretaris') {
+            return view('direktur.barang.index', compact('data', 'pemasok', 'kategori'));
+        } else if (Auth::user()->role == 'Keuangan') {
+            return view('direktur.barang.index', compact('data', 'pemasok', 'kategori'));
+        } else if (Auth::user()->role == 'Staf Gudang') {
+            return view('manajer_pemilik.barang.index', compact('data', 'pemasok', 'kategori'));
+        } else if (Auth::user()->role == 'Admin') {
+            return view('manajer_pemilik.barang.index', compact('data', 'pemasok', 'kategori'));
+        }
     }
 
     public function store(Request $request)
@@ -113,5 +126,17 @@ class BarangController extends Controller
                 'failed' => 'Data Gagal DiHapus!,Karena' . $error->getMessage()
             ]);
         }
+    }
+    public function printBarang(Request $request)
+    {
+        $databarang = DB::table('barangs')
+            ->select('barangs.*', 'kategoris.nama_katagori', 'pemasoks.nama_pemasok')
+            ->join('kategoris', 'kategoris.id', 'barangs.kategori_id')
+            ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.barang.print', compact('databarang', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_barang.pdf');
     }
 }

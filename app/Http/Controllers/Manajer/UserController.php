@@ -7,8 +7,10 @@ use App\Models\RiwayatLogin;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class UserController extends Controller
 {
@@ -23,7 +25,19 @@ class UserController extends Controller
             ->join('users', 'users.id', 'riwayat_logins.user_id')
             ->orderBy('last_login_at', 'DESC')
             ->get();
-        return view('manajer_pemilik.user.index', compact('data', 'history'));
+
+        if (Auth::user()->role == 'Direktur') {
+            return view('direktur.user.index', compact('data'));
+        } else if (Auth::user()->role == 'Sekretaris') {
+            return view('manajer_pemilik.user.index', compact('data'));
+        } else if (Auth::user()->role == 'Keuangan') {
+            return view('direktur.user.index', compact('data'));
+        } else if (Auth::user()->role == 'Staf Gudang') {
+            return view('manajer_pemilik.user.index', compact('data'));
+        } else if (Auth::user()->role == 'Admin') {
+            return view('manajer_pemilik.user.index', compact('data'));
+        }
+        // return view('manajer_pemilik.user.index', compact('data', 'history'));
     }
 
     // menyimpan data ke tabel users /menambahkan
@@ -133,5 +147,16 @@ class UserController extends Controller
                 'failed' => 'Data Gagal DiHapus!,Karena' . $error->getMessage()
             ]);
         }
+    }
+    public function printUser(Request $request)
+    {
+        $datauser = DB::table('users')
+            ->select(DB::raw('users.*'))
+            ->orderBy('name', 'ASC')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.user.print', compact('datauser', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_user.pdf');
     }
 }

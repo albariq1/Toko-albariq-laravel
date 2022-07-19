@@ -6,13 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\Pelanggan;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PDF;
+
 
 class PelangganController extends Controller
 {
     public function index()
     {
         $data = Pelanggan::all();
-        return view('manajer_pemilik.pelanggan.index', compact('data'));
+
+        if (Auth::user()->role == 'Direktur') {
+            return view('direktur.pelanggan.index', compact('data'));
+        } else if (Auth::user()->role == 'Sekretaris') {
+            return view('manajer_pemilik.pelanggan.index', compact('data'));
+        } else if (Auth::user()->role == 'Keuangan') {
+            return view('direktur.pelanggan.index', compact('data'));
+        } else if (Auth::user()->role == 'Staf Gudang') {
+            return view('manajer_pemilik.pelanggan.index', compact('data'));
+        } else if (Auth::user()->role == 'Admin') {
+            return view('manajer_pemilik.pelanggan.index', compact('data'));
+        }
+        // return view('manajer_pemilik.pelanggan.index', compact('data'));
     }
 
     public function store(Request $request)
@@ -99,5 +115,16 @@ class PelangganController extends Controller
                 'failed' => 'Data Gagal DiHapus!,Karena' . $error->getMessage()
             ]);
         }
+    }
+    public function printPelanggan(Request $request)
+    {
+        $datapelanggan = DB::table('pelanggans')
+            ->select(DB::raw('pelanggans.*'))
+            ->orderBy('nama_pelanggan', 'ASC')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.pelanggan.print', compact('datapelanggan', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_pelanggan.pdf');
     }
 }

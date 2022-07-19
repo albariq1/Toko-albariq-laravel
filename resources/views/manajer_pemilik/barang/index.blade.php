@@ -131,8 +131,8 @@
                             <td>
                                 <!-- Action -->
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         Action
                                     </button>
                                     <ul class="dropdown-menu">
@@ -178,58 +178,52 @@
 
         {{-- modal detail --}}
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Barang
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- form pengisian data barang -->
-                        <form>
-                            <div class="row">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="bimoli" disabled>
+        @foreach ($data as $dtdetail)
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Detail Barang
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form pengisian data barang -->
+                            <form>
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Barcode</label>
+                                        <input type="text" class="form-control" id="exampleInputPassword1"
+                                            placeholder="{{ $dtdetail->barcode }}" disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="{{ $dtdetail->nama_barang }}"
+                                            disabled>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Barcode</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <label for="exampleInputPassword1" class="form-label">Kategori</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                        placeholder="{{ $dtdetail->kategori_id }}" disabled>
                                 </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Pemasok</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Satuan</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Harga Beli</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Harga Jual</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                    Benar?</label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Tambah</button>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Pemasok</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                        placeholder="{{ $dtdetail->pemasok_id }}" disabled>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
 
         {{-- modal edit --}}
         <!-- Modal -->
@@ -279,8 +273,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Barcode</label>
-                                        <input type="text" name="barcode" class="form-control" id="exampleInputPassword1"
-                                            value="{{ $dtedit->barcode }}" required>
+                                        <input type="text" name="barcode" class="form-control"
+                                            id="exampleInputPassword1" value="{{ $dtedit->barcode }}" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">

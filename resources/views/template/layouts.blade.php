@@ -66,8 +66,8 @@
             @include('template.sidebar_sekretaris')
         @elseif(Auth::user()->role == 'Keuangan')
             @include('template.sidebar_keuangan')
-        @elseif (Auth::user()->role == 'Staff Gudang')
-
+        @elseif (Auth::user()->role == 'Staf Gudang')
+            @include('template.sidebar_staffgudang')
         @elseif (Auth::user()->role == 'Kasir')
             @include('template.sidebar_kasir')
         @endif

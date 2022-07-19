@@ -6,13 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PDF;
 
 class KategoriController extends Controller
 {
     public function index()
     {
         $data = Kategori::all();
-        return view('manajer_pemilik.kategori.index', compact('data'));
+        if (Auth::user()->role == 'Direktur') {
+            return view('direktur.kategori.index', compact('data'));
+        } else if (Auth::user()->role == 'Sekretaris') {
+            return view('direktur.kategori.index', compact('data'));
+        } else if (Auth::user()->role == 'Keuangan') {
+            return view('direktur.kategori.index', compact('data'));
+        } else if (Auth::user()->role == 'Staf Gudang') {
+            return view('manajer_pemilik.kategori.index', compact('data'));
+        } else if (Auth::user()->role == 'Admin') {
+            return view('manajer_pemilik.kategori.index', compact('data'));
+        }
     }
 
     // menyimpan data ke tabel kategoris /menambahkan
@@ -86,5 +99,16 @@ class KategoriController extends Controller
                 'failed' => 'Data Gagal DiHapus!,Karena' . $error->getMessage()
             ]);
         }
+    }
+    public function printKategori(Request $request)
+    {
+        $datakategori = DB::table('kategoris')
+            ->select(DB::raw('kategoris.*'))
+            ->orderBy('nama_katagori', 'ASC')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.kategori.print', compact('datakategori', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_kategori.pdf');
     }
 }

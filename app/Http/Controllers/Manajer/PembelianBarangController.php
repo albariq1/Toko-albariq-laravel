@@ -30,9 +30,19 @@ class PembelianBarangController extends Controller
             ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
             ->get();
 
+        if (Auth::user()->role == 'Direktur') {
+            return view('direktur.pembelian_barang.index', compact('data', 'barang'));
+        } else if (Auth::user()->role == 'Sekretaris') {
+            return view('direktur.pembelian_barang.index', compact('data', 'barang'));
+        } else if (Auth::user()->role == 'Keuangan') {
+            return view('direktur.pembelian_barang.index', compact('data', 'barang'));
+        } else if (Auth::user()->role == 'Staf Gudang') {
+            return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));
+        } else if (Auth::user()->role == 'Admin') {
+            return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));
+        }
 
-
-        return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));
+        // return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));
     }
 
     public function store(Request $request)
@@ -106,11 +116,17 @@ class PembelianBarangController extends Controller
             ->first();
 
 
-        $getLast = PembelianBarang::where('barang_id', $id)->orderBy('id', 'DESC')->first(); //untuk mengambil data barang yang terakhir untuk ambil harga tersebut
+        $getJumlahHilang = DB::table('kehilangan_barangs')
+            ->select(DB::raw('SUM(jumlah_hilang) as jumlah_hilang'))
+            ->where('barang_id', $id)
+            ->where('status', '0')
+            ->first();
+
+        $getLast = PembelianBarang::where('barang_id', $id)->orderBy('id', 'DESC')->first();  // utk mengambil dta barang yg terakhir, utk ambil harga dsb
 
         $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual - $getJumlahReturn->jumlah_return; //pengurangan total barang yang dibeli dengen total barang yang terjual
 
-        return  view('manajer_pemilik.pembelian_barang.detail', compact('data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast', 'getJumlahReturn'));
+        return  view('manajer_pemilik.pembelian_barang.detail', compact('data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast', 'getJumlahReturn', 'getJumlahHilang'));
     }
 
     public function cetakBarcode(Request $request)

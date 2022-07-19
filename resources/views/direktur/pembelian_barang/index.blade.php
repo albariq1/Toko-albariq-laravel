@@ -17,70 +17,7 @@
         <!-- Main content -->
         <section class="content pr-3">
             <div class="col mb-3">
-                <!-- button tambah barang -->
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-folder-plus mr-2"></i> Tambah Pembelian Barang
-                </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Pembelian Barang</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- form pengisian data barang -->
-                                <form action="{{ route('store_tabel_pembelian_barang') }}" method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Barang</label>
-                                            <select class="form-control" name="barang_id" id="" required>
-                                                <option value="">--Pilih--</option>
-                                                @foreach ($barang as $br)
-                                                    <option value="{{ $br->id }}">{{ $br->barcode }} -
-                                                        {{ $br->nama_barang }} - {{ $br->nama_pemasok }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Tgl. Pembelian</label>
-                                            <input type="date" name="tanggal_pembelian" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Jumlah</label>
-                                        <input type="number" min="1" name="jumlah_beli" class="form-control"
-                                            id="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Harga Beli</label>
-                                        <input type="text" name="harga_beli" class="form-control" id="">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">harga Jual</label>
-                                        <input type="text" name="harga_jual" class="form-control" id="">
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1" required>Apakah Yang Anda Input
-                                            Sudah
-                                            Benar?</label>
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <button type="button" class="btn btn-info">
                     Print
                 </button>

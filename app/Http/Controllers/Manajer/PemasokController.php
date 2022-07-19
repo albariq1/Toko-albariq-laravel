@@ -6,13 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Pemasok;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PDF;
 
 class PemasokController extends Controller
 {
     public function index()
     {
         $data = Pemasok::all();
-        return view('manajer_pemilik.pemasok.index', compact('data'));
+        if (Auth::user()->role == 'Direktur') {
+            return view('direktur.pemasok.index', compact('data'));
+        } else if (Auth::user()->role == 'Sekretaris') {
+            return view('direktur.pemasok.index', compact('data'));
+        } else if (Auth::user()->role == 'Keuangan') {
+            return view('direktur.pemasok.index', compact('data'));
+        } else if (Auth::user()->role == 'Staf Gudang') {
+            return view('manajer_pemilik.pemasok.index', compact('data'));
+        } else if (Auth::user()->role == 'Admin') {
+            return view('manajer_pemilik.pemasok.index', compact('data'));
+        }
     }
 
     public function store(Request $request)
@@ -99,5 +112,16 @@ class PemasokController extends Controller
                 'failed' => 'Data Gagal DiHapus!,Karena' . $error->getMessage()
             ]);
         }
+    }
+    public function printPemasok(Request $request)
+    {
+        $datapemasok = DB::table('pemasoks')
+            ->select(DB::raw('pemasoks.*'))
+            ->orderBy('nama_pemasok', 'ASC')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.pemasok.print', compact('datapemasok', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_pemasok.pdf');
     }
 }
