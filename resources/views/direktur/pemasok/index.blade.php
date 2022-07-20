@@ -18,7 +18,7 @@
              <div class="col mb-3">
 
                  <a href="{{ route('download_pemasok') }}" target="_blank" class="btn btn-success"><i
-                         class="fas fa-barcode mr-2"></i> Download PDF</a>
+                         class="fas fa-file-download mr-2"></i> Download PDF</a>
              </div>
              @if (Session::get('success'))
                  <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -117,15 +117,59 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="chart">
-                        <canvas id="barChart"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <div class="panel">
+                        <div class="chart"></div>
                     </div>
                 </div>
-                <!-- /.card-body -->
             </div>
 
         </section>
         <!-- /.content -->
     </div>
 @endsection
+@push('script')
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        Highcharts.chart('chart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Laba Bulanan Tahun ' + {{ date('Y') }}
+            },
+            // subtitle: {
+            //     text: 'Source: WorldClimate.com'
+            // },
+            xAxis: {
+                categories: {!! json_encode($categories) !!},
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nilai Laba'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>Rp. {point.y} </b></td></tr>',
+                // pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                //     '<td style="padding:0"><b>{point.y:.1f} Rupiah</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Nilai',
+                data: {!! json_encode($series) !!}
+            }]
+        });
+    </script>
+@endpush
