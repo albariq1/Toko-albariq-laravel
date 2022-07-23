@@ -31,8 +31,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"> <i class="nav-icon fas fa-tachometer-alt mr-2"></i>Dashboard
-                            Admin</h1>
+                        <h1 class="m-0"> <i class="nav-icon fas fa-tachometer-alt mr-2"></i>Dashboard</h1>
                     </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -91,7 +90,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>10</h3>
+                                <h3>{{ $return->totalreturn ?? '-' }}</h3>
 
                                 <p>Barang Return</p>
                             </div>
@@ -118,7 +117,7 @@
                 </div>
                 <div class="card-body">
                     <div class="panel">
-                        <div class="chart"></div>
+                        <div id="chart"></div>
                     </div>
                 </div>
             </div>

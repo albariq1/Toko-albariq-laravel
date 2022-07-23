@@ -143,4 +143,66 @@ class PembelianBarangController extends Controller
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('barcode-produk.pdf');
     }
+
+    public function printpembelian(Request $request)
+    {
+        $dataproduk = DB::table('pembelian_barangs')
+            ->select(DB::raw('pembelian_barangs.*, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
+            ->join('barangs', 'barangs.id', 'pembelian_barangs.barang_id')
+            ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
+            ->groupBy('pembelian_barangs.barang_id')
+            // ->orderBy('pembelian_barangs.id', 'DESC')
+            ->orderBy('barangs.id', 'ASC')
+            ->get();
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.pembelian_barang.print', compact('dataproduk', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_stok.pdf');
+    }
+
+    public function printPembelianBarang(Request $id)
+    {
+        $data = DB::table('pembelian_barangs')
+            ->select(DB::raw('pembelian_barangs.*, barangs.id as id_barang, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
+            ->join('barangs', 'barangs.id', 'pembelian_barangs.barang_id')
+            ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
+            ->where('barangs.id', $id)
+            ->get();
+
+        // ambil jumlal_beli(SUM) dari tabel pembelian_barangs
+        // berdasarkan id barangs yg dipilih
+        $getJumlah = DB::table('pembelian_barangs')
+            ->select(DB::raw('SUM(jumlah_beli) as stok'))
+            ->where('barang_id', $id)
+            ->first();
+
+        // ambil jumlah (SUM) dari tabel detail_penjualans
+        // berdasarkan id barangs yg dipilih
+        $getJumlahTerjual = DB::table('detail_penjualans')
+            ->select(DB::raw('SUM(jumlah) as jumlah_terjual'))
+            ->where('barang_id', $id)
+            ->first();
+
+        $getJumlahReturn = DB::table('return_barangs')
+            ->select(DB::raw('SUM(jumlah_return) as jumlah_return'))
+            ->where('barang_id', $id)
+            ->where('status', '0')
+            ->first();
+
+
+        $getJumlahHilang = DB::table('kehilangan_barangs')
+            ->select(DB::raw('SUM(jumlah_hilang) as jumlah_hilang'))
+            ->where('barang_id', $id)
+            ->where('status', '0')
+            ->first();
+
+        $getLast = PembelianBarang::where('barang_id', $id)->orderBy('id', 'DESC')->first();  // utk mengambil dta barang yg terakhir, utk ambil harga dsb
+
+        $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual - $getJumlahReturn->jumlah_return; //pengurangan total barang yang dibeli dengen total barang yang terjual
+
+        $no  = 1;
+        $pdf = PDF::loadView('direktur.pembelian_barang.print_detail', compact('no', 'data', 'getJumlah', 'getJumlahTerjual', 'sisaStok', 'getLast', 'getJumlahReturn', 'getJumlahHilang'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('tabel_detail_pembelian.pdf');
+    }
 }

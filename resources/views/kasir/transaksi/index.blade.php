@@ -1,7 +1,7 @@
 @extends('template.layouts')
 @push('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    {{-- <link rel="stylesheet" href="{{asset('css/select2-bootstrap4.css')}}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.css') }}">
 @endpush
 @section('content')
     <div class="content-wrapper">
@@ -36,39 +36,39 @@
                 <div class="card" style="width: 100%;">
                     <h3 class="card-header">Form Input Penjual</h3>
                     <div class="card-body">
-                        <form action="{{ route('kasir.store-transaksi') }}" method="POST">
-                            @csrf
-                            {{-- <div class="form-group">
-                                <label for="exampleInputEmail1" style="font-weight: normal ;">Nama Pelanggan</label>
-                                <select name="pelanggan_id" class="form-control">
-                                    <option value="">--Pilih--</option>
-                                    @foreach ($pelanggan as $pl)
-                                        <option value="{{ $pl->id }}">{{ $pl->nama_pelanggan }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
+                        <form method="get" action="{{ url('kasir/transaksi') }}" id="cari">
                             <div class="form-group">
                                 <label for="exampleInputEmail1" style="font-weight: normal ;">Nama Barang</label>
-                                <select name="barang_id" class="form-control" id="barang">
+                                <select name="id_barang" class="form-control barang-select" id="barang"
+                                    onchange="document.getElementById('cari').submit();" required>
                                     <option value="">--Pilih--</option>
                                     @foreach ($barang as $br)
-                                        <option value="{{ $br->id_barang }}">{{ $br->barcode }} |
+                                        <option
+                                            @isset($id_barang) {{ $id_barang == $br->id_barang ? 'selected' : '' }} @endisset
+                                            value="{{ $br->id_barang }} ">{{ $br->barcode }} |
                                             {{ $br->nama_barang }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                        </form>
+                        <form action="{{ route('kasir.store-transaksi') }}" method="POST">
+                            @csrf
+                            @if (isset($_GET['id_barang']))
+                                <input type="hidden" name="barang_id" class="form-control" value="{{ $id_barang }}">
+                            @endif
                             <div class="form-group">
                                 <label for="exampleInputEmail1" style="font-weight: normal ;">Jumlah</label>
                                 <input type="number" name="jumlah" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1" style="font-weight: normal ;">Harga Satuan</label>
-                                <input type="text" class="form-control" style="width:30% ;" disabled>
+                                <input type="text" class="form-control" style="width:100% ;" value="{{ $harga }}"
+                                    disabled>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="exampleInputEmail1" style="font-weight: normal ;">Total Harga</label>
                                 <input type="text" class="form-control" style="width:30% ;" disabled>
-                            </div>
+                            </div> --}}
                             <button type="submit" class="btn btn-primary">Tambah</button>
                         </form>
                     </div>
@@ -124,7 +124,7 @@
                                         <td>Nama Pelanggan</td>
                                         <td>:</td>
                                         <td>
-                                            <select name="pelanggan_id" class="form-control">
+                                            <select name="pelanggan_id" class="form-control js-example-basic-single">
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($pelanggan as $pl)
                                                     <option value="{{ $pl->id }}">{{ $pl->nama_pelanggan }}
@@ -158,43 +158,6 @@
 
                     </div>
                 </div>
-                {{-- <div class="row">
-                    <div class="card" style="width: 100%;">
-                        <h3 class="card-header">Penjualan Hari ini</h3>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode Penjualan</th>
-                                        <th scope="col">Tgl. Transaksi</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($penjualanToday['detail'] as $dt)
-                                        <tr>
-                                            <th scope="row">{{ $loop->index + 1 }}</th>
-                                            <td>{{ $dt->kode_penjualan }}</td>
-                                            <td>{{ $dt->tanggal_transaksi }}</td>
-                                            <td>Rp.{{ number_format($dt->grand_total) }}</td>
-                                            <td>
-                                                <a href="" class="btn btn-warning"><i class="fa fa-print"></i></a>
-                                                <a href="" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="d-flex flex-row card-footer pt-2">
-                            <h4 class="card-title mr-1 pt-1">Total Harga Belanjaan : </h4>
-                            <h4>Rp.{{ number_format($penjualanToday['grandTotal']->totalBelanjaan) }}</h4>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
 
@@ -204,7 +167,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('#barang').select2();
+                $('.barang-select').select2({
+                    theme: 'bootstrap4',
+                });
             });
         </script>
         <script>

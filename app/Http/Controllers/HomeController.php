@@ -40,6 +40,10 @@ class HomeController extends Controller
             ->select(DB::raw('COUNT(kode_penjualan) as totaltransaksi'))
             ->where('tanggal_transaksi', $today)
             ->first();
+        $return = DB::table('return_barangs')
+            ->select(DB::raw('SUM(jumlah_return) as totalreturn'))
+            ->where('status', '0')
+            ->first();
         $labaGrafik = DB::select("SELECT DATE_FORMAT(detail_penjualans.created_at,'%M') as bulan_jual, SUM(harga_pokok) as harga_pokok, SUM(harga_jual) as harga_jual, (SUM(harga_jual)-SUM(harga_pokok)) AS keunt, SUM(jumlah) AS jumlah, SUM(jual_diskon) as jual_diskon, ((SUM(harga_jual)-SUM(harga_pokok))*SUM(jumlah)) - (SUM(jumlah)*SUM(jual_diskon)) AS untung_bersih, barang_id FROM penjualan_barangs JOIN detail_penjualans ON detail_penjualans.penjualan_id=penjualan_barangs.id WHERE DATE_FORMAT(detail_penjualans.created_at,'%Y')='$tahun' GROUP BY DATE_FORMAT(detail_penjualans.created_at,'%M') ORDER BY detail_penjualans.created_at ASC");
 
         $categories = [];
@@ -52,6 +56,6 @@ class HomeController extends Controller
             $series[] = (int)$lg->untung_bersih;
         }
 
-        return view('home', compact('data', 'labakotor', 'totaltransaksi', 'series', 'categories'));
+        return view('home', compact('data', 'labakotor', 'totaltransaksi', 'series', 'categories', 'return'));
     }
 }

@@ -40,7 +40,8 @@
                                     <div class="row">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Barang</label>
-                                            <select class="form-control" name="barang_id" id="" required>
+                                            <select class="form-control" name="barang_id" id="Barang"
+                                                onchange="document.getElementById('cari').submit();" required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($barang as $br)
                                                     <option value="{{ $br->id }}">{{ $br->barcode }} -
@@ -66,12 +67,7 @@
                                         <label for="" class="form-label">harga Jual</label>
                                         <input type="text" name="harga_jual" class="form-control" id="">
                                     </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1" required>Apakah Yang Anda Input
-                                            Sudah
-                                            Benar?</label>
-                                    </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -81,9 +77,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
+                <a href="{{ route('download_stok') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
                 <a href="{{ route('barcode_barang') }}" target="_blank" class="btn btn-success"><i
                         class="fas fa-barcode mr-2"></i> Print Barcode</a>
             </div>
@@ -171,4 +166,14 @@
 
 
     </div>
+    @push('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.barang-select').select2({
+                    theme: 'bootstrap4',
+                });
+            });
+        </script>
+    @endpush
 @endsection

@@ -73,9 +73,8 @@
                          </div>
                      </div>
                  </div>
-                 <button type="button" class="btn btn-info">
-                     Print
-                 </button>
+                 <a href="{{ route('download_return') }}" target="_blank" class="btn btn-success"><i
+                         class="fas fa-file-download mr-2"></i> Download PDF</a>
                  @if (Session::get('success'))
                      <div class="alert alert-success alert-dismissible fade show" role="alert">
                          <strong>{{ Session::get('success') }}</strong>

@@ -21,7 +21,6 @@
                 <a href="{{ route('tabel_pembelian_barang') }}" class="btn btn-primary">
                     <i class="fas fa-angle-left mr-2"></i>Kembali
                 </a>
-
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -80,9 +79,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
+                <a href="{{ route('download_detail_pembelian') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
             </div>
 
             <table id="" class="table table-striped" style="width:100%">

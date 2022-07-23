@@ -90,7 +90,7 @@
                                         </select>
                                         @error('role')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <stron>{{ $message }}</stron g>
                                             </span>
                                         @enderror
                                     </div>

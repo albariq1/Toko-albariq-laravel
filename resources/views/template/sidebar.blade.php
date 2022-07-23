@@ -99,7 +99,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('tabel_kehilangan') }}"
-                                class="nav-link {{ set_active('tabel_kehillangan') }}">
+                                class="nav-link {{ set_active('tabel_kehilangan') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Kehilangan</p>
                             </a>

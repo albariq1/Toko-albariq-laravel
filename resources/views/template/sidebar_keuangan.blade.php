@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link {{ set_active(['tabel_return', 'tabel_kehilangan']) }}">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             Data Barang
@@ -60,7 +60,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item {{ set_active(['tabel_return', 'tabel_kehilangan']) }}">
+                        <li class="nav-item {{ set_active('tabel_return') }}">
                             <a href="{{ route('tabel_return') }}" class="nav-link {{ set_active('tabel_return') }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tabel Return</p>

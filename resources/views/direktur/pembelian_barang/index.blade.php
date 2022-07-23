@@ -17,10 +17,9 @@
         <!-- Main content -->
         <section class="content pr-3">
             <div class="col mb-3">
+                <a href="{{ route('download_stok') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
 
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
                 <a href="{{ route('barcode_barang') }}" target="_blank" class="btn btn-success"><i
                         class="fas fa-barcode mr-2"></i> Print Barcode</a>
             </div>

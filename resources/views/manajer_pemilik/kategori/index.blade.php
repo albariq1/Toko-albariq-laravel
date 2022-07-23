@@ -58,9 +58,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
+                <a href="{{ route('download_kategori') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
             </div>
             @if (Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -148,7 +147,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- form pengisian data barang -->
@@ -162,15 +162,10 @@
                                         id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
                                         value="{{ $dtedit->nama_katagori }}">
                                 </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                        Benar?</label>
-                                </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="" class="btn btn-primary">Tambah</button>
+                            <button type="" class="btn btn-primary">Simpan</button>
                         </div>
                         </form>
                     </div>

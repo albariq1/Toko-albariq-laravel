@@ -1,4 +1,8 @@
 @extends('template.layouts')
+@push('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link rel="stylesheet" href="{{asset('css/select2-bootstrap4.css')}}"> --}}
+@endpush
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -75,12 +79,6 @@
                                         </select>
                                     </div>
 
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                            Benar?</label>
-                                    </div>
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -90,9 +88,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
+                <a href="{{ route('download_barang') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
             </div>
             @if (Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -141,7 +138,7 @@
                                                 <!-- button tambah barang -->
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal">
+                                                    data-bs-target="#exampleModaldetail{{ $dt->id }}">
                                                     Detail
                                                 </button>
 
@@ -161,7 +158,8 @@
                                         </li>
                                         <li>
                                             <div class="col mb-3">
-                                                <button type="button" class="btn btn-danger">
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal{{ $dt->id }}">
                                                     Hapus
                                                 </button>
                                             </div>
@@ -179,13 +177,13 @@
         {{-- modal detail --}}
         <!-- Modal -->
         @foreach ($data as $dtdetail)
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="exampleModaldetail{{ $dtdetail->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Detail Barang
-                            </h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Detail
+                                Barang</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -194,26 +192,32 @@
                             <form>
                                 <div class="row">
                                     <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Barcode</label>
+                                        <label for="exampleInputEmail1" class="form-label">Nama
+                                            Pemasok</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" placeholder="{{ $dtdetail->nama_pemasok }}"
+                                            disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Alamat</label>
                                         <input type="text" class="form-control" id="exampleInputPassword1"
                                             placeholder="{{ $dtdetail->barcode }}" disabled>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1"
-                                            aria-describedby="emailHelp" placeholder="{{ $dtdetail->nama_barang }}"
-                                            disabled>
-                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Kategori</label>
+                                    <label for="exampleInputPassword1" class="form-label">No hp</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="{{ $dtdetail->kategori_id }}" disabled>
+                                        placeholder="{{ $dtdetail->nama_barang }}" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Pemasok</label>
+                                    <label for="exampleInputPassword1" class="form-label">No hp</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="{{ $dtdetail->pemasok_id }}" disabled>
+                                        placeholder="{{ $dtdetail->nama_katagori }}" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">No hp</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                        placeholder="{{ $dtdetail->nama_pemasok }}" disabled>
                                 </div>
                             </form>
                         </div>
@@ -286,12 +290,6 @@
                                     </select>
                                 </div>
 
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                        Benar?</label>
-                                </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -301,7 +299,38 @@
                     </div>
                 </div>
             </div>
+            {{-- Hapus --}}
+            <div class="modal fade" id="deleteModal{{ $dtedit->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda Yakin Hapus Data Pemasok {{ $dtedit->nama_barang }}?
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ route('destroy_tabel_barang') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $dtedit->id }}">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
-
     </div>
+    @push('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#pemasok').select2();
+            });
+        </script>
+    @endpush
 @endsection

@@ -13,6 +13,7 @@ class PenjualanBarangController extends Controller
 
     public function index()
     {
+        $today = date('Y-m-d');
         $detail = DB::table('penjualan_barangs')
             ->select(DB::raw('penjualan_barangs.*, users.name, pelanggans.nama_pelanggan'))
             ->join('users', 'users.id', 'penjualan_barangs.user_id')
@@ -25,11 +26,22 @@ class PenjualanBarangController extends Controller
             ->join('detail_penjualans', 'detail_penjualans.penjualan_id', 'penjualan_barangs.id')
             ->where('detail_penjualans.status', '1')
             ->first();
+        $detailharian = DB::table('penjualan_barangs')
+            ->select(DB::raw('penjualan_barangs.*, users.name, pelanggans.nama_pelanggan'))
+            ->join('users', 'users.id', 'penjualan_barangs.user_id')
+            ->leftJoin('pelanggans', 'pelanggans.id', 'penjualan_barangs.pelanggan_id')
+            ->where('tanggal_transaksi', $today)
+            ->orderBy('kode_penjualan', 'DESC')
+            ->get();
         $data = [
             'detail' => $detail,
             'grandTotal' => $grandTotal
         ];
-        return view('manajer_pemilik.penjualan.index', compact('data'));
+        $dataharian = [
+            'detail' => $detailharian,
+            'grandTotal' => $grandTotal
+        ];
+        return view('manajer_pemilik.penjualan.index', compact('data', 'dataharian'));
     }
 
     public function lap_laba_rugi(Request $request)

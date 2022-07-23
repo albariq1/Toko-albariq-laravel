@@ -49,7 +49,7 @@ class TransaksiController extends Controller
 
         return view('kasir.transaksi.history', compact('history'));
     }
-    public function index()
+    public function index(Request $request)
     {
 
         // menampilkan data pelanggan utk diform transaksi
@@ -77,8 +77,16 @@ class TransaksiController extends Controller
         $totBelanja = $total->totalbelanja;
 
         $penjualanToday = $this->penjualanToday();
+        $id_barang = $request->id_barang;
 
-        return view('kasir.transaksi.index', compact('pelanggan', 'barang', 'detail', 'totBelanja', 'penjualanToday'));
+        if ($id_barang) {
+            $cekHarga = PembelianBarang::where('barang_id', $id_barang)->orderBy('id', 'DESC')->first();
+            $harga = $cekHarga->harga_jual;
+        } else {
+            $harga = "";
+        }
+
+        return view('kasir.transaksi.index', compact('pelanggan', 'barang', 'detail', 'totBelanja', 'penjualanToday', 'id_barang', 'harga'));
     }
 
     public function store(Request $request)
@@ -140,7 +148,7 @@ class TransaksiController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with([
+            return redirect('kasir/transaksi')->with([
                 'success' => 'Data berhasil ditambah!'
             ]);
         } catch (Exception $error) {
@@ -223,5 +231,21 @@ class TransaksiController extends Controller
         $pdf->setOptions(['dpi', 72]);
         //fungsi untuk menjalankan perintah print pdf / download pdf
         return $pdf->stream('struk-penjualan.pdf');
+    }
+
+    public function printtransaksi(Request $request)
+    {
+        $id = Auth::user()->id;
+        $today = date('Y-m-d');
+        $data = DB::table('penjualan_barangs')
+            ->select(DB::raw('SUM(grand_total) as totalharian'))
+            ->where('tanggal_transaksi', $today, $id)
+            ->first();
+        $penjualan = PenjualanBarang::find($id);
+        $no = 1;
+        $pdf = PDF::loadView('kasir.transaksi.rekap', compact('data', 'no', 'penjualan'));
+        $pdf->setPaper([0, 0, 204, 650], 'potrait');
+        $pdf->setOptions(['dpi', 72]);
+        return $pdf->stream('rekap kasir.pdf');
     }
 }

@@ -17,9 +17,8 @@
         <!-- Main content -->
         <section class="content pr-3">
             <div class="col mb-3">
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
+                <a href="{{ route('download_rekap') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
             </div>
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>

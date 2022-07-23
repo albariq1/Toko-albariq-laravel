@@ -166,7 +166,7 @@
                     <table border="1" align="center" class="table" style="margin-bottom:20px;">
                         <thead>
                             <tr>
-                                <th colspan="11" style="text-align:left;">Bulan : {{ @$_GET['bulan'] }}</th>
+                                <th colspan="10" style="text-align:left;">Bulan : {{ @$_GET['bulan'] }}</th>
                             </tr>
                             <tr>
                                 <th style="width:50px;">No</th>
