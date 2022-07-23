@@ -233,19 +233,21 @@ class TransaksiController extends Controller
         return $pdf->stream('struk-penjualan.pdf');
     }
 
-    public function printtransaksi(Request $request)
+    public function printtransaksi()
     {
-        $id = Auth::user()->id;
+        // $id = Auth::user()->id;
         $today = date('Y-m-d');
         $data = DB::table('penjualan_barangs')
             ->select(DB::raw('SUM(grand_total) as totalharian'))
-            ->where('tanggal_transaksi', $today, $id)
+            ->where('tanggal_transaksi', $today)
+            ->where('user_id', Auth::user()->id)
             ->first();
-        $penjualan = PenjualanBarang::find($id);
+        // dd($data->totalharian);
+        $penjualan = PenjualanBarang::where('tanggal_transaksi', $today)->first();
         $no = 1;
         $pdf = PDF::loadView('kasir.transaksi.rekap', compact('data', 'no', 'penjualan'));
         $pdf->setPaper([0, 0, 204, 650], 'potrait');
         $pdf->setOptions(['dpi', 72]);
-        return $pdf->stream('rekap kasir.pdf');
+        return $pdf->stream('rekap_kasir.pdf');
     }
 }

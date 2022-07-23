@@ -185,20 +185,12 @@
 
         <div id="table">
             <table class="table">
-                @foreach ($data as $dt)
-                    @php
-                        $getLast = App\Models\PenjualanBarang::where('id', $dt->id)
-                            ->orderBy('id', 'DESC')
-                            ->first(); // utk mengambil dta barang yg terakhir, utk ambil harga dsb
-                        // dd($getLast->harga_jual);
-                    @endphp
-                    <tr>
-                        <td colspan="2" class="itemtext">TOTAL TRANSAKSI HARI INI</td>
-                    </tr>
-                    <tr>
-                        <td class="itemtext">Rp. {{ number_format($dt->totalharian, 0, ',', '.') }}</td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td colspan="2" class="itemtext">TOTAL TRANSAKSI HARI INI</td>
+                </tr>
+                <tr>
+                    {{-- <td class="itemtext">Rp. {{ number_format($dt->totalharian, 0, ',', '.') }}</td> --}}
+                </tr>
             </table>
             <hr>
             <table class="table">
@@ -206,7 +198,7 @@
                     <td colspan="2" class="itemtext">Total</td>
                     <td></td>
                     <td class="itemtext" style="float: right;">Rp.
-                        {{ number_format($dt->totalharian, 0, ',', '.') }}</td>
+                        {{ number_format($data->totalharian, 0, ',', '.') }}</td>
                 </tr>
             </table>
             <hr>

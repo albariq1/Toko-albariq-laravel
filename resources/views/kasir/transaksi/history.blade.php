@@ -17,7 +17,7 @@
         <!-- Main content -->
         <section class="content pr-3">
             <div class="col mb-3">
-                <a href="{{ route('download_rekap') }}" target="_blank" class="btn btn-success"><i
+                <a href="{{ route('download_rekap') }}" target="_blank" class="btn btn-success {{ Auth::user()->id }}"><i
                         class="fas fa-file-download mr-2"></i> Download PDF</a>
             </div>
             <table id="example" class="table table-striped" style="width:100%">
