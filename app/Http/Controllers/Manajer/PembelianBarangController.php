@@ -13,7 +13,7 @@ use PDF;
 
 class PembelianBarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = DB::table('pembelian_barangs')
             ->select(DB::raw('pembelian_barangs.*, barangs.nama_barang, barangs.barcode, barangs.satuan, pemasoks.nama_pemasok '))
@@ -29,17 +29,18 @@ class PembelianBarangController extends Controller
             ->join('kategoris', 'kategoris.id', 'barangs.kategori_id')
             ->join('pemasoks', 'pemasoks.id', 'barangs.pemasok_id')
             ->get();
+        $id_barang = $request->id_barang;
 
         if (Auth::user()->role == 'Direktur') {
-            return view('direktur.pembelian_barang.index', compact('data', 'barang'));
+            return view('direktur.pembelian_barang.index', compact('data', 'barang', 'id_barang'));
         } else if (Auth::user()->role == 'Sekretaris') {
-            return view('direktur.pembelian_barang.index', compact('data', 'barang'));
+            return view('direktur.pembelian_barang.index', compact('data', 'barang', 'id_barang'));
         } else if (Auth::user()->role == 'Keuangan') {
-            return view('direktur.pembelian_barang.index', compact('data', 'barang'));
+            return view('direktur.pembelian_barang.index', compact('data', 'barang', 'id_barang'));
         } else if (Auth::user()->role == 'Staf Gudang') {
-            return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));
+            return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang', 'id_barang'));
         } else if (Auth::user()->role == 'Admin') {
-            return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));
+            return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang', 'id_barang'));
         }
 
         // return view('manajer_pemilik.pembelian_barang.index', compact('data', 'barang'));

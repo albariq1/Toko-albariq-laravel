@@ -1,5 +1,8 @@
 @extends('template.layouts')
-
+@push('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.css') }}">
+@endpush
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -40,11 +43,12 @@
                                     <div class="row">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Barang</label>
-                                            <select class="form-control" name="barang_id" id="Barang"
-                                                onchange="document.getElementById('cari').submit();" required>
+                                            <select class="form-control barang-select" name="barang_id" id="barang"
+                                                required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($barang as $br)
-                                                    <option value="{{ $br->id }}">{{ $br->barcode }} -
+                                                    <option {{-- @isset($id_barang) {{ $id_barang == $br->id_barang ? 'selected' : '' }} @endisset --}} value="{{ $br->id }}">
+                                                        {{ $br->barcode }} -
                                                         {{ $br->nama_barang }} - {{ $br->nama_pemasok }}</option>
                                                 @endforeach
                                             </select>

@@ -153,9 +153,6 @@
                             <button type="submit" class="btn btn-primary ml-auto"> Submit</button>
                             </form>
                         @endif
-
-
-
                     </div>
                 </div>
             </div>
