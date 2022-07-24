@@ -59,7 +59,7 @@ class KategoriController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'nama_kategori' => 'required'
+            'nama_katagori' => 'required'
         ]);
 
         try {
@@ -69,7 +69,7 @@ class KategoriController extends Controller
             $kategori = Kategori::find($request->id);
 
             $kategori->update([
-                'nama_kategori' => $request->nama_kategori
+                'nama_katagori' => $request->nama_katagori
             ]);
 
             return redirect('tabel_kategori')->with([

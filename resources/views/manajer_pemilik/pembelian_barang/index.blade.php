@@ -29,8 +29,8 @@
                 <!-- Modal -->
                 {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true"> --}}
-                <div class="modal hide fade" id="modalBarang" role="dialog" tabindex="-1"
-                    aria-labelledby="modalBarangLabel" aria-hidden="true" style="overflow: hidden;">
+                <div class="modal hide fade" id="modalBarang" tabindex="-1" role="dialog"
+                    aria-labelledby="modalBarangLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -172,15 +172,15 @@
 
 
     </div>
-    @push('script')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $(".barang-select").select2({
-                    dropdownParent: $("#modalBarang")
-                    theme: 'bootstrap4',
-                });
-            });
-        </script>
-    @endpush
 @endsection
+@push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".barang-select").select2({
+                dropdownParent: $("#modalBarang"),
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+@endpush

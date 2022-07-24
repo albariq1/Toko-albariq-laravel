@@ -17,7 +17,8 @@
                                 <!-- Profile picture image-->
                                 @if ($data->foto == '' || $data->foto == null)
                                     <img class="img-account-profile rounded-circle mb-2"
-                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" style="width: 80%" alt="">
+                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" style="width: 80%"
+                                        alt="">
                                 @else
                                     <img src="{{ asset('storage/' . $data->foto) }}" alt="" style="width: 80%">
                                 @endif
@@ -42,7 +43,8 @@
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputUsername">Nama Lengkap</label>
                                     <input class="form-control" id="inputUsername" type="text"
-                                        placeholder="Enter your username" name="name" value="{{ $data->name }}" required>
+                                        placeholder="Enter your username" name="name" value="{{ $data->name }}"
+                                        required>
                                 </div>
                                 <!-- Form Group (email address)-->
                                 <div class="mb-3">
@@ -55,9 +57,9 @@
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (organization name)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputOrgName">No Hp</label>
-                                        <input class="form-control" id="inputOrgName" type="text"
-                                            placeholder="Enter your organization name" name="No_hp"
+                                        <label class="small mb-1" for="nohp">No Hp</label>
+                                        <input class="form-control" id="nohp" type="text"
+                                            placeholder="Enter your Number Phone" name="no_hp"
                                             value="{{ $data->No_hp }}" required>
                                     </div>
                                     <!-- Form Group (location)-->
@@ -72,12 +74,12 @@
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-12">
                                         <label class="small mb-1" for="inputPhone">alamat</label>
-                                        <textarea class="form-control" id="inputPhone" cols="50" rows="2" name="alamat"
-                                            required>{{ $data->alamat }}</textarea>
+                                        <textarea class="form-control" id="inputPhone" cols="50" rows="2" name="alamat" required>{{ $data->alamat }}</textarea>
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
                                 <button type="submit" class="btn btn-primary" type="button">Save changes</button>
+
                             </form>
                         </div>
                     </div>

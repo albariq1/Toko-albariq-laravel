@@ -1,7 +1,7 @@
 @extends('template.layouts')
 @push('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    {{-- <link rel="stylesheet" href="{{asset('css/select2-bootstrap4.css')}}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.css') }}">
 @endpush
 @section('content')
     <div class="content-wrapper">
@@ -22,17 +22,16 @@
             <div class="col mb-3">
                 <!-- button tambah barang -->
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBarang">
                     <i class="fas fa-folder-plus mr-2"></i>Tambah Barang
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="modalBarang" tabindex="-1" aria-labelledby="modalBarang" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Barang</h5>
+                                <h5 class="modal-title" id="modalBarangLabel">Tambah Data Barang</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -42,8 +41,9 @@
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Pemasok</label>
-                                            <select class="form-control" name="pemasok_id" id="" required>
+                                            <label for="" class="form-label">Pemasok</label>
+                                            <select class="form-control pemasok-select" name="pemasok_id"
+                                                id="pemasok-select" required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($pemasok as $pm)
                                                     <option value="{{ $pm->id }}">{{ $pm->nama_pemasok }}</option>
@@ -52,7 +52,8 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputPassword1" class="form-label">Kategori</label>
-                                            <select class="form-control" name="kategori_id" id="" required>
+                                            <select class="form-control kategori-select" name="kategori_id"
+                                                id="kategori-select" required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($kategori as $kt)
                                                     <option value="{{ $kt->id }}">{{ $kt->nama_katagori }}</option>
@@ -199,25 +200,30 @@
                                             disabled>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputPassword1" class="form-label">Alamat</label>
+                                        <label for="exampleInputPassword1" class="form-label">Barcode</label>
                                         <input type="text" class="form-control" id="exampleInputPassword1"
                                             placeholder="{{ $dtdetail->barcode }}" disabled>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">No hp</label>
+                                    <label for="exampleInputPassword1" class="form-label">Nama Barang</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
                                         placeholder="{{ $dtdetail->nama_barang }}" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">No hp</label>
+                                    <label for="exampleInputPassword1" class="form-label">Kategori</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
                                         placeholder="{{ $dtdetail->nama_katagori }}" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">No hp</label>
+                                    <label for="exampleInputPassword1" class="form-label">Pemasok</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
                                         placeholder="{{ $dtdetail->nama_pemasok }}" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Satuan</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                        placeholder="{{ $dtdetail->satuan }}" disabled>
                                 </div>
                             </form>
                         </div>
@@ -325,12 +331,21 @@
             </div>
         @endforeach
     </div>
-    @push('script')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#pemasok').select2();
-            });
-        </script>
-    @endpush
 @endsection
+@push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".pemasok-select").select2({
+                dropdownParent: $("#modalBarang"),
+                theme: 'bootstrap4'
+            });
+        });
+        $(document).ready(function() {
+            $(".kategori-select").select2({
+                dropdownParent: $("#modalBarang"),
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+@endpush

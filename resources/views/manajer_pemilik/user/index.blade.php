@@ -104,11 +104,6 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                            Benar?</label>
-                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -118,9 +113,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
+                <a href="{{ route('download_user') }}" target="_blank" class="btn btn-success"><i
+                        class="fas fa-file-download mr-2"></i> Download PDF</a>
             </div>
             @if (Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -263,7 +257,7 @@
                                         <option value="Keuangan"{{ $dtedit->role == 'Keuangan' ? 'selected' : '' }}>
                                             Keuangan</option>
                                         <option
-                                            value="Staff Gudang"{{ $dtedit->role == 'Staff Gudang' ? 'selected' : '' }}>
+                                            value="Staf Gudang"{{ $dtedit->role == 'Staf Gudang' ? 'selected' : '' }}>
                                             Staff Gudang</option>
                                         <option value="Kasir" {{ $dtedit->role == 'Kasir' ? 'selected' : '' }}>Kasir
                                         </option>
@@ -273,11 +267,6 @@
                                     <label for="" class="form-label">Alamat</label>
                                     <textarea class="form-control @error('alamat') is-invalid @enderror" id="" name="alamat" cols="30"
                                         rows="10" required>{{ $dtedit->alamat }}</textarea>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                        Benar?</label>
                                 </div>
                         </div>
                         <div class="modal-footer">

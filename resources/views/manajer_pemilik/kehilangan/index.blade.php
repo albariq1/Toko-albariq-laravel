@@ -1,4 +1,8 @@
 @extends('template.layouts')
+@push('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.css') }}">
+@endpush
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -18,17 +22,17 @@
             <div class="col mb-3">
                 <!-- button tambah barang -->
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBarang">
                     <i class="fas fa-folder-plus mr-2"></i>Tambah Data
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal hide fade" id="modalBarang" tabindex="-1" aria-labelledby="modalBarangLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kehilangan Barang</h5>
+                                <h5 class="modal-title" id="modalBarangLabel">Tambah Data Kehilangan Barang</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -38,8 +42,9 @@
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Barang</label>
-                                            <select class="form-control" name="barang_id" id="" required>
+                                            <label for="" class="form-label">Barang</label>
+                                            <select class="form-control barang-select" name="barang_id" id="barang-select"
+                                                required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($barang as $br)
                                                     <option value="{{ $br->id }}">{{ $br->barcode }} -
@@ -52,11 +57,6 @@
                                             <input type="number" name="jumlah_hilang" class="form-control"
                                                 id="exampleInputEmail1" aria-describedby="emailHelp" required>
                                         </div>
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                            Benar?</label>
                                     </div>
 
                             </div>
@@ -238,3 +238,14 @@
         @endforeach
     </div>
 @endsection
+@push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".barang-select").select2({
+                dropdownParent: $("#modalBarang"),
+                theme: 'bootstrap4'
+            });
+        });
+    </script>
+@endpush

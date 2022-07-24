@@ -114,7 +114,7 @@ class UserController extends Controller
 
             $user->update([
                 'name' => $request->name,
-                'No_hp' => $request->no_hp,
+                'no_hp' => $request->no_hp,
                 'role' => $request->role,
                 'alamat' => $request->alamat,
                 'password' => $newPassword

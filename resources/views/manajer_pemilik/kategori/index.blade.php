@@ -150,23 +150,23 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <!-- form pengisian data barang -->
-                            <form action="{{ route('update_tabel_kategori') }}" method="POST">
+                        <form action="{{ route('update_tabel_kategori') }}" method="POST">
+                            <div class="modal-body">
+                                <!-- form pengisian data barang -->
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $dtedit->id }}">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Nama Katagori</label>
                                     <input type="text"
                                         class="form-control @error('nama_katagori') is-invalid @enderror"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+                                        id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_katagori"
                                         value="{{ $dtedit->nama_katagori }}">
                                 </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="" class="btn btn-primary">Simpan</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
                         </form>
                     </div>
                 </div>

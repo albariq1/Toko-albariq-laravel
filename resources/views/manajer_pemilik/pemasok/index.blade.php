@@ -176,7 +176,7 @@
                                          <input type="text"
                                              class="form-control @error('nama_pemasok') is-invalid @enderror"
                                              id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="bimoli"
-                                             name="nama_pelanggan" value="{{ $dtedit->nama_pemasok }}">
+                                             name="nama_pemasok" value="{{ $dtedit->nama_pemasok }}">
                                      </div>
                                      <div class="mb-3">
                                          <label for="exampleInputPassword1" class="form-label">Alamat</label>

@@ -17,9 +17,6 @@
         <!-- Main content -->
         <section class="content pr-3">
             <div class="col mb-3">
-                <button type="button" class="btn btn-info">
-                    Print
-                </button>
             </div>
             <div class="card card-success">
                 <div class="card-header">
@@ -81,7 +78,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="example" class="table table-striped" style="width:100%">
+                    <table id="tabel1" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>

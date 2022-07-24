@@ -46,7 +46,8 @@
                                          </div>
                                          <div class=" mb-3">
                                              <label for="exampleInputPassword1" class="form-label">Alamat</label>
-                                             <input type="text" class="form-control @error('alamat') is-invalid @enderror"
+                                             <input type="text"
+                                                 class="form-control @error('alamat') is-invalid @enderror"
                                                  id="exampleInputPassword1" name="alamat" value="{{ old('alamat') }}"
                                                  required>
                                          </div>
@@ -54,12 +55,8 @@
                                      <div class="mb-3">
                                          <label for="exampleInputPassword1" class="form-label">No Hp</label>
                                          <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp" required>
-                                     </div>
-                                     <div class="mb-3 form-check">
-                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                         <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                             Benar?</label>
+                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp"
+                                             required>
                                      </div>
                                      <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary"
@@ -110,8 +107,8 @@
                              <td>
                                  <!-- Action -->
                                  <div class="btn-group">
-                                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                         aria-expanded="false">
+                                     <button type="button" class="btn btn-primary dropdown-toggle"
+                                         data-bs-toggle="dropdown" aria-expanded="false">
                                          Action
                                      </button>
                                      <ul class="dropdown-menu">
@@ -190,11 +187,12 @@
                                  </div>
                                  <div class="mb-3">
                                      <label for="exampleInputPassword1" class="form-label">No Hp</label>
-                                     <input type="text" class="form-control" id="exampleInputPassword1" name="no_hp"
-                                         value="{{ $dtedit->no_hp }}">
+                                     <input type="text" class="form-control" id="exampleInputPassword1"
+                                         name="no_hp" value="{{ $dtedit->no_hp }}">
                                  </div>
                                  <div class="modal-footer">
-                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                     <button type="button" class="btn btn-secondary"
+                                         data-bs-dismiss="modal">Close</button>
                                      <button type="submit" class="btn btn-primary">Tambah</button>
                                  </div>
                              </form>

@@ -18,6 +18,7 @@ class SetingController extends Controller
 
     public function updateProfile(Request $request)
     {
+
         User::find(Auth::user()->id)->update([
             'name' => $request->name,
             'no_hp' => $request->no_hp,

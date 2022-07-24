@@ -79,7 +79,7 @@ class KehilanganBarangController extends Controller
 
         $sisaStok = $getJumlah->stok - $getJumlahTerjual->jumlah_terjual - $getJumlahReturn->jumlah_return - $getJumlahHilang->jumlah_hilang;
 
-        if ($request->jumlah_return > $sisaStok) {
+        if ($request->jumlah_hilang > $sisaStok) {
             return redirect()->back()->with([
                 'failed' => 'Jumlah melebihi Stok Barang!'
             ]);
