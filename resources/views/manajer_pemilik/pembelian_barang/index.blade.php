@@ -22,17 +22,19 @@
             <div class="col mb-3">
                 <!-- button tambah barang -->
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBarang">
                     <i class="fas fa-folder-plus mr-2"></i> Tambah Pembelian Barang
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"> --}}
+                <div class="modal hide fade" id="modalBarang" role="dialog" tabindex="-1"
+                    aria-labelledby="modalBarangLabel" aria-hidden="true" style="overflow: hidden;">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Pembelian Barang</h5>
+                                <h5 class="modal-title" id="modalBarangLabel">Tambah Pembelian Barang</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -42,12 +44,12 @@
                                     @csrf
                                     <div class="row">
                                         <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Barang</label>
-                                            <select class="form-control barang-select" name="barang_id" id="barang"
+                                            <label for="" class="form-label">Barang</label>
+                                            <select class="form-control barang-select" name="barang_id" id="barang-select"
                                                 required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($barang as $br)
-                                                    <option {{-- @isset($id_barang) {{ $id_barang == $br->id_barang ? 'selected' : '' }} @endisset --}} value="{{ $br->id }}">
+                                                    <option value="{{ $br->id }}">
                                                         {{ $br->barcode }} -
                                                         {{ $br->nama_barang }} - {{ $br->nama_pemasok }}</option>
                                                 @endforeach
@@ -174,7 +176,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('.barang-select').select2({
+                $(".barang-select").select2({
+                    dropdownParent: $("#modalBarang")
                     theme: 'bootstrap4',
                 });
             });
