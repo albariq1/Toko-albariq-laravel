@@ -55,8 +55,7 @@
                                      <div class="mb-3">
                                          <label for="exampleInputPassword1" class="form-label">No Hp</label>
                                          <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp"
-                                             required>
+                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp" required>
                                      </div>
                                      <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary"
@@ -68,9 +67,8 @@
                          </div>
                      </div>
                  </div>
-                 <button type="button" class="btn btn-info">
-                     Print
-                 </button>
+                 <a href="{{ route('download_pelanggan') }}" target="_blank" class="btn btn-success"><i
+                         class="fas fa-file-download mr-2"></i> Download PDF</a>
              </div>
              @if (Session::get('success'))
                  <div class="alert alert-success alert-dismissible fade show" role="alert">

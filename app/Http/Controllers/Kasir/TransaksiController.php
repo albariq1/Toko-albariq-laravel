@@ -148,9 +148,10 @@ class TransaksiController extends Controller
                 ]);
             }
 
-            return redirect('kasir/transaksi')->with([
-                'success' => 'Data berhasil ditambah!'
-            ]);
+            // return redirect('kasir/transaksi')->with([
+            //     'success' => 'Data berhasil ditambah!'
+            // ]);
+            return redirect('kasir/transaksi');
         } catch (Exception $error) {
 
             return redirect()->back()->with([
@@ -198,11 +199,12 @@ class TransaksiController extends Controller
             DB::commit();
 
             //penggail function download pdf invoice menggunakan redirect
-            return redirect()->route('kasir.cetak-invoice', ['id' => $storePenjualan->id]);
+            // return redirect()->route('kasir.cetak-invoice', ['id' => $storePenjualan->id]);
 
-            // return redirect()->back()->with([
-            //     'success' => 'Data berhasil diproses!'
-            // ]);
+            return redirect()->back()->with([
+                'success' => 'Data berhasil diproses!',
+                'id' => $storePenjualan->id
+            ]);
         } catch (Exception $error) {
             // saat gagal, maka cancel smua transaction data
             DB::rollBack();

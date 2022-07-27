@@ -17,7 +17,10 @@
         <div class="container">
             @if (Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ Session::get('success') }}</strong>
+                    {{-- <strong>{{ Session::get('success') }}</strong> --}}
+                    <strong>{{ Session::get('success') }} <a
+                            href="{{ route('kasir.cetak-invoice', Session::get('id')) }}">Silahkan Cetak
+                            Invoice!</a></strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

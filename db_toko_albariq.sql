@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2022 at 07:49 AM
+-- Generation Time: Jul 27, 2022 at 06:13 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -103,7 +103,9 @@ INSERT INTO `detail_penjualans` (`id`, `barang_id`, `penjualan_id`, `jumlah`, `h
 (25, 10, 24, 2, 5000, 6000, 0, 12000, '1', '2022-07-20', 5, '2022-07-20 16:09:04', '2022-07-20 16:09:13'),
 (26, 10, 25, 1, 5000, 6000, 0, 6000, '1', '2022-07-21', 5, '2022-07-20 18:08:24', '2022-07-20 18:08:31'),
 (27, 3, 26, 1, 20000, 21000, 0, 21000, '1', '2022-07-22', 5, '2022-07-21 17:15:45', '2022-07-21 17:15:55'),
-(28, 10, 27, 2, 5000, 6000, 0, 12000, '1', '2022-07-23', 5, '2022-07-23 04:41:40', '2022-07-23 04:41:47');
+(28, 10, 27, 2, 5000, 6000, 0, 12000, '1', '2022-07-23', 5, '2022-07-23 04:41:40', '2022-07-23 04:41:47'),
+(29, 10, 28, 1, 5000, 6000, 0, 6000, '1', '2022-07-27', 5, '2022-07-27 12:23:56', '2022-07-27 12:24:06'),
+(30, 22, 29, 1, 5000, 5500, 0, 5500, '1', '2022-07-27', 5, '2022-07-27 16:11:44', '2022-07-27 16:11:53');
 
 -- --------------------------------------------------------
 
@@ -171,7 +173,7 @@ CREATE TABLE `kehilangan_barangs` (
 --
 
 INSERT INTO `kehilangan_barangs` (`id`, `barang_id`, `user_id`, `jumlah_hilang`, `status`, `tgl_update_status`, `created_at`, `updated_at`) VALUES
-(2, 25, 6, 1, '0', NULL, '2022-07-16 16:51:26', '2022-07-16 16:51:26'),
+(2, 25, 6, 1, '1', '2022-07-24', '2022-07-16 16:51:26', '2022-07-24 09:34:51'),
 (3, 25, 6, 2, '0', NULL, '2022-07-23 04:54:02', '2022-07-23 04:54:02');
 
 -- --------------------------------------------------------
@@ -305,7 +307,9 @@ INSERT INTO `pembelian_barangs` (`id`, `barang_id`, `tanggal_pembelian`, `harga_
 (13, 3, '2022-07-11', 10000, 11000, 10, 100000, 6, '2022-07-09 21:47:25', '2022-07-09 21:47:25'),
 (14, 3, '2022-07-11', 20000, 21000, 5, 100000, 6, '2022-07-10 01:48:08', '2022-07-10 01:48:08'),
 (15, 25, '2022-07-10', 10000, 11000, 2, 20000, 6, '2022-07-10 01:48:42', '2022-07-10 01:48:42'),
-(16, 25, '2022-07-23', 8000, 10000, 2, 16000, 6, '2022-07-23 04:52:58', '2022-07-23 04:52:58');
+(16, 25, '2022-07-23', 8000, 10000, 2, 16000, 6, '2022-07-23 04:52:58', '2022-07-23 04:52:58'),
+(17, 25, '2022-07-24', 7500, 8000, 10, 75000, 9, '2022-07-24 07:48:57', '2022-07-24 07:48:57'),
+(18, 22, '2022-07-24', 5000, 5500, 3, 15000, 9, '2022-07-24 07:49:58', '2022-07-24 07:49:58');
 
 -- --------------------------------------------------------
 
@@ -339,7 +343,9 @@ INSERT INTO `penjualan_barangs` (`id`, `kode_penjualan`, `pelanggan_id`, `potong
 (24, 'BRQ-0004', 1, NULL, NULL, 12000, 15000, 3000, 5, '2022-07-20', '2022-07-20 16:09:13', '2022-07-20 16:09:13'),
 (25, 'BRQ-0005', 1, NULL, NULL, 6000, 10000, 4000, 5, '2022-07-21', '2022-07-20 18:08:31', '2022-07-20 18:08:31'),
 (26, 'BRQ-0006', 2, NULL, NULL, 21000, 22000, 1000, 5, '2022-07-22', '2022-07-21 17:15:55', '2022-07-21 17:15:55'),
-(27, 'BRQ-0007', 2, NULL, NULL, 12000, 15000, 3000, 5, '2022-07-23', '2022-07-23 04:41:47', '2022-07-23 04:41:47');
+(27, 'BRQ-0007', 2, NULL, NULL, 12000, 15000, 3000, 5, '2022-07-23', '2022-07-23 04:41:47', '2022-07-23 04:41:47'),
+(28, 'BRQ-0008', 2, NULL, NULL, 6000, 7000, 1000, 5, '2022-07-27', '2022-07-27 12:24:06', '2022-07-27 12:24:06'),
+(29, 'BRQ-0009', 2, NULL, NULL, 5500, 6000, 500, 5, '2022-07-27', '2022-07-27 16:11:53', '2022-07-27 16:11:53');
 
 -- --------------------------------------------------------
 
@@ -382,7 +388,6 @@ CREATE TABLE `return_barangs` (
 
 INSERT INTO `return_barangs` (`id`, `barang_id`, `user_id`, `jumlah_return`, `alasan`, `status`, `created_at`, `updated_at`) VALUES
 (6, 3, 6, 2, 'Barang Rusak', '1', '2022-07-09 21:47:46', '2022-07-16 08:53:33'),
-(7, 10, 6, 2, 'Barang Rusak', '1', '2022-07-16 08:55:02', '2022-07-16 09:06:47'),
 (8, 25, 6, 2, 'Barang Rusak', '0', '2022-07-16 09:07:16', '2022-07-16 09:07:16');
 
 -- --------------------------------------------------------
@@ -479,7 +484,20 @@ INSERT INTO `riwayat_logins` (`id`, `user_id`, `last_login_at`, `last_login_ip`,
 (133, 5, '2022-07-24 02:20:27', '127.0.0.1', '2022-07-23 19:20:27', '2022-07-23 19:20:27'),
 (134, 9, '2022-07-24 02:20:46', '127.0.0.1', '2022-07-23 19:20:46', '2022-07-23 19:20:46'),
 (135, 5, '2022-07-24 11:59:35', '127.0.0.1', '2022-07-24 04:59:35', '2022-07-24 04:59:35'),
-(136, 9, '2022-07-24 12:13:49', '127.0.0.1', '2022-07-24 05:13:49', '2022-07-24 05:13:49');
+(136, 9, '2022-07-24 12:13:49', '127.0.0.1', '2022-07-24 05:13:49', '2022-07-24 05:13:49'),
+(137, 6, '2022-07-24 13:45:22', '127.0.0.1', '2022-07-24 06:45:22', '2022-07-24 06:45:22'),
+(138, 6, '2022-07-24 14:51:08', '127.0.0.1', '2022-07-24 07:51:08', '2022-07-24 07:51:08'),
+(139, 6, '2022-07-24 20:32:24', '127.0.0.1', '2022-07-24 13:32:24', '2022-07-24 13:32:24'),
+(140, 6, '2022-07-27 19:21:06', '127.0.0.1', '2022-07-27 12:21:06', '2022-07-27 12:21:06'),
+(141, 8, '2022-07-27 19:21:24', '127.0.0.1', '2022-07-27 12:21:24', '2022-07-27 12:21:24'),
+(142, 5, '2022-07-27 19:21:52', '127.0.0.1', '2022-07-27 12:21:52', '2022-07-27 12:21:52'),
+(143, 8, '2022-07-27 19:22:58', '127.0.0.1', '2022-07-27 12:22:58', '2022-07-27 12:22:58'),
+(144, 9, '2022-07-27 19:25:13', '127.0.0.1', '2022-07-27 12:25:13', '2022-07-27 12:25:13'),
+(145, 11, '2022-07-27 19:31:08', '127.0.0.1', '2022-07-27 12:31:08', '2022-07-27 12:31:08'),
+(146, 8, '2022-07-27 19:31:19', '127.0.0.1', '2022-07-27 12:31:19', '2022-07-27 12:31:19'),
+(147, 7, '2022-07-27 19:35:18', '127.0.0.1', '2022-07-27 12:35:18', '2022-07-27 12:35:18'),
+(148, 11, '2022-07-27 19:37:04', '127.0.0.1', '2022-07-27 12:37:04', '2022-07-27 12:37:04'),
+(149, 5, '2022-07-27 23:11:31', '127.0.0.1', '2022-07-27 16:11:31', '2022-07-27 16:11:31');
 
 -- --------------------------------------------------------
 
@@ -509,12 +527,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `alamat`, `No_hp`, `foto`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`) VALUES
-(5, 'kasir', 'kasir@gmail.com', NULL, '$2y$10$P6KsEh24TQ/9IEskkBp1uOrlUO/QTPHeLHr0GyQYbp7K.Mv0kLmse', 'Kasir', 'alamat', '08287919', NULL, NULL, '2022-07-24 11:59:35', '127.0.0.1', '2022-07-09 03:44:17', '2022-07-24 04:59:35'),
-(6, 'albariq', 'albariq00@gmail.com', NULL, '$2y$10$4hXio6z.yns4UA1DtjrN/uMfW511xz9z6sD9D84JBVpNHKzJRoTNq', 'Admin', 'Jl.H Ahmad Dahlan Hy Maskarebet', '', 'user-images/BIBHVDDrgF1fWmRPWmF6n8eZaobZmljNNYG10jaP.jpg', NULL, '2022-07-23 11:46:11', '127.0.0.1', '2022-07-09 03:57:08', '2022-07-23 04:46:11'),
-(7, 'keuangan', 'keuangan@gmail.com', NULL, '$2y$10$ayTLpkevljYhXdy9XXfC..SwhYzfURBRfj3whXm0QkVZSHAfjpoam', 'Keuangan', 'talang kelapa', '', NULL, NULL, '2022-07-23 17:55:29', '127.0.0.1', '2022-07-09 04:02:25', '2022-07-23 10:55:29'),
-(8, 'direktur', 'direktur@gmail.com', NULL, '$2y$10$9dWe76vfXvQNdK54I5hqoeJm0QDC6wph3q2zABIY6EQJOp3rfRAC6', 'Direktur', 'alang alang', '080820803', NULL, NULL, '2022-07-23 17:36:33', '127.0.0.1', '2022-07-09 20:58:39', '2022-07-23 10:36:33'),
-(9, 'staff gudang', 'staffgudang@gmail.com', NULL, '$2y$10$iGJKehndJg2RLr0b.Hz4ceQUKo75h4wPNM540Aj/ctXrczHi10uZa', 'Staf Gudang', 'jl.ahmad yani', '07899801', NULL, NULL, '2022-07-24 12:13:49', '127.0.0.1', '2022-07-10 01:54:02', '2022-07-24 05:13:49'),
-(11, 'sekretaris', 'sekretaris@gmail.com', NULL, '$2y$10$r0y95MrqQTruCl6JBO85de0QVOi7o3XX/9CT98ZcUU//s6C6d/Ke2', 'Sekretaris', '-', '0823279797', NULL, NULL, '2022-07-23 17:30:28', '127.0.0.1', '2022-07-20 13:10:53', '2022-07-23 10:30:28');
+(5, 'kasir', 'kasir@gmail.com', NULL, '$2y$10$P6KsEh24TQ/9IEskkBp1uOrlUO/QTPHeLHr0GyQYbp7K.Mv0kLmse', 'Kasir', 'alamat', '082879192', NULL, NULL, '2022-07-27 23:11:31', '127.0.0.1', '2022-07-09 03:44:17', '2022-07-27 16:11:31'),
+(6, 'albariq', 'albariq00@gmail.com', NULL, '$2y$10$4hXio6z.yns4UA1DtjrN/uMfW511xz9z6sD9D84JBVpNHKzJRoTNq', 'Admin', 'Jl.H Ahmad Dahlan Hy Maskarebet no1', '082371664523', 'user-images/BIBHVDDrgF1fWmRPWmF6n8eZaobZmljNNYG10jaP.jpg', NULL, '2022-07-27 19:21:06', '127.0.0.1', '2022-07-09 03:57:08', '2022-07-27 12:21:06'),
+(7, 'keuangan', 'keuangan@gmail.com', NULL, '$2y$10$ayTLpkevljYhXdy9XXfC..SwhYzfURBRfj3whXm0QkVZSHAfjpoam', 'Keuangan', 'talang kelapa', '', NULL, NULL, '2022-07-27 19:35:18', '127.0.0.1', '2022-07-09 04:02:25', '2022-07-27 12:35:18'),
+(8, 'direktur', 'direktur@gmail.com', NULL, '$2y$10$9dWe76vfXvQNdK54I5hqoeJm0QDC6wph3q2zABIY6EQJOp3rfRAC6', 'Direktur', 'alang alang', '080820803', NULL, NULL, '2022-07-27 19:31:19', '127.0.0.1', '2022-07-09 20:58:39', '2022-07-27 12:31:19'),
+(9, 'staff gudang', 'staffgudang@gmail.com', NULL, '$2y$10$iGJKehndJg2RLr0b.Hz4ceQUKo75h4wPNM540Aj/ctXrczHi10uZa', 'Staf Gudang', 'jl.ahmad yani', '07899801', NULL, NULL, '2022-07-27 19:25:13', '127.0.0.1', '2022-07-10 01:54:02', '2022-07-27 12:25:13'),
+(11, 'sekretaris', 'sekretaris@gmail.com', NULL, '$2y$10$r0y95MrqQTruCl6JBO85de0QVOi7o3XX/9CT98ZcUU//s6C6d/Ke2', 'Sekretaris', '-', '0823279797', NULL, NULL, '2022-07-27 19:37:04', '127.0.0.1', '2022-07-20 13:10:53', '2022-07-27 12:37:04');
 
 --
 -- Indexes for dumped tables
@@ -636,13 +654,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barangs`
 --
 ALTER TABLE `barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualans`
 --
 ALTER TABLE `detail_penjualans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -654,13 +672,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kategoris`
 --
 ALTER TABLE `kategoris`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kehilangan_barangs`
 --
 ALTER TABLE `kehilangan_barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -672,25 +690,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pelanggans`
 --
 ALTER TABLE `pelanggans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pemasoks`
 --
 ALTER TABLE `pemasoks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pembelian_barangs`
 --
 ALTER TABLE `pembelian_barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `penjualan_barangs`
 --
 ALTER TABLE `penjualan_barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -708,13 +726,13 @@ ALTER TABLE `return_barangs`
 -- AUTO_INCREMENT for table `riwayat_logins`
 --
 ALTER TABLE `riwayat_logins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
