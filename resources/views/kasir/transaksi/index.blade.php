@@ -68,6 +68,15 @@
                                 <input type="text" class="form-control" style="width:100% ;" value="{{ $harga }}"
                                     disabled>
                             </div>
+                            <div class="form-group">
+                                <label for="diskon" style="font-weight: normal ;">Diskon @if (isset($_GET['id_barang']))
+                                        <span
+                                            class="badge badge-{{ $dataDiskon['diskon_aktif'] == 'Aktif' ? 'success' : 'warning' }}">{{ $dataDiskon['diskon_aktif'] }}</span>
+                                    @endif </label>
+                                <input type="text" name="jual_diskon" class="form-control" style="width:100% ;"
+                                    value="{{ $dataDiskon['diskon'] }}" readonly>
+
+                            </div>
                             {{-- <div class="form-group">
                                 <label for="exampleInputEmail1" style="font-weight: normal ;">Total Harga</label>
                                 <input type="text" class="form-control" style="width:30% ;" disabled>
@@ -89,6 +98,7 @@
                                         <th scope="col">Nama Barang</th>
                                         <th scope="col">Jumlah</th>
                                         <th scope="col">Harga Satuan</th>
+                                        <th scope="col">Potongan Diskon</th>
                                         <th scope="col">Total Harga</th>
                                     </tr>
                                 </thead>
@@ -106,6 +116,7 @@
                                             <td>{{ $dt->nama_barang }}</td>
                                             <td>{{ $dt->jumlah }}</td>
                                             <td>Rp.{{ number_format($getLastBarang->harga_jual) }}</td>
+                                            <td>Rp.{{ number_format($dt->jual_diskon) }}</td>
                                             <td>Rp.{{ number_format($dt->totalharga) }}</td>
                                         </tr>
                                     @endforeach

@@ -7,6 +7,7 @@ use App\Models\DetailPenjualan;
 use App\Models\Pelanggan;
 use App\Models\PembelianBarang;
 use App\Models\PenjualanBarang;
+use App\Models\Barang;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,12 +82,21 @@ class TransaksiController extends Controller
 
         if ($id_barang) {
             $cekHarga = PembelianBarang::where('barang_id', $id_barang)->orderBy('id', 'DESC')->first();
+            $getBarang = Barang::find($id_barang);
             $harga = $cekHarga->harga_jual;
+            $dataDiskon = [
+                'diskon' =>  $harga * ($getBarang->diskon / 100),
+                'diskon_aktif' => $getBarang->diskon_aktif == '1' ? 'Aktif' : 'Tidak Aktif',
+            ];
         } else {
             $harga = "";
+            $dataDiskon = [
+                'diskon' => 0,
+                'diskon_aktif' => 'Tidak Ada',
+            ];
         }
 
-        return view('kasir.transaksi.index', compact('pelanggan', 'barang', 'detail', 'totBelanja', 'penjualanToday', 'id_barang', 'harga'));
+        return view('kasir.transaksi.index', compact('pelanggan', 'barang', 'detail', 'totBelanja', 'penjualanToday', 'id_barang', 'harga', 'dataDiskon'));
     }
 
     public function store(Request $request)
@@ -126,6 +136,14 @@ class TransaksiController extends Controller
 
             $cekKeranjang = DetailPenjualan::where('barang_id', $request->barang_id)->where('status', '0')->where('user_id', Auth::user()->id);
 
+            $getBarang = Barang::find($request->barang_id);
+
+            if ($getBarang->diskon_aktif == '1') {
+                $hargadiskon = $harga * ($getBarang->diskon / 100);
+            } else {
+                $hargadiskon = 0;
+            }
+
             if ($cekKeranjang->first()) {
                 // ambil datanya
                 $data = $cekKeranjang->first();
@@ -139,8 +157,10 @@ class TransaksiController extends Controller
                     'jumlah' => $request->jumlah,
                     'harga_jual' => $harga,
                     'harga_pokok' => $harga_beli,
-                    'jual_diskon' => 0,
-                    'totalharga' => $request->jumlah * $harga,
+                    // 'jual_diskon' => 0,
+                    // 'totalharga' => $request->jumlah * $harga,
+                    'jual_diskon' => $hargadiskon,
+                    'totalharga' => ($request->jumlah * $harga) - $hargadiskon,
                     'status' => '0',
                     'pelanggan_id' => $request->pelanggan_id,
                     'tanggal_transaksi' => date('Y-m-d'),

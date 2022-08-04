@@ -63,7 +63,10 @@ class BarangController extends Controller
                     'pemasok_id' => $request->pemasok_id,
                     'kategori_id' => $request->kategori_id,
                     'nama_barang' => $request->nama_barang,
-                    'barcode' => $request->barcode
+                    'barcode' => $request->barcode,
+                    'satuan' => $request->satuan,
+                    'diskon' => $request->diskon,
+                    'diskon_aktif' => $request->diskon_aktif,
                 ]
             );
 
@@ -96,7 +99,10 @@ class BarangController extends Controller
                 'pemasok_id' => $request->pemasok_id,
                 'kategori_id' => $request->kategori_id,
                 'nama_barang' => $request->nama_barang,
-                'barcode' => $request->barcode
+                'barcode' => $request->barcode,
+                'satuan' => $request->satuan,
+                'diskon' => $request->diskon,
+                'diskon_aktif' => $request->diskon_aktif,
             ]);
 
             return redirect('tabel_barang')->with([

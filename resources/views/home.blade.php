@@ -121,6 +121,26 @@
                     </div>
                 </div>
             </div>
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Chart Total Penjualan</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="panel">
+                        <div id="grafik"></div>
+                    </div>
+                </div>
+            </div>
+
 
         </section>
         <!-- /.content -->
@@ -168,6 +188,49 @@
             series: [{
                 name: 'Nilai',
                 data: {!! json_encode($series) !!}
+            }]
+        });
+    </script>
+    <script>
+        Highcharts.chart('grafik', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Total Penjualan ' + {{ date('Y') }}
+            },
+            // subtitle: {
+            //     text: 'Source: WorldClimate.com'
+            // },
+            xAxis: {
+                categories: {!! json_encode($bulan) !!},
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nilai Penjualan'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>Rp. {point.y} </b></td></tr>',
+                // pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                //     '<td style="padding:0"><b>{point.y:.1f} Rupiah</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Nilai',
+                data: {!! json_encode($totalGrafik) !!}
             }]
         });
     </script>

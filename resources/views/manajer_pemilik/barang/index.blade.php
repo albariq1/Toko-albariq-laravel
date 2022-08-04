@@ -79,7 +79,19 @@
                                             <option value="Kg">Kg</option>
                                         </select>
                                     </div>
-
+                                    <div class="mb-3">
+                                        <label for="diskon" class="form-label">Diskon (%)</label>
+                                        <input type="number" min="1" name="diskon" class="form-control"
+                                            id="diskon">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Diskon aktif?</label>
+                                        <select class="form-control" name="diskon_aktif" id="">
+                                            <option value="">--Pilih--</option>
+                                            <option value="1">Ya</option>
+                                            <option value="0">Tidak</option>
+                                        </select>
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

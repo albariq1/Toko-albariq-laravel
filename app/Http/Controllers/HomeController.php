@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPenjualan;
+use App\Models\PenjualanBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Command\WhereamiCommand;
@@ -56,6 +58,22 @@ class HomeController extends Controller
             $series[] = (int)$lg->untung_bersih;
         }
 
-        return view('home', compact('data', 'labakotor', 'totaltransaksi', 'series', 'categories', 'return'));
+        // $totalgrarafik = DB::select("SELECT DATE_FORMAT(detail_penjualans.created_at,'%M') as bulan_juall, SUM(totalharga) as totalpenjualan WHERE DATE_FORMAT(detail_penjualans.created_at, '%Y')='$tahun' GROUP BY DATE_FORMAT(detail_penjualans.created_at, '%M') ORDER BY detail_penjualans.created_at ASC");
+        // $kategori = [];
+        // $series1 = [];
+        // foreach ($totalgrarafik as $tg) {
+        //     $kategori[] = $tg->bulan_juall;
+        //     $series1[] = (int)$tg->totalpenjualan;
+        // }
+
+        $totalGrafik = DetailPenjualan::select(DB::raw("CAST(SUM(totalharga) as int) as totalharga"))
+            ->GroupBy(DB::raw("Month(created_at)"))
+            ->pluck('totalharga');
+
+        $bulan = DetailPenjualan::select(DB::raw("MonthName(created_at) as bulan"))
+            ->GroupBy(DB::raw("MonthName(created_at)"))
+            ->pluck('bulan');
+
+        return view('home', compact('data', 'labakotor', 'totaltransaksi', 'series', 'categories', 'return', 'totalGrafik', 'bulan'));
     }
 }
