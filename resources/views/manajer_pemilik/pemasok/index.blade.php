@@ -55,8 +55,7 @@
                                      <div class="mb-3">
                                          <label for="exampleInputPassword1" class="form-label">No Hp</label>
                                          <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
-                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp"
-                                             required>
+                                             id="exampleInputPassword1" value="{{ old('no_hp') }}" name="no_hp" required>
                                      </div>
                                      <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary"
@@ -211,7 +210,7 @@
                                  aria-label="Close"></button>
                          </div>
                          <div class="modal-body">
-                             Apakah Anda Yakin Hapus Data Pemasok {{ $dtedit->nama_katagori }}?
+                             Apakah Anda Yakin Hapus Data Pemasok {{ $dtedit->nama_pemasok }}?
                          </div>
                          <div class="modal-footer">
                              <form action="{{ route('destroy_tabel_pemasok') }}" method="POST">

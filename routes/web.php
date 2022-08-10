@@ -102,6 +102,7 @@ Route::get('/download_return', [App\Http\Controllers\Manajer\ReturnBarangControl
 Route::get('/tabel_penjualan', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'index'])->name('tabel_penjualan');
 Route::get('/laba_rugi', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'lap_laba_rugi'])->name('laba_rugi');
 Route::get('/download_labarugi', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'printlabarugi'])->name('download_labarugi');
+Route::get('/download_labarugi_langsung', [App\Http\Controllers\Manajer\PenjualanBarangController::class, 'printlabarugilangsung'])->name('download_labarugi_langsung');
 
 
 // Kehilangan barang

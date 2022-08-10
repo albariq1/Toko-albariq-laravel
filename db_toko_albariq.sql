@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2022 at 06:13 PM
+-- Generation Time: Aug 10, 2022 at 09:16 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -35,6 +35,8 @@ CREATE TABLE `barangs` (
   `pemasok_id` bigint(20) UNSIGNED NOT NULL,
   `barcode` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `satuan` enum('Pcs','Kg') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `diskon` int(11) DEFAULT NULL,
+  `diskon_aktif` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,31 +45,32 @@ CREATE TABLE `barangs` (
 -- Dumping data for table `barangs`
 --
 
-INSERT INTO `barangs` (`id`, `nama_barang`, `kategori_id`, `pemasok_id`, `barcode`, `satuan`, `created_at`, `updated_at`) VALUES
-(2, 'Lifeboy', 2, 2, '098767890', 'Pcs', '2022-06-16 13:25:14', '2022-06-16 13:25:14'),
-(3, 'Frisian Flag Bendera Coklat 370g', 3, 3, '8992753102204', 'Pcs', '2022-07-01 16:48:57', '2022-07-01 16:48:57'),
-(4, 'Frisian Flag Bendera Kental Manis 370g', 3, 3, '8992753101207', 'Pcs', '2022-07-01 16:50:03', '2022-07-01 16:50:03'),
-(5, 'Frisian Flag Bendera Full Cream Gold 370g', 3, 3, '8992753100101', 'Pcs', '2022-07-01 16:51:03', '2022-07-01 16:51:03'),
-(6, 'Enaak Kental Manis Cokelat 370g', 3, 4, '8993007001465', 'Pcs', '2022-07-01 16:53:02', '2022-07-01 16:54:15'),
-(7, 'Enaak Kental Manis 370g', 3, 4, '8992702000025', 'Pcs', '2022-07-01 16:53:58', '2022-07-01 16:53:58'),
-(8, 'Nestle Carnation Krimer Kental Manis 495g', 3, 5, '8992696426528', 'Pcs', '2022-07-01 16:58:18', '2022-07-01 16:58:18'),
-(9, 'Seiya Muaaanteb Sweetened Creamer 505g', 3, 6, '9555394503367', 'Pcs', '2022-07-01 17:00:42', '2022-07-01 17:00:42'),
-(10, 'Frisian Flag Bendera Coklat 40g', 4, 3, '8992753102303', 'Pcs', '2022-07-01 17:02:36', '2022-07-01 17:02:36'),
-(11, 'Frisian Flag Bendera Coklat 545g', 5, 3, '8992753004034', 'Pcs', '2022-07-01 17:04:34', '2022-07-01 17:04:34'),
-(12, 'Indomilk Kental Manis Sweetened Condensed 545g', 5, 4, '8993007003902', 'Pcs', '2022-07-01 17:07:02', '2022-07-01 17:07:02'),
-(13, 'Indomilk Swiss Choco 545g', 5, 4, '8993007003919', 'Pcs', '2022-07-01 17:08:00', '2022-07-01 17:08:00'),
-(14, 'Ultra Milk Low Fat Source Of Calsium 1 Liter', 6, 7, '8998009010637', 'Pcs', '2022-07-01 17:16:11', '2022-07-01 17:16:11'),
-(15, 'Ultra Milk Low Fat Source Of Calsium Rasa Coklat 1 Liter', 6, 7, '8998009011207', 'Pcs', '2022-07-01 17:17:17', '2022-07-01 17:17:17'),
-(16, 'Ultra Milk Rasa Coklat 1 Liter', 6, 7, '8998009010620', 'Pcs', '2022-07-01 17:18:25', '2022-07-01 17:18:25'),
-(17, 'Ultra Milk Full Cream 1 Liter', 6, 7, '8998009010613', 'Pcs', '2022-07-01 17:19:26', '2022-07-01 17:19:26'),
-(18, 'Ultra Milk Rasa Stroberi 200 ml', 7, 7, '8998009010576', 'Pcs', '2022-07-01 17:21:17', '2022-07-01 17:21:17'),
-(19, 'Ultra Milk Rasa Coklat 200 ml', 7, 7, '8998009010569', 'Pcs', '2022-07-01 17:22:25', '2022-07-01 17:22:25'),
-(20, 'Ultra Milk Full Cream 200 ml', 7, 7, '8998009010552', 'Pcs', '2022-07-01 17:23:18', '2022-07-01 17:23:18'),
-(21, 'Ultra Milk Rasa Stroberi 125 ml', 8, 7, '8998009010606', 'Pcs', '2022-07-01 17:25:17', '2022-07-01 17:25:17'),
-(22, 'Ultra Milk Rasa Coklat 125 ml', 8, 7, '8998009010590', 'Pcs', '2022-07-01 17:27:14', '2022-07-01 17:27:14'),
-(23, 'Nestle Milo 180 ml', 7, 5, '8992696523067', 'Pcs', '2022-07-01 17:28:46', '2022-07-01 17:28:46'),
-(24, 'Nestle Milo 110 ml', 8, 5, '8992696523081', 'Pcs', '2022-07-01 17:29:37', '2022-07-01 17:29:37'),
-(25, 'Glade Coffee', 9, 9, '89927020000121', 'Pcs', '2022-07-09 21:42:40', '2022-07-20 17:15:54');
+INSERT INTO `barangs` (`id`, `nama_barang`, `kategori_id`, `pemasok_id`, `barcode`, `satuan`, `diskon`, `diskon_aktif`, `created_at`, `updated_at`) VALUES
+(2, 'Lifeboy1', 2, 2, '098767890', '', 1, '0', '2022-06-16 13:25:14', '2022-08-05 17:22:48'),
+(3, 'Frisian Flag Bendera Coklat 370g', 3, 3, '8992753102204', 'Pcs', 2, '1', '2022-07-01 16:48:57', '2022-08-06 19:16:39'),
+(4, 'Frisian Flag Bendera Kental Manis 370g', 3, 3, '8992753101207', 'Pcs', NULL, NULL, '2022-07-01 16:50:03', '2022-07-01 16:50:03'),
+(5, 'Frisian Flag Bendera Full Cream Gold 370g', 3, 3, '8992753100101', 'Pcs', NULL, NULL, '2022-07-01 16:51:03', '2022-07-01 16:51:03'),
+(6, 'Enaak Kental Manis Cokelat 370g', 3, 4, '8993007001465', 'Pcs', NULL, NULL, '2022-07-01 16:53:02', '2022-07-01 16:54:15'),
+(7, 'Enaak Kental Manis 370g', 3, 4, '8992702000025', 'Pcs', NULL, NULL, '2022-07-01 16:53:58', '2022-07-01 16:53:58'),
+(8, 'Nestle Carnation Krimer Kental Manis 495g', 3, 5, '8992696426528', 'Pcs', NULL, NULL, '2022-07-01 16:58:18', '2022-07-01 16:58:18'),
+(9, 'Seiya Muaaanteb Sweetened Creamer 505g', 3, 6, '9555394503367', 'Pcs', NULL, NULL, '2022-07-01 17:00:42', '2022-07-01 17:00:42'),
+(10, 'Frisian Flag Bendera Coklat 40g', 4, 3, '8992753102303', 'Pcs', NULL, NULL, '2022-07-01 17:02:36', '2022-07-01 17:02:36'),
+(11, 'Frisian Flag Bendera Coklat 545g', 5, 3, '8992753004034', 'Pcs', NULL, NULL, '2022-07-01 17:04:34', '2022-07-01 17:04:34'),
+(12, 'Indomilk Kental Manis Sweetened Condensed 545g', 5, 4, '8993007003902', 'Pcs', NULL, NULL, '2022-07-01 17:07:02', '2022-07-01 17:07:02'),
+(13, 'Indomilk Swiss Choco 545g', 5, 4, '8993007003919', 'Pcs', NULL, NULL, '2022-07-01 17:08:00', '2022-07-01 17:08:00'),
+(14, 'Ultra Milk Low Fat Source Of Calsium 1 Liter', 6, 7, '8998009010637', 'Pcs', NULL, NULL, '2022-07-01 17:16:11', '2022-07-01 17:16:11'),
+(15, 'Ultra Milk Low Fat Source Of Calsium Rasa Coklat 1 Liter', 6, 7, '8998009011207', 'Pcs', NULL, NULL, '2022-07-01 17:17:17', '2022-07-01 17:17:17'),
+(16, 'Ultra Milk Rasa Coklat 1 Liter', 6, 7, '8998009010620', 'Pcs', NULL, NULL, '2022-07-01 17:18:25', '2022-07-01 17:18:25'),
+(17, 'Ultra Milk Full Cream 1 Liter', 6, 7, '8998009010613', 'Pcs', NULL, NULL, '2022-07-01 17:19:26', '2022-07-01 17:19:26'),
+(18, 'Ultra Milk Rasa Stroberi 200 ml', 7, 7, '8998009010576', 'Pcs', NULL, NULL, '2022-07-01 17:21:17', '2022-07-01 17:21:17'),
+(19, 'Ultra Milk Rasa Coklat 200 ml', 7, 7, '8998009010569', 'Pcs', NULL, NULL, '2022-07-01 17:22:25', '2022-07-01 17:22:25'),
+(20, 'Ultra Milk Full Cream 200 ml', 7, 7, '8998009010552', 'Pcs', NULL, NULL, '2022-07-01 17:23:18', '2022-07-01 17:23:18'),
+(21, 'Ultra Milk Rasa Stroberi 125 ml', 8, 7, '8998009010606', 'Pcs', NULL, NULL, '2022-07-01 17:25:17', '2022-07-01 17:25:17'),
+(22, 'Ultra Milk Rasa Coklat 125 ml', 8, 7, '8998009010590', 'Pcs', NULL, NULL, '2022-07-01 17:27:14', '2022-07-01 17:27:14'),
+(23, 'Nestle Milo 180 ml', 7, 5, '8992696523067', 'Pcs', NULL, NULL, '2022-07-01 17:28:46', '2022-07-01 17:28:46'),
+(24, 'Nestle Milo 110 ml', 8, 5, '8992696523081', 'Pcs', NULL, NULL, '2022-07-01 17:29:37', '2022-07-01 17:29:37'),
+(25, 'Glade Coffee', 9, 9, '89927020000121', 'Pcs', 5, '0', '2022-07-09 21:42:40', '2022-07-20 17:15:54'),
+(30, 'beras patin', 1, 2, '123', 'Pcs', 10, '1', '2022-08-04 17:28:08', '2022-08-04 17:28:08');
 
 -- --------------------------------------------------------
 
@@ -105,7 +108,16 @@ INSERT INTO `detail_penjualans` (`id`, `barang_id`, `penjualan_id`, `jumlah`, `h
 (27, 3, 26, 1, 20000, 21000, 0, 21000, '1', '2022-07-22', 5, '2022-07-21 17:15:45', '2022-07-21 17:15:55'),
 (28, 10, 27, 2, 5000, 6000, 0, 12000, '1', '2022-07-23', 5, '2022-07-23 04:41:40', '2022-07-23 04:41:47'),
 (29, 10, 28, 1, 5000, 6000, 0, 6000, '1', '2022-07-27', 5, '2022-07-27 12:23:56', '2022-07-27 12:24:06'),
-(30, 22, 29, 1, 5000, 5500, 0, 5500, '1', '2022-07-27', 5, '2022-07-27 16:11:44', '2022-07-27 16:11:53');
+(30, 22, 29, 1, 5000, 5500, 0, 5500, '1', '2022-07-27', 5, '2022-07-27 16:11:44', '2022-07-27 16:11:53'),
+(31, 25, 30, 1, 7500, 8000, 0, 8000, '1', '2022-07-29', 5, '2022-07-29 07:50:18', '2022-07-29 07:50:58'),
+(32, 10, 30, 2, 5000, 6000, 0, 12000, '1', '2022-07-29', 5, '2022-07-29 07:50:41', '2022-07-29 07:50:58'),
+(33, 22, 31, 1, 2625, 3200, 0, 3200, '1', '2022-08-01', 5, '2022-07-31 17:02:31', '2022-07-31 17:02:41'),
+(34, 22, 32, 1, 2625, 3200, 0, 3200, '1', '2022-08-02', 5, '2022-08-02 01:47:07', '2022-08-02 01:52:59'),
+(35, 3, 32, 3, 12000, 12500, 0, 37500, '1', '2022-08-02', 5, '2022-08-02 01:47:24', '2022-08-02 01:52:59'),
+(36, 25, 32, 5, 7000, 7500, 0, 37500, '1', '2022-08-02', 5, '2022-08-02 01:48:00', '2022-08-02 01:52:59'),
+(37, 22, 33, 1, 2625, 3200, 0, 3200, '1', '2022-08-02', 5, '2022-08-02 01:53:59', '2022-08-02 01:54:54'),
+(38, 3, 33, 3, 12000, 12500, 0, 37500, '1', '2022-08-02', 5, '2022-08-02 01:54:12', '2022-08-02 01:54:54'),
+(39, 25, 33, 5, 7000, 7500, 0, 37500, '1', '2022-08-02', 5, '2022-08-02 01:54:33', '2022-08-02 01:54:54');
 
 -- --------------------------------------------------------
 
@@ -213,7 +225,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (33, '2022_07_09_103152_update_enum_value_users', 7),
 (35, '2022_07_09_110910_add_status_to_return_barangs_table', 8),
 (37, '2022_07_16_132128_create_kehilangan_barangs_table', 9),
-(38, '2022_07_16_140920_add_tgl_update_status_to_return_barangs_table', 10);
+(38, '2022_07_16_140920_add_tgl_update_status_to_return_barangs_table', 10),
+(39, '2022_08_05_001335_add_fields_to_barangs_table', 11);
 
 -- --------------------------------------------------------
 
@@ -270,13 +283,14 @@ CREATE TABLE `pemasoks` (
 --
 
 INSERT INTO `pemasoks` (`id`, `nama_pemasok`, `alamat`, `no_hp`, `created_at`, `updated_at`) VALUES
-(2, 'unilever', 'jl.mifta', '08920112', '2022-06-16 13:24:44', '2022-06-16 13:24:44'),
-(3, 'Frieslandcampina', 'Jl. Raya Bogor KM 5, Pasar Rebo, Jakarta Timur, Indonesia 13760', '-', '2022-07-01 16:47:25', '2022-07-01 20:13:37'),
-(4, 'PT.Indolakto', '-', '-', '2022-07-01 16:51:57', '2022-07-01 16:51:57'),
-(5, 'PT. Nestle Indonesia', '-', '-', '2022-07-01 16:56:31', '2022-07-01 16:56:31'),
-(6, 'PT. Buana Prima Sukses', '-', '-', '2022-07-01 16:59:34', '2022-07-01 16:59:34'),
-(7, 'PT. Ultrajaya Milk Industry & Trading Co. TBK.', '-', '-', '2022-07-01 17:13:32', '2022-07-01 17:13:32'),
-(9, 'PT. Jhonson & Jhonson Company', 'Jl. Mampang Prpt. Raya No.1, RT.6/RW.1, Mampang Prpt., Kec. Mampang Prpt., Kota Jakarta Selatan', '0829028210', '2022-07-09 21:36:49', '2022-07-09 21:36:49');
+(2, 'unilever', 'Jalan Laks L RE Martadinata No.1, 2 Ilir, Ilir Timur II, 2 Ilir, Kec. Ilir Tim. II, Kota Palembang, Sumatera Selatan 30163', '(0711) 717364', '2022-06-16 13:24:44', '2022-07-31 05:50:43'),
+(3, 'Frieslandcampina', 'Jl. Raya Bogor KM 5, Pasar Rebo, Jakarta Timur, Indonesia 13760', '(021) 8410945', '2022-07-01 16:47:25', '2022-07-31 05:51:15'),
+(4, 'PT.Indolakto', 'Komplek pergudangan Prima Star blok C no. 01, Jl. Tj. Api-Api No.KM 8, Sukajadi, Kec. Talang Klp., Kab. Banyuasin, Sumatera Selatan 30361', '(0711) 5712011', '2022-07-01 16:51:57', '2022-07-31 05:51:48'),
+(5, 'PT. Nestle Indonesia', 'Jl. Surya Pratama Kav. I 37-39 ABC Kawasan Industri Surya Cipta, Kutanegara, Ciampel, Karawang, West Java 41312', '(0267) 8630353', '2022-07-01 16:56:31', '2022-07-31 05:54:51'),
+(6, 'PT. Buana Prima Sukses', '1', '-', '2022-07-01 16:59:34', '2022-08-05 16:09:04'),
+(7, 'PT. Ultrajaya Milk Industry & Trading Co. TBK.', 'Jl. Raya Cimareme 131, Padalarang Bandung 40552, Indonesia', '+62-22-86700700', '2022-07-01 17:13:32', '2022-07-31 05:59:29'),
+(9, 'PT. Jhonson & Jhonson Company', 'Jl. Mampang Prpt. Raya No.1, RT.6/RW.1, Mampang Prpt., Kec. Mampang Prpt., Kota Jakarta Selatan', '0829028210', '2022-07-09 21:36:49', '2022-07-09 21:36:49'),
+(13, 'PT INDOFOOD CBP SUKSES MAKMUR Tbk', 'Jl. HBR Motik No.Km. 8, Karya Baru, Kec. Alang-Alang Lebar, Kota Palembang, Sumatera Selatan 30961', '(0711) 410212', '2022-07-31 05:54:14', '2022-07-31 05:54:14');
 
 -- --------------------------------------------------------
 
@@ -309,7 +323,14 @@ INSERT INTO `pembelian_barangs` (`id`, `barang_id`, `tanggal_pembelian`, `harga_
 (15, 25, '2022-07-10', 10000, 11000, 2, 20000, 6, '2022-07-10 01:48:42', '2022-07-10 01:48:42'),
 (16, 25, '2022-07-23', 8000, 10000, 2, 16000, 6, '2022-07-23 04:52:58', '2022-07-23 04:52:58'),
 (17, 25, '2022-07-24', 7500, 8000, 10, 75000, 9, '2022-07-24 07:48:57', '2022-07-24 07:48:57'),
-(18, 22, '2022-07-24', 5000, 5500, 3, 15000, 9, '2022-07-24 07:49:58', '2022-07-24 07:49:58');
+(18, 22, '2022-07-24', 5000, 5500, 3, 15000, 9, '2022-07-24 07:49:58', '2022-07-24 07:49:58'),
+(20, 3, '2022-07-31', 12, 13, 3, 36, 9, '2022-07-31 06:04:54', '2022-07-31 06:04:54'),
+(21, 10, '2022-07-31', 11, 11, 2, 21, 9, '2022-07-31 06:05:42', '2022-07-31 06:05:42'),
+(22, 3, '2022-07-31', 12000, 12500, 1, 12000, 9, '2022-07-31 06:08:36', '2022-07-31 06:08:36'),
+(23, 10, '2022-07-31', 11000, 11500, 1, 11000, 9, '2022-07-31 06:09:23', '2022-07-31 06:09:23'),
+(24, 22, '2022-07-31', 2625, 3200, 1, 2625, 9, '2022-07-31 06:10:05', '2022-07-31 06:10:05'),
+(25, 25, '2022-07-31', 7000, 7500, 1, 7000, 9, '2022-07-31 06:11:09', '2022-07-31 06:11:09'),
+(27, 30, '2022-08-05', 20000, 25000, 2, 40000, 9, '2022-08-04 17:28:33', '2022-08-04 17:28:33');
 
 -- --------------------------------------------------------
 
@@ -345,7 +366,11 @@ INSERT INTO `penjualan_barangs` (`id`, `kode_penjualan`, `pelanggan_id`, `potong
 (26, 'BRQ-0006', 2, NULL, NULL, 21000, 22000, 1000, 5, '2022-07-22', '2022-07-21 17:15:55', '2022-07-21 17:15:55'),
 (27, 'BRQ-0007', 2, NULL, NULL, 12000, 15000, 3000, 5, '2022-07-23', '2022-07-23 04:41:47', '2022-07-23 04:41:47'),
 (28, 'BRQ-0008', 2, NULL, NULL, 6000, 7000, 1000, 5, '2022-07-27', '2022-07-27 12:24:06', '2022-07-27 12:24:06'),
-(29, 'BRQ-0009', 2, NULL, NULL, 5500, 6000, 500, 5, '2022-07-27', '2022-07-27 16:11:53', '2022-07-27 16:11:53');
+(29, 'BRQ-0009', 2, NULL, NULL, 5500, 6000, 500, 5, '2022-07-27', '2022-07-27 16:11:53', '2022-07-27 16:11:53'),
+(30, 'BRQ-0010', 1, NULL, NULL, 20000, 25000, 5000, 5, '2022-07-29', '2022-07-29 07:50:58', '2022-07-29 07:50:58'),
+(31, 'BRQ-0011', 2, NULL, NULL, 3200, 3300, 100, 5, '2022-08-01', '2022-07-31 17:02:41', '2022-07-31 17:02:41'),
+(32, 'BRQ-0012', NULL, NULL, NULL, 78200, 80000, 1800, 5, '2022-08-02', '2022-08-02 01:52:59', '2022-08-02 01:52:59'),
+(33, 'BRQ-0013', NULL, NULL, NULL, 78200, 100000, 21800, 5, '2022-08-02', '2022-08-02 01:54:54', '2022-08-02 01:54:54');
 
 -- --------------------------------------------------------
 
@@ -497,7 +522,50 @@ INSERT INTO `riwayat_logins` (`id`, `user_id`, `last_login_at`, `last_login_ip`,
 (146, 8, '2022-07-27 19:31:19', '127.0.0.1', '2022-07-27 12:31:19', '2022-07-27 12:31:19'),
 (147, 7, '2022-07-27 19:35:18', '127.0.0.1', '2022-07-27 12:35:18', '2022-07-27 12:35:18'),
 (148, 11, '2022-07-27 19:37:04', '127.0.0.1', '2022-07-27 12:37:04', '2022-07-27 12:37:04'),
-(149, 5, '2022-07-27 23:11:31', '127.0.0.1', '2022-07-27 16:11:31', '2022-07-27 16:11:31');
+(149, 5, '2022-07-27 23:11:31', '127.0.0.1', '2022-07-27 16:11:31', '2022-07-27 16:11:31'),
+(150, 6, '2022-07-29 14:47:33', '127.0.0.1', '2022-07-29 07:47:34', '2022-07-29 07:47:34'),
+(151, 8, '2022-07-29 14:48:06', '127.0.0.1', '2022-07-29 07:48:06', '2022-07-29 07:48:06'),
+(152, 5, '2022-07-29 14:49:35', '127.0.0.1', '2022-07-29 07:49:35', '2022-07-29 07:49:35'),
+(153, 8, '2022-07-29 14:52:12', '127.0.0.1', '2022-07-29 07:52:12', '2022-07-29 07:52:12'),
+(154, 8, '2022-07-29 20:08:06', '127.0.0.1', '2022-07-29 13:08:06', '2022-07-29 13:08:06'),
+(155, 8, '2022-07-30 01:06:14', '127.0.0.1', '2022-07-29 18:06:14', '2022-07-29 18:06:14'),
+(156, 8, '2022-07-30 14:11:08', '127.0.0.1', '2022-07-30 07:11:08', '2022-07-30 07:11:08'),
+(157, 8, '2022-07-31 12:49:33', '127.0.0.1', '2022-07-31 05:49:33', '2022-07-31 05:49:33'),
+(158, 9, '2022-07-31 12:50:19', '127.0.0.1', '2022-07-31 05:50:19', '2022-07-31 05:50:19'),
+(159, 8, '2022-07-31 13:01:02', '127.0.0.1', '2022-07-31 06:01:02', '2022-07-31 06:01:02'),
+(160, 9, '2022-07-31 13:03:59', '127.0.0.1', '2022-07-31 06:03:59', '2022-07-31 06:03:59'),
+(161, 9, '2022-07-31 16:45:47', '127.0.0.1', '2022-07-31 09:45:47', '2022-07-31 09:45:47'),
+(162, 8, '2022-07-31 16:46:01', '127.0.0.1', '2022-07-31 09:46:01', '2022-07-31 09:46:01'),
+(163, 9, '2022-07-31 16:52:52', '127.0.0.1', '2022-07-31 09:52:52', '2022-07-31 09:52:52'),
+(164, 8, '2022-07-31 16:54:14', '127.0.0.1', '2022-07-31 09:54:14', '2022-07-31 09:54:14'),
+(165, 8, '2022-07-31 22:53:19', '127.0.0.1', '2022-07-31 15:53:19', '2022-07-31 15:53:19'),
+(166, 5, '2022-08-01 00:01:20', '127.0.0.1', '2022-07-31 17:01:20', '2022-07-31 17:01:20'),
+(167, 8, '2022-08-02 08:40:41', '127.0.0.1', '2022-08-02 01:40:41', '2022-08-02 01:40:41'),
+(168, 9, '2022-08-02 08:43:43', '127.0.0.1', '2022-08-02 01:43:43', '2022-08-02 01:43:43'),
+(169, 9, '2022-08-02 08:44:47', '127.0.0.1', '2022-08-02 01:44:47', '2022-08-02 01:44:47'),
+(170, 5, '2022-08-02 08:45:09', '127.0.0.1', '2022-08-02 01:45:09', '2022-08-02 01:45:09'),
+(171, 9, '2022-08-02 08:46:27', '127.0.0.1', '2022-08-02 01:46:27', '2022-08-02 01:46:27'),
+(172, 8, '2022-08-02 08:50:58', '127.0.0.1', '2022-08-02 01:50:58', '2022-08-02 01:50:58'),
+(173, 11, '2022-08-02 09:00:15', '127.0.0.1', '2022-08-02 02:00:15', '2022-08-02 02:00:15'),
+(174, 9, '2022-08-05 00:19:38', '127.0.0.1', '2022-08-04 17:19:38', '2022-08-04 17:19:38'),
+(175, 8, '2022-08-05 00:19:58', '127.0.0.1', '2022-08-04 17:19:58', '2022-08-04 17:19:58'),
+(176, 9, '2022-08-05 00:20:50', '127.0.0.1', '2022-08-04 17:20:50', '2022-08-04 17:20:50'),
+(177, 5, '2022-08-05 00:22:45', '127.0.0.1', '2022-08-04 17:22:45', '2022-08-04 17:22:45'),
+(178, 9, '2022-08-05 00:27:32', '127.0.0.1', '2022-08-04 17:27:32', '2022-08-04 17:27:32'),
+(179, 5, '2022-08-05 00:28:48', '127.0.0.1', '2022-08-04 17:28:48', '2022-08-04 17:28:48'),
+(180, 9, '2022-08-05 22:01:18', '127.0.0.1', '2022-08-05 15:01:18', '2022-08-05 15:01:18'),
+(181, 8, '2022-08-05 22:33:31', '127.0.0.1', '2022-08-05 15:33:31', '2022-08-05 15:33:31'),
+(182, 9, '2022-08-05 23:01:16', '127.0.0.1', '2022-08-05 16:01:16', '2022-08-05 16:01:16'),
+(183, 8, '2022-08-06 00:05:07', '127.0.0.1', '2022-08-05 17:05:07', '2022-08-05 17:05:07'),
+(184, 9, '2022-08-06 00:22:33', '127.0.0.1', '2022-08-05 17:22:33', '2022-08-05 17:22:33'),
+(185, 8, '2022-08-06 00:30:04', '127.0.0.1', '2022-08-05 17:30:04', '2022-08-05 17:30:04'),
+(186, 8, '2022-08-07 02:16:20', '127.0.0.1', '2022-08-06 19:16:20', '2022-08-06 19:16:20'),
+(187, 8, '2022-08-08 16:17:37', '127.0.0.1', '2022-08-08 09:17:37', '2022-08-08 09:17:37'),
+(188, 8, '2022-08-09 23:40:23', '127.0.0.1', '2022-08-09 16:40:23', '2022-08-09 16:40:23'),
+(189, 8, '2022-08-10 02:01:10', '127.0.0.1', '2022-08-09 19:01:10', '2022-08-09 19:01:10'),
+(190, 8, '2022-08-10 07:55:10', '127.0.0.1', '2022-08-10 00:55:10', '2022-08-10 00:55:10'),
+(191, 11, '2022-08-10 09:04:48', '127.0.0.1', '2022-08-10 02:04:48', '2022-08-10 02:04:48'),
+(192, 15, '2022-08-10 09:05:41', '127.0.0.1', '2022-08-10 02:05:41', '2022-08-10 02:05:41');
 
 -- --------------------------------------------------------
 
@@ -527,12 +595,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `alamat`, `No_hp`, `foto`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`) VALUES
-(5, 'kasir', 'kasir@gmail.com', NULL, '$2y$10$P6KsEh24TQ/9IEskkBp1uOrlUO/QTPHeLHr0GyQYbp7K.Mv0kLmse', 'Kasir', 'alamat', '082879192', NULL, NULL, '2022-07-27 23:11:31', '127.0.0.1', '2022-07-09 03:44:17', '2022-07-27 16:11:31'),
-(6, 'albariq', 'albariq00@gmail.com', NULL, '$2y$10$4hXio6z.yns4UA1DtjrN/uMfW511xz9z6sD9D84JBVpNHKzJRoTNq', 'Admin', 'Jl.H Ahmad Dahlan Hy Maskarebet no1', '082371664523', 'user-images/BIBHVDDrgF1fWmRPWmF6n8eZaobZmljNNYG10jaP.jpg', NULL, '2022-07-27 19:21:06', '127.0.0.1', '2022-07-09 03:57:08', '2022-07-27 12:21:06'),
+(5, 'kasir', 'kasir@gmail.com', NULL, '$2y$10$P6KsEh24TQ/9IEskkBp1uOrlUO/QTPHeLHr0GyQYbp7K.Mv0kLmse', 'Kasir', 'alamat', '082879192', NULL, NULL, '2022-08-05 00:28:48', '127.0.0.1', '2022-07-09 03:44:17', '2022-08-04 17:28:48'),
+(6, 'albariq', 'albariq00@gmail.com', NULL, '$2y$10$4hXio6z.yns4UA1DtjrN/uMfW511xz9z6sD9D84JBVpNHKzJRoTNq', 'Admin', 'Jl.H Ahmad Dahlan Hy Maskarebet no1', '082371664523', 'user-images/BIBHVDDrgF1fWmRPWmF6n8eZaobZmljNNYG10jaP.jpg', NULL, '2022-07-29 14:47:33', '127.0.0.1', '2022-07-09 03:57:08', '2022-07-29 07:47:33'),
 (7, 'keuangan', 'keuangan@gmail.com', NULL, '$2y$10$ayTLpkevljYhXdy9XXfC..SwhYzfURBRfj3whXm0QkVZSHAfjpoam', 'Keuangan', 'talang kelapa', '', NULL, NULL, '2022-07-27 19:35:18', '127.0.0.1', '2022-07-09 04:02:25', '2022-07-27 12:35:18'),
-(8, 'direktur', 'direktur@gmail.com', NULL, '$2y$10$9dWe76vfXvQNdK54I5hqoeJm0QDC6wph3q2zABIY6EQJOp3rfRAC6', 'Direktur', 'alang alang', '080820803', NULL, NULL, '2022-07-27 19:31:19', '127.0.0.1', '2022-07-09 20:58:39', '2022-07-27 12:31:19'),
-(9, 'staff gudang', 'staffgudang@gmail.com', NULL, '$2y$10$iGJKehndJg2RLr0b.Hz4ceQUKo75h4wPNM540Aj/ctXrczHi10uZa', 'Staf Gudang', 'jl.ahmad yani', '07899801', NULL, NULL, '2022-07-27 19:25:13', '127.0.0.1', '2022-07-10 01:54:02', '2022-07-27 12:25:13'),
-(11, 'sekretaris', 'sekretaris@gmail.com', NULL, '$2y$10$r0y95MrqQTruCl6JBO85de0QVOi7o3XX/9CT98ZcUU//s6C6d/Ke2', 'Sekretaris', '-', '0823279797', NULL, NULL, '2022-07-27 19:37:04', '127.0.0.1', '2022-07-20 13:10:53', '2022-07-27 12:37:04');
+(8, 'direktur', 'direktur@gmail.com', NULL, '$2y$10$9dWe76vfXvQNdK54I5hqoeJm0QDC6wph3q2zABIY6EQJOp3rfRAC6', 'Direktur', 'alang alang', '080820803', NULL, NULL, '2022-08-10 07:55:10', '127.0.0.1', '2022-07-09 20:58:39', '2022-08-10 00:55:10'),
+(9, 'staff gudang', 'staffgudang@gmail.com', NULL, '$2y$10$iGJKehndJg2RLr0b.Hz4ceQUKo75h4wPNM540Aj/ctXrczHi10uZa', 'Staf Gudang', 'jl.ahmad yani', '07899801', NULL, NULL, '2022-08-06 00:22:33', '127.0.0.1', '2022-07-10 01:54:02', '2022-08-05 17:22:33'),
+(11, 'sekretaris', 'sekretaris@gmail.com', NULL, '$2y$10$r0y95MrqQTruCl6JBO85de0QVOi7o3XX/9CT98ZcUU//s6C6d/Ke2', 'Sekretaris', '-', '0823279797', NULL, NULL, '2022-08-10 09:04:48', '127.0.0.1', '2022-07-20 13:10:53', '2022-08-10 02:04:48'),
+(15, 'admin', 'admin@gmail.com', NULL, '$2y$10$jXfRtIpmVACEpje/XXx3bOz.3i0Yad7eUwOpOn5R8.G2.drliHSNq', 'Admin', 'lunjuk', '23131', NULL, NULL, '2022-08-10 09:05:41', '127.0.0.1', '2022-08-10 02:05:23', '2022-08-10 02:05:41');
 
 --
 -- Indexes for dumped tables
@@ -654,13 +723,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barangs`
 --
 ALTER TABLE `barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualans`
 --
 ALTER TABLE `detail_penjualans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -684,7 +753,7 @@ ALTER TABLE `kehilangan_barangs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `pelanggans`
@@ -696,19 +765,19 @@ ALTER TABLE `pelanggans`
 -- AUTO_INCREMENT for table `pemasoks`
 --
 ALTER TABLE `pemasoks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `pembelian_barangs`
 --
 ALTER TABLE `pembelian_barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `penjualan_barangs`
 --
 ALTER TABLE `penjualan_barangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -726,13 +795,13 @@ ALTER TABLE `return_barangs`
 -- AUTO_INCREMENT for table `riwayat_logins`
 --
 ALTER TABLE `riwayat_logins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

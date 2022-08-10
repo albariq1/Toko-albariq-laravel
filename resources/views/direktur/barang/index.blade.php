@@ -43,6 +43,8 @@
                         <th>Nama barang</th>
                         <th>Kategori</th>
                         <th>Pemasok</th>
+                        <th>Diskon</th>
+                        <th>Diskon Aktif</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -54,11 +56,17 @@
                             <td>{{ $dt->nama_barang }}</td>
                             <td>{{ $dt->nama_katagori }}</td>
                             <td>{{ $dt->nama_pemasok }}</td>
+                            <td>{{ $dt->diskon }}</td>
+                            <td>{{ $dt->diskon_aktif == '1' ? 'Aktif' : 'Tidak Aktif' }} </td>
                             <td>
                                 <div class="col mb-3">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModaldetail{{ $dt->id }}">
-                                        Detail
+                                        <i class="fas fa-info"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModaldiskon{{ $dt->id }}">
+                                        <i class="fas fa-percent"></i>
                                     </button>
                                 </div>
                             </td>
@@ -124,5 +132,99 @@
             </div>
         @endforeach
 
+        @foreach ($data as $dtdiskon)
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModaldiskon{{ $dtdiskon->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Discount
+                                Barang</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form pengisian data barang -->
+                            <form action="{{ route('update_tabel_barang') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <input type="hidden" name="id" value="{{ $dtdiskon->id }}">
+                                        <label for="exampleInputPassword1" class="form-label">Pemasok</label>
+                                        <select class="form-control" name="pemasok_id" id="" readonly>
+                                            <option value="">--Pilih--</option>
+                                            @foreach ($pemasok as $pm)
+                                                <option value="{{ $pm->id }}"
+                                                    {{ $pm->id == $dtdiskon->pemasok_id ? 'selected' : '' }}>
+                                                    {{ $pm->nama_pemasok }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Kategori</label>
+                                        <select class="form-control" name="kategori_id" id="" readonly>
+                                            <option value="">--Pilih--</option>
+                                            @foreach ($kategori as $kt)
+                                                <option value="{{ $kt->id }}"
+                                                    {{ $kt->id == $dtdiskon->kategori_id ? 'selected' : '' }}>
+                                                    {{ $kt->nama_katagori }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
+                                        <input type="text" name="nama_barang" class="form-control"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            value="{{ $dtdiskon->nama_barang }}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Barcode</label>
+                                        <input type="text" name="barcode" class="form-control"
+                                            id="exampleInputPassword1" value="{{ $dtdiskon->barcode }}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Satuan</label>
+                                        <select class="form-control" name="satuan" id="" readonly>
+                                            <option value="">--Pilih--</option>
+                                            <option value="Pcs" <?= $dtdiskon->satuan === 'Pcs' ? 'Selected' : '' ?>>Pcs
+                                            </option>
+                                            <option value="Kg" <?= $dtdiskon->satuan === 'Kg' ? 'Selected' : '' ?>>kg
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Diskon</label>
+                                        <input type="text" name="diskon" class="form-control"
+                                            id="exampleInputPassword1" value="{{ $dtdiskon->diskon }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Diskon Aktif</label>
+                                        <select class="form-control" name="diskon_aktif" id="">
+                                            <option value="">--Pilih--</option>
+                                            <option value="1"
+                                                <?= $dtdiskon->diskon_aktif === '1' ? 'selected' : '' ?>>
+                                                Ya
+                                                {{-- <option value="{{ $dtdiskon->diskon_aktif == '1' ? 'selected' : '' }}">Ya --}}
+                                            </option>
+                                            <option value="0"
+                                                <?= $dtdiskon->diskon_aktif === '0' ? 'selected' : '' ?>>
+                                                Tidak
+                                                {{-- <option value="{{ $dtdiskon->diskon_aktif == '0' ? 'selected' : '' }}">Tidak --}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 @endsection

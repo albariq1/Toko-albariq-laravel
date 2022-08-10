@@ -82,12 +82,15 @@ class BarangController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'pemasok_id' => 'required',
-            'kategori_id' => 'required',
-            'nama_barang' => 'required',
-            'barcode' => 'required'
-        ]);
+        // $request->validate([
+        //     'pemasok_id' => 'required',
+        //     'kategori_id' => 'required',
+        //     'nama_barang' => 'required',
+        //     'barcode' => 'required',
+        //     'satuan' => 'required',
+        //     'diskon' => 'required',
+        //     'diskon_aktif' => 'required',
+        // ]);
 
         try {
             //proses update data ke tabel

@@ -44,7 +44,7 @@
                                     <label class="small mb-1" for="inputUsername">Nama Lengkap</label>
                                     <input class="form-control" id="inputUsername" type="text"
                                         placeholder="Enter your username" name="name" value="{{ $data->name }}"
-                                        required>
+                                        readonly>
                                 </div>
                                 <!-- Form Group (email address)-->
                                 <div class="mb-3">
@@ -59,8 +59,8 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="nohp">No Hp</label>
                                         <input class="form-control" id="nohp" type="text"
-                                            placeholder="Enter your Number Phone" name="no_hp"
-                                            value="{{ $data->No_hp }}" required>
+                                            placeholder="Enter your Number Phone" name="no_hp" value="{{ $data->No_hp }}"
+                                            required>
                                     </div>
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">

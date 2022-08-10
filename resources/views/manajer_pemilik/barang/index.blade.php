@@ -127,6 +127,8 @@
                         <th>Nama barang</th>
                         <th>Kategori</th>
                         <th>Pemasok</th>
+                        <th>Diskon</th>
+                        <th>Diskon Aktif</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -138,6 +140,8 @@
                             <td>{{ $dt->nama_barang }}</td>
                             <td>{{ $dt->nama_katagori }}</td>
                             <td>{{ $dt->nama_pemasok }}</td>
+                            <td>{{ $dt->diskon }}</td>
+                            <td>{{ $dt->diskon_aktif == '1' ? 'Aktif' : 'Tidak Aktif' }} </td>
                             <td>
                                 <!-- Action -->
                                 <div class="btn-group">
@@ -298,14 +302,35 @@
                                         <input type="text" name="barcode" class="form-control"
                                             id="exampleInputPassword1" value="{{ $dtedit->barcode }}" required>
                                     </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Satuan</label>
-                                    <select class="form-control" name="satuan" id="">
-                                        <option value="">--Pilih--</option>
-                                        <option value="{{ $dtedit->satuan == 'Pcs' ? 'selected' : '' }}">Pcs</option>
-                                        <option value="{{ $dtedit->satuan == 'Kg' ? 'selected' : '' }}">Kg</option>
-                                    </select>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Satuan</label>
+                                        <select class="form-control" name="satuan" id="">
+                                            <option value="">--Pilih--</option>
+                                            <option value="Pcs" <?= $dtedit->satuan === 'Pcs' ? 'Selected' : '' ?>>Pcs
+                                            </option>
+                                            <option value="Kg" <?= $dtedit->satuan === 'Kg' ? 'Selected' : '' ?>>kg
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Diskon</label>
+                                        <input type="text" name="diskon" class="form-control"
+                                            id="exampleInputPassword1" value="{{ $dtedit->diskon }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Diskon Aktif</label>
+                                        <select class="form-control" name="diskon_aktif" id="">
+                                            <option value="">--Pilih--</option>
+                                            <option value="1" <?= $dtedit->diskon_aktif === '1' ? 'selected' : '' ?>>
+                                                Ya
+                                                {{-- <option value="{{ $dtedit->diskon_aktif == '1' ? 'selected' : '' }}">Ya --}}
+                                            </option>
+                                            <option value="0" <?= $dtedit->diskon_aktif === '0' ? 'selected' : '' ?>>
+                                                Tidak
+                                                {{-- <option value="{{ $dtedit->diskon_aktif == '0' ? 'selected' : '' }}">Tidak --}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
 
                         </div>

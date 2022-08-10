@@ -11,11 +11,28 @@
 <body>
     <div>
         <div id="laporan">
+            {{-- <center>
+                <h3><b>Toko Albariq</b></h3>
+                <p>Jl.Maskarebet No 1 Depan Toko Albariq</p>
+                <p>No.082371664523</p>
+            </center> --}}
+            <table width="100%">
+                <tr>
+                    {{-- <td width="25" align="center"><img src="{{ asset('template/./assest/LOGO ALBARIQ.png') }}"
+                            width="60%"></td> --}}
+                    <td width="50" align="center">
+                        <h3><b>Toko Albariq</b></h3>
+                        <p>Jl.H Ahmad Dahlan Hy RT.065 RW. 001 Kecamatan Alanag-alang lebar, keluarahan Talang Kelapa
+                        </p>
+                        <p>No Hp.082371664523</p>
+                    </td>
+
+                </tr>
+            </table>
             <table align="center"
                 style="width:900px; border-bottom:3px double;border-top:none;border-right:none;border-left:none;margin-top:5px;margin-bottom:20px;">
 
             </table>
-
             <table border="0" align="center" style="width:800px; border:none;margin-top:5px;margin-bottom:0px;">
                 <tr>
                     <td colspan="2" style="width:800px;paddin-left:20px;">

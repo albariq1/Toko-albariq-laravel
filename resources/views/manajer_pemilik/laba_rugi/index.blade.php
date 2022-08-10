@@ -25,6 +25,11 @@
                     data-bs-target="#exampleModaldownload">
                     <i class="fas fa-file-download mr-2"></i>Download PDF
                 </button>
+                <form action="{{ route('download_labarugi_langsung') }}" method="GET">
+                    @csrf
+                    <input type="hidden" name="bulan" value="{{ @$_GET['bulan'] }}"><br>
+                    <button type="submit" class="btn btn-warning">Print</button>
+                </form>
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModaldownload" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -98,12 +103,6 @@
                                         </div>
 
 
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Apakah Yang Anda Input Sudah
-                                                Benar?</label>
-                                        </div>
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -114,30 +113,10 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <form action="{{ route('laba_rugi') }}" method="GET">
-                    <div class="row">
-                        <div class="mb-3">
-                            <label for="" class="form-label">Pilih Bulan</label>
-                            <select name="bulan" id="bulan" class="form-control">
-                                @php
-                                    $bulan = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                                    $date = date('F');
-                                @endphp
-                                @foreach ($bulan as $bln)
-                                    <option value="{{ $bln == $bulan ? $bulan : $bln }}">{{ $bln }}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
-                    </div>
-                </form> --}}
                 </div>
+                {{-- <a href="{{ route('download_labarugi') }}" class="btn btn-warning" name="{{ @$_GET['bulan'] }}"
+                    id="{{ @$_GET['bulan'] }}">Print</a> --}}
+
 
 
                 <div id="laporan">
